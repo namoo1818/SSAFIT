@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssafit.board.model.dao.ReviewDao">
+	<resultMap type="Review" id="reviewMap">
+		<result column="review_num" property="num"/>
+		<result column="review_writer" property="writer"/>
+		<result column="review_title" property="title"/>
+		<result column="review_content" property="content"/>
+		<result column="review_viewcnt" property="viewcnt"/>
+		<result column="review_regdate" property="regdate"/>
+		<result column="video_num" property="videoNum"/>
+	</resultMap>
+
+	<select id="selectOne" resultMap="reviewMap" parameterType="int">
+		SELECT *
+		FROM review
+		WHERE review_num = #{num}
+	</select>
+
+	<insert id="insertReview" parameterType="review" keyProperty="num" useGeneratedKeys="true">
+		INSERT INTO review (review_title, review_writer, review_content, video_num)
+		VALUES (#{title}, #{writer}, #{content}, #{videoNum})
+	</insert>
+	
+	<delete id="deleteReview" parameterType="int">
+		DELETE FROM review
+		WHERE review_num = #{num}
+	</delete>
+	
+	<update id="updateViewCnt" parameterType="int">
+		UPDATE review
+		SET review_viewcnt = review_viewcnt+1
+		WHERE review_num = #{num}
+	</update>
+	
+	<update id="updateReview" parameterType="review">
+		UPDATE review
+		SET review_title = #{title}, review_content = #{content}
+		WHERE review_num = #{num}
+	</update>
+	
+	<!-- 검색기능  -->
+	<select id="search" resultMap="reviewMap" parameterType="SearchCondition">
+		SELECT *
+		FROM review
+		<!-- 검색 조건 (동적쿼리)-->
+		<if test="key != 'none'">
+			WHERE ${key} LIKE concat('%', #{word}, '%')
+		</if>
+		<!-- 어떤 기준으로 어떤 방향으로 정렬 -->
+		<if test="orderBy != 'none'">
+			ORDER BY ${orderBy} ${orderByDir}
+		</if>
+	</select>
+	
+
+</mapper>
