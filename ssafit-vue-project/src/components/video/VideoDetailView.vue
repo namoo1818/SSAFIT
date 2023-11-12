@@ -9,6 +9,10 @@
         frameborder="0" 
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
         allowfullscreen></iframe>
+        <div> 제목 : {{ store.video.title }}</div>
+        <div> 부위 : {{ store.video.part }}</div>
+        <div> 채널 : {{ store.video.channel }}</div>
+        <div> 조회수 : {{ store.video.viewcnt }}</div>
     </div>
 </template>
 
