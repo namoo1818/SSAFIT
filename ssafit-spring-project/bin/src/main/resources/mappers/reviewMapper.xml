@@ -11,26 +11,13 @@
 		<result column="review_viewcnt" property="viewcnt"/>
 		<result column="review_regdate" property="regdate"/>
 		<result column="video_num" property="videoNum"/>
-		<result column="user_nickname" property="userNickname"/>
-		<result column="video_url" property="videoUrl"/>
 	</resultMap>
 
-	<select id="selectOne" resultType="Review" parameterType="int">
-		SELECT review_num as num, review_title as title, review_content as content,
-		review_viewcnt as viewcnt, review_regdate as regdate, user_nickname as userNickname, video_url as videoUrl 
-		FROM review LEFT JOIN user 
-		ON review_writer = user_num 
-		LEFT JOIN video
-		ON review.video_num = video.video_num
-		WHERE review_num = #{num}
-	</select>
-
-	<!-- <select id="selectOne" resultMap="reviewMap" parameterType="int">
+	<select id="selectOne" resultMap="reviewMap" parameterType="int">
 		SELECT *
-		FROM review 
+		FROM review
 		WHERE review_num = #{num}
 	</select>
-	 -->
 
 	<insert id="insertReview" parameterType="review" keyProperty="num" useGeneratedKeys="true">
 		INSERT INTO review (review_title, review_writer, review_content, video_num)
@@ -55,13 +42,9 @@
 	</update>
 	
 	<!-- 검색기능  -->
-	<select id="search" resultType="review" parameterType="SearchCondition">
-		SELECT review_num as num, review_title as title, review_content as content,
-		review_viewcnt as viewcnt, review_regdate as regdate, user_nickname as userNickname, video_url as videoUrl 
-		FROM review LEFT JOIN user 
-		ON review_writer = user_num 
-		LEFT JOIN video
-		ON review.video_num = video.video_num
+	<select id="search" resultMap="reviewMap" parameterType="SearchCondition">
+		SELECT *
+		FROM review
 		<!-- 검색 조건 (동적쿼리)-->
 		<if test="key != 'none'">
 			WHERE ${key} LIKE concat('%', #{word}, '%')

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssafit.board.model.dao.FollowDao">
+
+	<insert id="insertFollow" parameterType="Follow" keyProperty="num" useGeneratedKeys="true">
+		INSERT INTO follow (follower_num, followee_num) 
+		VALUES (#{follower}, #{followee})
+	</insert>
+
+	<delete id="deleteFollow" parameterType="int">
+		DELETE FROM follow
+		WHERE follow_num = #{num}
+	</delete>
+	
+	<!-- 나를 팔로우하는 사람 조회  -->
+	<select id="followerSearch" resultType="Follow" parameterType="int">
+		SELECT follow_num as num, follower_num as follower, followee_num as followee FROM follow
+		Where followee_num = #{myNum}
+		ORDER BY follow_num DESC
+	</select>
+	
+	<!-- 내가 팔로우하는 사람 조회 -->
+	<select id="followingSearch" resultType="Follow" parameterType="int">
+		SELECT follow_num as num, follower_num as follower, followee_num as followee FROM follow
+		Where follower_num = #{myNum}
+		ORDER BY follow_num DESC
+	</select>
+
+
+</mapper>
