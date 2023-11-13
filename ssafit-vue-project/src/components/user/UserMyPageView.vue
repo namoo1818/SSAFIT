@@ -9,7 +9,7 @@
             <div class="card mb-3" style="max-width: 540px">
               <div class="row g-0">
                 <div class="col-md-4 d-flex flex-column justify-content-center">
-                  <img src="img/noimg.png" class="img-fluid rounded-start m-3" />
+                  <img src="../img/noimg.png" class="img-fluid rounded-start m-3" />
                 </div>
                 <div class="col-md-8">
                   <div class="card-body">
@@ -30,20 +30,20 @@
                       <li class="list-group-item">
                         <div>
                           <span>닉네임 : </span>
-                          <span id="user-nickname">{{ loginUser.userNickName }}</span>
+                          <span id="user-nickname">{{ loginUser.userNickname }}</span>
                         </div>
                       </li>
                       <li class="list-group-item">
                         <div>
                           <span>이메일 : </span>
-                          <span id="user-email">{{ loginUser.email }}</span>
+                          <span id="user-email">{{ loginUser.userEmail }}</span>
                         </div>
                       </li>
                     </ul>
                     <div class="card-body">
-                      <a href="#" class="card-link">회원정보수정</a>
-                      <a href="#" class="card-link">회원탈퇴</a>
-                      <a href="#" @click="logout">로그아웃</a>
+                      <a href="#" class="card-link">회원정보수정</a>  |
+                      <a href="#" class="card-link">회원탈퇴</a>  |
+                      <button type="button" @click="logout">로그아웃</button>
                     </div>
                   </div>
                 </div>
@@ -86,12 +86,13 @@
   <script setup>
   import { ref, onMounted } from 'vue'
   import {useUserStore} from '@/stores/user.js'
+  import { RouterLink, useRouter } from 'vue-router'
+  import axios from 'axios'
+
+  const REST_USER_API = `http://localhost:8080/apiUser/user`
 
   const store = useUserStore()
-
-  const logout = () => {
-  store.logout()
-  };
+  const router = useRouter()
 
   const loginUser = ref({})
   const loginOffDisplay = ref('block')
@@ -106,8 +107,24 @@
     }
   }
   
+  const logout = () => {
+    axios
+    .get(REST_USER_API)
+    .then(() => {
+        alert("로그아웃되었습니다");
+        user.value = null; //안되면 지우기
+        localStorage.removeItem("loginUser");
+        router.push("/");
+      });
+    }
+
+
   onMounted(fetchLoginUser)
+    
   </script>
   
-  <style scoped></style>
+  <style scoped>
+
+
+</style>
   

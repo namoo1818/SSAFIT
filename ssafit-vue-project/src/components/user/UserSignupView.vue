@@ -60,24 +60,23 @@
       return
     }
   
-    // 로컬스토리지 users 목록 가져오기
-    let users = localStorage.getItem('users')
-    if (users !== null) {
-      users = JSON.parse(users)
-    } else {
-      users = []
-    }
+    // users 목록 가져오기
+    let users = store.getUserList()
+    // if (users !== null) {
+    //   users = JSON.parse(users)
+    // } else {
+    //   users = []
+    // }
   
     alert('회원가입 성공')
     let user = {
-      userSeq: users.length,
       userId: id.value,
-      userPw: pw1.value,
+      userPassword: pw1.value,
       userName: name.value,
       userNickName: nickname.value,
-      email: email.value
+      userEmail: email.value
     }
-    users.push(user)
+    store.createUser(user)
   
     // 로컬 스토리지 저장
     localStorage.setItem('users', JSON.stringify(users))

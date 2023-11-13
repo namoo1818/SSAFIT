@@ -17,7 +17,7 @@
                 <td>
                     <RouterLink :to="`/review/${review.num}`">{{ review.title }}</RouterLink>
                     </td>
-                <td>{{ review.writer }}</td>
+                <td>{{ getNickname(review.writer) }}</td>
                 <td>{{ review.content }}</td>
                 <td>{{ review.viewcnt }}</td>
                 <td>{{ review.regdate }}</td>
@@ -26,14 +26,16 @@
     </div>
 </template>
 
+
+
 <script setup>
 import { useRoute, useRouter } from 'vue-router';
 import {useReviewStore} from '@/stores/review'
 import {onMounted} from 'vue'
 
+
 const store = useReviewStore()
 const router = useRouter()
-const route = useRoute()
 
 onMounted(()=>{
     store.getReviewList()
@@ -41,6 +43,12 @@ onMounted(()=>{
 
 const createReview = function(){
     router.push({name:'reviewCreate'})
+}
+
+const getNickname = async function(id) {
+    await store.findUserNickname(id)
+    console.log(store.user.userNickname)
+    return store.user.userNickname;
 }
 </script>
 

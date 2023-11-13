@@ -14,26 +14,33 @@
         <div> 채널 : {{ store.video.channel }}</div>
         <div> 조회수 : {{ store.video.viewcnt }}</div>
     </div>
+    <tr v-for="review in rStore.videoReview" :key="review.num">
+                <td>{{ review.num }}</td>
+                <td>
+                    <RouterLink :to="`/review/${review.num}`">{{ review.title }}</RouterLink>
+                    </td>
+                <td>{{ getNickname(review.writer) }}</td>
+                <td>{{ review.content }}</td>
+                <td>{{ review.viewcnt }}</td>
+                <td>{{ review.regdate }}</td>
+    </tr>
 </template>
 
 <script setup>
 import { useRoute, useRouter } from 'vue-router';
 import {useVideoStore} from '@/stores/video'
+import { useReviewStore } from '../../stores/review';
 import {onMounted} from 'vue'
 const store = useVideoStore();
+const rStore = useReviewStore();
 const router = useRouter()
+
 const route = useRoute()
 
 onMounted(()=>{
-    console.log(route.params.id)
     store.getVideo(route.params.id)
 })
 
-// const videoURL = computed(()=>{
-//     const videoId = store.video.num
-// //    const videoId = store.selectedVideo.id.videoId
-//     return `https://www.youtube.com/embed/${videoId}`
-// })
 </script>
 
 <style scoped>

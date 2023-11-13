@@ -8,11 +8,7 @@
         <div>
             <h3>인기 동영상</h3>
             <ul>
-                <VideoListItem
-                    v-for="video in store.popularVideos"
-                    :key="video.title"
-                    :video="video"
-                />
+                <VideoListItem v-for="video in store.popularVideos"  :video="video"/>
             </ul>
             
         </div>
@@ -40,7 +36,6 @@ import {onMounted, ref} from 'vue'
 const store = useVideoStore()
 
 function selectPart(part) {
-    // alert(part)
     store.getPartVideo(part)
 }
 
@@ -48,7 +43,6 @@ const partList = ref(["전신", "상체", "하체", "복부"])
 
 onMounted(()=>{
     store.getVideoList()
-    store.getPopular()
 })
 
 </script>

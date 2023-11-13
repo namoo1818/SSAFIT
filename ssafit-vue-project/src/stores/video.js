@@ -11,19 +11,19 @@ export const useVideoStore = defineStore('video', ()=>{
 
     // 영상 전체
     const getVideoList = function(){
-        axios.get({
-            url : REST_VIDEO_API,
-            method: "GET",
-            params: {
+        axios.get(REST_VIDEO_API, {
+            params : {
                 orderBy : "video_viewcnt",
                 orderByDir : "desc"
             }
         })
         .then((response)=>{
             videoList.value = response.data
+            console.log(videoList)
         })
     }
-
+    
+    // 영상 하나
     const video = ref({})
     const getVideo = function(id){
         axios.get(`${REST_VIDEO_API}/${id}`)
@@ -59,6 +59,11 @@ export const useVideoStore = defineStore('video', ()=>{
         selectedVideo.value = video
     }
 
+    // 인기동영상
+    const popularVideos = computed (() => {
+        return videoList.value.sort((a,b)=>b.viewcnt - a.viewcnt).slice(0,3);
+    })
+
     const partVideos = ref([])
     // 부위별 영상 
     const getPartVideo = function(val){
@@ -66,15 +71,5 @@ export const useVideoStore = defineStore('video', ()=>{
         partVideos.value = videoList.value.filter((video)=> video.part === val)
     }
 
-    const popularVideos = ref([])
-    // 인기 영상
-    const getPopular = function(){
-        axios.get(REST_VIDEO_API)
-        .then((response)=>{
-            videoList.value = response.data
-            popularVideos.value = videoList.value.slice(0,3)
-        })
-    }
-
-    return { videos, videoList, video, getVideo, selectedVideo, getVideoList, videoSearch, clickVideo, partVideos, getPartVideo, popularVideos, getPopular }
+    return { videos, videoList, video, getVideo, selectedVideo, getVideoList, videoSearch, clickVideo, partVideos, getPartVideo, popularVideos }
 })

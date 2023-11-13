@@ -29,9 +29,9 @@ export const useUserStore = defineStore('user',()=>{
         axios({
             url: REST_USER_API,
             method: 'POST',
-            // headers: {
-            //     "Content-Type": "application/json"
-            //   },
+            headers: {
+                "Content-Type": "application/json"
+            },
             data: user
             })
             .then(()=>{
@@ -58,20 +58,7 @@ export const useUserStore = defineStore('user',()=>{
         })
     }
 
-    //로그인
-
-    //로그아웃 
-    const logout = () => {
-        user.value = null; //안되면 지우기
-        localStorage.removeItem("loginUser");
-        // 로그아웃 시 메인페이지로 리다이렉트
-        // axios({}).then(() => {
-        //     router.push({name: 'home'})
-        //     })
-      };
-
-
-    return {userList, getUserList, user, getUser, createUser, updateUser, deleteUser, logout}
+    return {userList, getUserList, user, getUser, createUser, updateUser, deleteUser}
 
 
 })

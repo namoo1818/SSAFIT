@@ -11,12 +11,11 @@
         allowfullscreen></iframe>
         <hr>
         <div>제목: {{ store.review.title }}</div>
-        <div>쓰니: {{ store.review.writer }}</div>
+        <div>쓰니: {{ uStore.user.userNickname }}</div>
         <div>쓰니아이디: {{ uStore.user.userId }}</div>
         <div>작성일: {{ store.review.regdate }}</div>
         <div>조회수: {{ store.review.viewcnt }}</div>
         <div>내용: {{ store.review.content }}</div>
-        <!-- <div>비디오 번호: {{ store.review.videoNum }}</div> -->
 
         <button @click="deleteReview">삭제</button>
         <button @click="updateReview">수정</button>
@@ -36,11 +35,6 @@ const vStore = useVideoStore()
 const uStore = useUserStore()
 const router = useRouter()
 const route = useRoute()
-
-// const videoURL = computed(()=>{
-//     const videoNum = store.review.videoNum
-//     return `https://www.youtube.com/embed/${videoId}`
-// })
 
 onMounted(()=>{
     console.log(store.review.writer)
