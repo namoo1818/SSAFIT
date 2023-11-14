@@ -19,7 +19,6 @@ export const useVideoStore = defineStore('video', ()=>{
         })
         .then((response)=>{
             videoList.value = response.data
-            console.log(videoList)
         })
     }
     
@@ -32,17 +31,34 @@ export const useVideoStore = defineStore('video', ()=>{
     }
 
     // 영상 검색 (유튜브 API 사용)
-    const videoSearch = function(keyword){
-        const URL = 'https://www.googleapis.com/youtube/v3/search';
-        const API_KEY = 'AIzaSyB4uKplPhOnhHhJ9MLK8ITIJUmwbls-WkE';
+    // const videoSearch = function(keyword){
+    //     const URL = 'https://www.googleapis.com/youtube/v3/search';
+    //     const API_KEY = 'AIzaSyB4uKplPhOnhHhJ9MLK8ITIJUmwbls-WkE';
 
+    //     axios({
+    //         url:URL,
+    //         method:"GET",
+    //         params: {
+    //             key: API_KEY,
+    //             part: "snippet",
+    //             q: keyword,
+    //             type: 'video',
+    //             maxResults: 10
+    //         }
+    //     })
+    //     .then((response)=>{
+    //         videos.value = response.data.items
+    //     })
+    //     .catch(()=>{})
+    // }
+
+    const videoSearch = function(keyword){
         axios({
-            url:URL,
+            url:REST_VIDEO_API,
             method:"GET",
             params: {
-                key: API_KEY,
-                part: "snippet",
-                q: keyword,
+                key: "video_title",
+                word: keyword,
                 type: 'video',
                 maxResults: 10
             }
@@ -50,7 +66,6 @@ export const useVideoStore = defineStore('video', ()=>{
         .then((response)=>{
             videos.value = response.data.items
         })
-        .catch(()=>{})
     }
 
     // 영상 클릭
@@ -70,6 +85,7 @@ export const useVideoStore = defineStore('video', ()=>{
         console.log(typeof val)
         partVideos.value = videoList.value.filter((video)=> video.part === val)
     }
+
 
     return { videos, videoList, video, getVideo, selectedVideo, getVideoList, videoSearch, clickVideo, partVideos, getPartVideo, popularVideos }
 })

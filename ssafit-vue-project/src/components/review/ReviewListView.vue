@@ -1,6 +1,8 @@
 <template>
     <div class="container">
-        <h4>리뷰 목록</h4>
+        <div class="text-center">
+            <h2 class="my-h2 my-underline">리뷰 목록</h2>
+        </div>
         <hr>
         <button @click="createReview">글쓰기</button>
         <table>
@@ -55,5 +57,11 @@ const getNickname = async function(id) {
 <style scoped>
 .container {
   margin: 0px 30px;
+}
+.my-h2{
+    display: inline;
+}
+.my-underline {
+    background : linear-gradient(to top, rgb(255, 213, 135)20%, transparent 30%)
 }
 </style>
