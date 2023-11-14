@@ -4,8 +4,8 @@
       <div>
         <RouterLink to="/" class="logo">SSAFIT</RouterLink>
       </div>
-        <form class="form-inline my-2 my-lg-0">
-          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        <form @submit.prevent class="form-inline my-2 my-lg-0">
+          <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" v-model="keyword">
           <button class="btn btn-outline-success my-2 my-sm-0" type="submit" @click="search">검색</button>
         </form>
       <div>
@@ -23,13 +23,20 @@
 <script setup>
 import {ref, onMounted} from 'vue';
 import {useVideoStore} from '@/stores/video'
+import {useRouter} from "vue-router";
+
+const router = useRouter();
 
 const store = useVideoStore()
 const keyword = ref('')
 const dropdownlist = ref(['마이페이지', '내가 찜한 동영상', '최근에 본 영상', '설정', '고객센터', '로그아웃'])
 
 const search = function() {
+    console.log(keyword)
     store.videoSearch(keyword.value)
+    router.push({
+      path: "/result"
+    })
 }
 
 const loadedUser = localStorage.getItem("loginUser");

@@ -1,9 +1,5 @@
 <template>
     <div>
-        <!-- <VideoSearch/>
-        <hr>
-        <VideoDetail/>
-        <VideoList/> -->
         <RouterView />
     </div>
 </template>

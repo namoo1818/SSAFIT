@@ -11,6 +11,11 @@ const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
+      path: '/result',
+      name: 'result',
+      component: () => import('../components/video/VideoSearchResultView.vue')
+    },
+    {
       path: '/review',
       name: 'review',
       component: Review,

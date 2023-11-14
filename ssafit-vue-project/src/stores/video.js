@@ -53,18 +53,19 @@ export const useVideoStore = defineStore('video', ()=>{
     // }
 
     const videoSearch = function(keyword){
+        console.log(keyword)
         axios({
             url:REST_VIDEO_API,
             method:"GET",
             params: {
-                key: "video_title",
+                key: "video.video_title",
                 word: keyword,
-                type: 'video',
                 maxResults: 10
             }
         })
         .then((response)=>{
-            videos.value = response.data.items
+            videos.value = response.data
+            console.log(videos)
         })
     }
 

@@ -67,10 +67,12 @@ export const useReviewStore = defineStore('review', ()=>{
     const videoReview = ref([])
     const getVideoReview = function(id){
         axios.get(REST_REVIEW_API, {
-            params: searchCondition
+            key: "video.video_num",
+            word: id
         })
         .then((res)=>{
-            reviewList.value = res.data
+            videoReview.value = res.data
+            console.log(videoReview)
         })
     }
 
