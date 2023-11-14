@@ -14,16 +14,22 @@
 		WHERE follow_num = #{num}
 	</delete>
 	
-	<!-- 나를 팔로우하는 사람 조회  -->
+	<!-- 나를 팔로우하는 사람(follower) 조회  -->
 	<select id="followerSearch" resultType="Follow" parameterType="int">
-		SELECT follow_num as num, follower_num as follower, followee_num as followee FROM follow
-		Where followee_num = #{myNum}
+		SELECT follow_num as num, follower_num as followernum, followee_num as followeenum, 
+		user_nickname as follower
+		FROM follow LEFT JOIN user 
+		ON follower_num = user_num
+		WHERE followee_num = #{myNum}
 		ORDER BY follow_num DESC
 	</select>
 	
-	<!-- 내가 팔로우하는 사람 조회 -->
+	<!-- 내가 팔로우하는 사람(followee) 조회 -->
 	<select id="followingSearch" resultType="Follow" parameterType="int">
-		SELECT follow_num as num, follower_num as follower, followee_num as followee FROM follow
+		SELECT follow_num as num, follower_num as followernum, followee_num as followeenum, 
+		user_nickname as followee
+		FROM follow LEFT JOIN user
+		ON followee_num = user_num 
 		Where follower_num = #{myNum}
 		ORDER BY follow_num DESC
 	</select>

@@ -16,8 +16,13 @@
 	
 	<!-- 검색기능  -->
 	<select id="wishSearch" resultType="Wish" parameterType="int">
-		SELECT wish_num as num, video_num as videonum, wish_writer as writer FROM wish
-		Where wish_writer = #{writer}
+		SELECT wish_num as num, wish.video_num as videonum, wish_writer as writer, 
+		user_nickname as userNickname, video_title as videoTitle, video_url as videoUrl 
+		FROM wish LEFT JOIN user
+		ON wish_writer = user_num 
+		LEFT JOIN video
+		ON wish.video_num = video.video_num
+		Where wish.wish_writer = #{writer}
 		ORDER BY wish_num DESC
 	</select>
 
