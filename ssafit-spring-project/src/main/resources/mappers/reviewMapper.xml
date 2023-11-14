@@ -77,4 +77,13 @@
 	</select>
 	
 
+	<select id="selectVideoReview" resultType="review" parameterType="int">
+	    SELECT review_num as num, review_title as title, review_content as content,
+	    review_viewcnt as viewcnt, review_regdate as regdate, user_nickname as userNickname, video_url as videoUrl 
+	    FROM review LEFT JOIN user 
+	    ON review_writer = user_num 
+	    LEFT JOIN video
+	    ON review.video_num = video.video_num
+	    WHERE video.video_num = #{num}
+	</select>
 </mapper>

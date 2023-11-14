@@ -23,5 +23,8 @@ public interface ReviewDao {
 
 	// 검색 기능
 	public List<Review> search(SearchCondition condition);
+	
+	// 영상에 달린 리뷰 목록
+	public List<Review> selectVideoReview(int id);
 
 }

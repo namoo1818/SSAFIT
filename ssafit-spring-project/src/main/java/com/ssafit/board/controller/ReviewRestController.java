@@ -69,5 +69,13 @@ public class ReviewRestController {
 			return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
 		return new ResponseEntity<String>(FAIL, HttpStatus.BAD_REQUEST);
 	}
+	
+	@GetMapping("/videoReview/{id}")
+    public ResponseEntity<?> videoReview(@PathVariable int id){
+        List<Review> list = reviewService.getVideoReveiw(id);
+        if (list == null || list.size() == 0)
+            return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+        return new ResponseEntity<List<Review>>(list, HttpStatus.OK);
+    }
 
 }

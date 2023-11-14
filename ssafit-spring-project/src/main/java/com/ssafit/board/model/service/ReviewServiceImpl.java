@@ -44,5 +44,10 @@ public class ReviewServiceImpl implements ReviewService {
 	public List<Review> search(SearchCondition condition) {
 		return reviewDao.search(condition);
 	}
+	
+	@Override
+	public List<Review> getVideoReveiw(int id) {
+	    return reviewDao.selectVideoReview(id);
+	}
 
 }

@@ -21,4 +21,7 @@ public interface ReviewService {
 
 	// 검색 버튼을 눌렀을 때 처리할 메서드
 	List<Review> search(SearchCondition condition);
+	
+	// 영상에 달린 리뷰 조회
+	public List<Review> getVideoReveiw(int id);
 }
