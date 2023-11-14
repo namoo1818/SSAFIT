@@ -22,9 +22,9 @@
 
 <script setup>
 import {ref, onMounted} from 'vue';
-import {useYoutubeStore} from '@/stores/youtube'
+import {useVideoStore} from '@/stores/video'
 
-const store = useYoutubeStore()
+const store = useVideoStore()
 const keyword = ref('')
 const dropdownlist = ref(['마이페이지', '내가 찜한 동영상', '최근에 본 영상', '설정', '고객센터', '로그아웃'])
 
