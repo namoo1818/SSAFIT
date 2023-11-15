@@ -11,7 +11,11 @@ export const useReviewStore = defineStore('review', ()=>{
 
     // 리뷰 전체
     const getReviewList = function(){
-        axios.get(REST_REVIEW_API)
+        axios.get(REST_REVIEW_API,{
+            headers: {
+                'access-token': sessionStorage.getItem('access-token')
+            }
+        })
         .then((response)=>{
             reviewList.value = response.data
             // console.log(reviewList.value)

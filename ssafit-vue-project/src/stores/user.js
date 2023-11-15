@@ -5,7 +5,27 @@ import axios from 'axios'
 const REST_USER_API = `http://localhost:8080/apiUser/user`
 
 export const useUserStore = defineStore('user',()=>{
+    const loginUserId = ref('')
     const userList = ref([])
+    const userLogin = function(id, pw){
+
+        axios.post(`${REST_USER_API}/login`,{userId: id, userPassword: pw})
+        .then((response)=>{
+            sessionStorage.setItem('access-token', response.data["access-token"])
+            
+            const token = response.data['access-token'].split('.')
+            let id = token[1]
+            id = atob(id)
+            id = JSON.parse(id)
+            console.log(id)
+            loginUserId.value = id['id']
+
+            router.push({name:"home"})
+        })
+        .catch(()=>{
+
+        })
+    }
 
     // 사용자 전체
     const getUserList = function(){
@@ -58,7 +78,7 @@ export const useUserStore = defineStore('user',()=>{
         })
     }
 
-    return {userList, getUserList, user, getUser, createUser, updateUser, deleteUser}
+    return {userLogin, userList, getUserList, user, getUser, createUser, updateUser, deleteUser}
 
 
 })

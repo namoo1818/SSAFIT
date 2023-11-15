@@ -6,10 +6,10 @@
         </div>
         <form class="form">
           <div>
-            <input type="text" placeholder="아이디" v-model="id" id="id" />
+            <input type="text" placeholder="아이디" v-model.trim="id" id="id" />
           </div>
           <div>
-            <input type="password" placeholder="비밀번호" v-model="pw" id="pw" />
+            <input type="password" placeholder="비밀번호" v-model.trim="pw" id="pw" />
           </div>
           <div class="checkbox">
             <input type="checkbox" id="id-save" style="width: auto; margin: 0 10px 0 0" />
@@ -29,41 +29,46 @@
   import { ref } from 'vue'
   import { RouterLink, useRouter } from 'vue-router'
   import axios from 'axios'
+  import {useUserStore} from "@/stores/user"
   
   const router = useRouter()
   const id = ref('')
   const pw = ref('')
-  const user = ref(null);
+  // const user = ref(null);
   const REST_USER_API = `http://localhost:8080/apiUser/user`
-  
-  const login = () => {
-    let loginUser = {
-      userId:id.value,
-      userPassword:pw.value
-    };
+  const store = useUserStore()
 
-    axios
-    .get(REST_USER_API)
-    .then((res) => {
-      let matchedUser = res.data.find(
-        (u) => u.userId === loginUser.userId && u.userPassword === loginUser.userPassword
-      );
+  const login = function(){
+      store.userLogin(id.value, pw.value);
+    }
 
-      if (matchedUser) {
-        user.value = matchedUser;
-        localStorage.setItem("loginUser", JSON.stringify(matchedUser));
+  // const login = () => {
+  //   let loginUser = {
+  //     userId:id.value,
+  //     userPassword:pw.value
+  //   };
+  //   axios
+  //   .get(REST_USER_API)
+  //   .then((res) => {
+  //     let matchedUser = res.data.find(
+  //       (u) => u.userId === loginUser.userId && u.userPassword === loginUser.userPassword
+  //     );
 
-        alert("로그인 성공");
-        router.push("/"); // 로그인 성공 시 마이페이지로
-      } else {
-        alert("로그인 실패");
-      }
-    })
-    .catch((err) => {
-      console.log(err);
-      alert("로그인 실패: 서버 에러");
-    });
-  }
+  //     if (matchedUser) {
+  //       user.value = matchedUser;
+  //       localStorage.setItem("loginUser", JSON.stringify(matchedUser));
+
+  //       alert("로그인 성공");
+  //       router.push("/"); // 로그인 성공 시 마이페이지로
+  //     } else {
+  //       alert("로그인 실패");
+  //     }
+  //   })
+  //   .catch((err) => {
+  //     console.log(err);
+  //     alert("로그인 실패: 서버 에러");
+  //   });
+  // }
 
 
   // const login = async () => {
