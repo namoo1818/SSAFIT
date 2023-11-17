@@ -8,15 +8,11 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-import com.ssafit.board.interceptor.JwtInterceptor;
-
 //Web과 관련 설정을 위한 파일
 @Configuration
 @EnableWebMvc
 public class WebConfig implements WebMvcConfigurer {
 	
-	@Autowired
-	private JwtInterceptor jwtInterceptor;
 	
 	//해당 위치에서 일치하는 것이 있다면 미리 찾기 
 	@Override
@@ -39,11 +35,6 @@ public class WebConfig implements WebMvcConfigurer {
 	// 필드를 통해 의존성을 주입 받고
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
-		registry.addInterceptor(jwtInterceptor).addPathPatterns("/**").excludePathPatterns("/apiUser/user/login",
-				"/swagger-resources/**", "/swagger-ui/**", "/v2/api-docs");
 	}
-	
-	
-	
 
 }

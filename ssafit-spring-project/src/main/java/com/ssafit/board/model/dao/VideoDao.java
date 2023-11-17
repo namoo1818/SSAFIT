@@ -23,5 +23,9 @@ public interface VideoDao {
 
 	// 검색 기능
 	public List<Video> search(SearchCondition condition);
+	
+	// 최근에 본 영상 목록
+	public List<Video> RecentlyViewedVideo(int id);
+	
 
 }

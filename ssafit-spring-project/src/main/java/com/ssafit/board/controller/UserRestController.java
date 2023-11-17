@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ssafit.board.model.dto.SearchCondition;
 import com.ssafit.board.model.dto.User;
 import com.ssafit.board.model.service.UserService;
-import com.ssafit.board.util.JwtUtil;
 
 @RestController
 @RequestMapping("/apiUser")
@@ -31,9 +30,6 @@ public class UserRestController {
 
 	@Autowired
 	private UserService userService;
-
-	@Autowired
-	private JwtUtil jwtUtil;
 
 	// 1. 목록
 	@GetMapping("/user")
@@ -75,33 +71,5 @@ public class UserRestController {
 		if (userService.modifyUser(user))
 			return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
 		return new ResponseEntity<String>(FAIL, HttpStatus.BAD_REQUEST);
-	}
-
-	@PostMapping("/user/login")
-	public ResponseEntity<Map<String, Object>> login(@RequestBody User user) {
-		System.out.println(user);
-		Map<String, Object> result = new HashMap<String, Object>();
-
-		// User Service -> DAO -> DB //실제 유저인지 아닌지 확인 등등등....
-
-		HttpStatus status = null;
-
-		// User의 id가 Null이 아니거나 뭔가 작성이 되어있다면 로그인 성공 이라고 가정
-		// 로그인 성공!
-		try {
-			if (user.getUserId() != null && user.getUserId().length() > 0) {
-				// userDB가서 유저 확인해야함
-				result.put("access-token", jwtUtil.createToken("id", user.getUserId()));
-				result.put("message", SUCCESS);
-				status = HttpStatus.ACCEPTED;
-			}else {
-				result.put("message", FAIL);
-				status = HttpStatus.NO_CONTENT;
-			}
-		} catch (UnsupportedEncodingException e) {
-			result.put("message", FAIL);
-			status = HttpStatus.INTERNAL_SERVER_ERROR;
-		}
-		return new ResponseEntity<Map<String,Object>>(result, status);
 	}
 }

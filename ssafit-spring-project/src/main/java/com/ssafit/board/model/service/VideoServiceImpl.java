@@ -45,4 +45,9 @@ public class VideoServiceImpl implements VideoService {
 		return videoDao.search(condition);
 	}
 
+	@Override
+	public List<Video> RecentlyViewedVideo(int id) {
+		return videoDao.RecentlyViewedVideo(id);
+	}
+
 }

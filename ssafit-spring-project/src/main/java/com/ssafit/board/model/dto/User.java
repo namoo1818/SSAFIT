@@ -9,30 +9,24 @@ public class User {
 	private String userNickname;
 	private String userEmail;
 	private String userRegdate;
+	private int userGoal;
+	private int userExp;
 	
 	public User() {
 		// TODO Auto-generated constructor stub
 	}
-	
-	public User(String userId, String userPassword, String userName, String userNickname, String userEmail) {
-		super();
-		this.userId = userId;
-		this.userPassword = userPassword;
-		this.userName = userName;
-		this.userNickname = userNickname;
-		this.userEmail = userEmail;
-	}
 
-	public User(int userNum, String userId, String userPassword, String userName, String userNickname, 
-			String userEmail, String userRegdate) {
+	public User(String userId, String userPassword, String userName, String userNickname, String userEmail,
+			String userRegdate, int userGoal, int userExp) {
 		super();
-		this.userNum = userNum;
 		this.userId = userId;
 		this.userPassword = userPassword;
 		this.userName = userName;
 		this.userNickname = userNickname;
 		this.userEmail = userEmail;
 		this.userRegdate = userRegdate;
+		this.userGoal = userGoal;
+		this.userExp = userExp;
 	}
 
 	public int getUserNum() {
@@ -91,12 +85,27 @@ public class User {
 		this.userRegdate = userRegdate;
 	}
 
+	public int getUserGoal() {
+		return userGoal;
+	}
+
+	public void setUserGoal(int userGoal) {
+		this.userGoal = userGoal;
+	}
+
+	public int getUserExp() {
+		return userExp;
+	}
+
+	public void setUserExp(int userExp) {
+		this.userExp = userExp;
+	}
+
 	@Override
 	public String toString() {
 		return "User [userNum=" + userNum + ", userId=" + userId + ", userPassword=" + userPassword + ", userName="
 				+ userName + ", userNickname=" + userNickname + ", userEmail=" + userEmail + ", userRegdate="
-				+ userRegdate + "]";
+				+ userRegdate + ", userGoal=" + userGoal + ", userExp=" + userExp + "]";
 	}
 	
-
 }

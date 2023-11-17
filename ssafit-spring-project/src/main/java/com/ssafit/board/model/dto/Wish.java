@@ -4,7 +4,7 @@ public class Wish {
 
 	private int num; //인덱스 
 	private int videonum; //비디오 번호 
-	private int writer; //해당 위시 작성자(소유자) 
+	private int userNum; //해당 위시 작성자(소유자) 
 	private String userNickname;
 	private String videoTitle;
 	private String videoUrl;
@@ -13,11 +13,11 @@ public class Wish {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Wish(int num, int videonum, int writer, String userNickname, 
+	public Wish(int num, int videonum, int userNum, String userNickname, 
 			String videoTitle, String videoUrl) {
 		super();
 		this.videonum = videonum;
-		this.writer = writer;
+		this.userNum = userNum;
 		this.userNickname = userNickname;
 		this.videoTitle = videoTitle;
 		this.videoUrl = videoUrl;
@@ -39,12 +39,12 @@ public class Wish {
 		this.videonum = videonum;
 	}
 
-	public int getWriter() {
-		return writer;
+	public int getUserNum() {
+		return userNum;
 	}
 
-	public void setWriter(int writer) {
-		this.writer = writer;
+	public void setUserNum(int userNum) {
+		this.userNum = userNum;
 	}
 
 	public String getUserNickname() {
@@ -75,7 +75,7 @@ public class Wish {
 
 	@Override
 	public String toString() {
-		return "Wish [num=" + num + ", videonum=" + videonum + ", writer=" + writer + ", userNickname=" + userNickname
+		return "Wish [num=" + num + ", videonum=" + videonum + ", userNum=" + userNum + ", userNickname=" + userNickname
 				+ ", videoTitle=" + videoTitle + ", videoUrl=" + videoUrl + "]";
 	}
 
