@@ -1,0 +1,181 @@
+
+-- SSAFIT DB INIT DML FILE 
+	-- 1팀 이민지 조아영 
+
+-- 목차
+    -- 데이터 조회 및 삽입
+		-- 1. (user) 사용자 
+		-- 2. (video) 운동 영상 
+		-- 3. (review) 리뷰 
+		-- 4. (calendar) 캘린더 
+		-- 5. (daily) 운동 체크
+		-- 6. (viewlog) 영상 시청 여부 저장
+		-- 7. (wish) 운동 찜
+		-- 8. (playlist) 운동용 플레이리스트 
+		-- 9. (quote) 명언, 응원문구
+		-- 10. (follow) 팔로우
+		-- 11. (map) 카카오 map api
+		-- 12. (grade) 회원 등급
+		-- 13. (weather) 날씨 
+-- 1. 사용자
+SELECT * FROM user;
+INSERT INTO user (user_id, user_password, user_name, user_nickname, user_email) VALUES 
+	('harry','1111','해리포터','번개흉터','potter@hw.ac.uk'),
+	('ron','2222','론위즐리','퀴디치위너','ron@hw.ac.uk'),
+	('hermione','3333','헤르미온느','모범생','granger@hw.ac.uk'),
+	('severus','4444','스네이프','마법약고수','snape@hw.ac.uk'),
+	('minerva','5555','맥고나걸','변신최고','professor@hw.ac.uk'),
+	('albus','6666','덤블도어','교장','dumble@dore.com'),
+	('draco','7777','말포이','슬리데린1짱','malfoy@slytherin.com'),
+	('voldemort','8888','톰리들','죽먹자','dontwannadie@azkaban.com'),
+	('bella','9999','벨라트릭스','볼드짱팬','bella@azkaban.com'),
+	('ssafy','0000','김싸피','관리자','ssafy@ssafy.com'),
+	('dlalswl','1004','이민지','MJ','dlalswl@ssafy.com'),
+	('cho','1234','조아영','ay','whdkdud@ssafy.com');
+
+-- 2. (video) 운동 영상 
+SELECT * FROM video;
+INSERT INTO video (video_keyword, video_title, video_url, video_channel, video_intensity) VALUES 
+	('연예인','르세라핌 카즈하가 실.제.로 하고있는 복근운동 루틴 10분', 'https://www.youtube.com/watch?v=P81i-Umj6i8','에이핏',3),
+	('연예인','와...르세라핌이 ‘이 동작’으로 살을 뺐구나....[극강의 9분 전신운동]', 'https://www.youtube.com/watch?v=N7W4mvOyxIk','비타민신지니',3),
+	('연예인','와...장원영님 몸매가 이쁜 이유가 ‘이 동작’ 때문이구나...[단기속성 9분 전신운동]','https://www.youtube.com/watch?v=5WkxRsNX9U8','비타민신지니',3),
+	('연예인','[여자아이돌 다이어트댄스] 실제 감량 후기 폭발했던 4세대 여돌 플레이리스트로 2주 -5kg 도전 해보세요!','https://www.youtube.com/watch?v=2paxL9MmxWM','흥둥이',3),
+	('연예인','[여자아이돌 다이어트댄스]실제 감량후기 폭발! 4세대 여돌 플리로 2주 -5kg 도전해보세요🔥','https://www.youtube.com/watch?v=d1j06bW5VO4','흥둥이',3),
+	('연예인','[남돌 다이어트 댄스 모음] 살 쭉 빠졌다는 실제 후기가 가득한 다이어트댄스, 딱 2주만 도전 해보세요 🔥','https://www.youtube.com/watch?v=sAphP_KZkHE','흥둥이',3),
+	('해외','Billy Blanks BootCamp 1 Basic Training','https://www.youtube.com/watch?v=HsvBCDU9EsM','빌리의부트캠프','3'),
+	('해외','2008편집본 Hana Kang Lower Body Stretching 2018 - Thinner Legs Here I Come! - 강하나 스트레칭(2018)','https://www.youtube.com/watch?v=LZWORB39zQk','강하나','2'),
+	('해외','Miley Cyrus Workout: Sexy Legs','https://www.youtube.com/watch?v=MG69sFM1UIw','마일리사일러스',3),
+	('해외','Drive By Inner Thighs Challenge Workout','https://www.youtube.com/watch?v=kJyZhOJ2Tag','캐시',3),
+	('해외','10 min Booty Shaking Waist Workout- Lose inches off your waist | TiffanyRotheWorkouts','https://www.youtube.com/watch?v=r_J8btnIEKQ','티파니',3),
+	('해외','줌바댄스 1000칼로리 소비 /Zumba dance','https://www.youtube.com/watch?v=dZbPtAgofwI','다이어트의모든것',3);
+INSERT INTO video (video_title, video_url, video_channel, video_intensity) VALUES 
+	('앉아서 하는 스트레칭 루틴!ㅣ의자 스트레칭','https://www.youtube.com/watch?v=2DRvc74GgYM','관절사용설명서',1),
+	('가만히 서 있었는데 뱃살이 쫙 빠지고 하체가 단단해지는 운동 루틴! [하루 10분 홈트]','https://www.youtube.com/watch?v=GUhTT21IHI0','관절사용설명서',2),
+	('복부가 단단해지고 허리통증 없애는 코어운동 초보 하루 10분 루틴!(3단계)','https://www.youtube.com/watch?v=ZpeX7pX9u1Q','관절사용설명서',2),
+	('코어운동 초보들이 무조건 먼저 해야할 운동!','https://www.youtube.com/watch?v=xrAtsN5mhDE','관절사용설명서',1),
+	('코어운동 초보 루틴 BESTㅣ하루 10분으로 초보자 코어근육강화!','https://www.youtube.com/watch?v=_RKJL6vwx_U','관절사용설명서',1),
+	('플랭크 아직도 버티기만 하세요?','https://www.youtube.com/watch?v=-Mqno-gaztM','관절사용설명서',1),
+	('하루 10분 초급 코어강화 운동💛 청소년 필수시청 영상입니다 (Beginner core workout)','https://www.youtube.com/watch?v=LWKpDLeVivI','빵느',1),
+	('하루 두 번🧘🏻‍♀️반드시 해야하는 20분 전신순환 스트레칭 - 피로회복, 디톡스, 심신안정, 혈액순환, 라인정리 효과','https://www.youtube.com/watch?v=Kk7TQGqQ3nA','빵느',1),
+	('하루 30분🧘🏻 반드시 해야하는 전신순환 스트레칭 - 피로회복, 붓기제거, 디톡스, 심신안정, 라인정리 효과','https://www.youtube.com/watch?v=ejcfa2prYmI','빵느',2),
+	('매일 아침 꼭 해야하는 15분 기상 스트레칭｜혈액순환, 피로회복, 신진대사 향상 (Morning stretch)','https://www.youtube.com/watch?v=xCIid6LG354','빵느',1),
+	('만성두통, 어깨결림, 뭉친등에 효과가 좋은 상체 폼롤러 마사지 (Foam roller massage - fascial plasticity)','https://www.youtube.com/watch?v=EhvmSFeYqWY','빵느',2),
+	('※30분 걷기운동※ 집에서 3km 걸으면서 전신칼로리 불태우기!! (Walking workout)','https://www.youtube.com/watch?v=aGOvDH3UY2A','빵느',2),
+	('뱃살빼기! 효과보장!! 15MIN STANDING ABS WORKOUT - No Talking , No Equipment','https://www.youtube.com/watch?v=0iqP6WP2ET4','미지',2),
+	('매일 따라하는 8분 상체 스트레칭 - 거북목, 뭉친 어깨, 굽은 등 교정','https://www.youtube.com/watch?v=0XBcrjkkwQo','미지',1),
+	('살이 이렇게나 빠진다구?! 층간소음❌ 지방 태우기🔥 No Jumping Cardio Workout','https://www.youtube.com/watch?v=s82_Hi_5ItA','미지',3),
+	('일주일만에 팔뚝살 폭파🔥 일자 팔뚝 만들기 8분 운동','https://www.youtube.com/watch?v=KZdQdzcrMOg','미지',2),
+	('일주일만에 슬림한 일자 팔뚝 만들기! - 출렁이는 팔뚝살 없애는 9분 루틴','https://www.youtube.com/watch?v=6rDlOwn4q0Q','미지',2),
+	('서서하는 복근운동 이 영상하나로 끝! 16MIN STANDING ABS FOR BEGINNER','https://www.youtube.com/watch?v=6rDlOwn4q0Q','미지',2),
+	('[ENG] 운동 전 최고의 스트레칭! 10분만 따라해도 운동효과 대박!','https://www.youtube.com/watch?v=yyjOhsNEqtE','힙으뜸',1),
+	('ENG)매일 아침 8분 스트레칭 l 8minutes morning full body stretch','https://www.youtube.com/watch?v=ojWHzxUzEVk','힙으뜸',1),
+	('ENG)하루10분 스쿼트로 기초 체력 기르기!','https://www.youtube.com/watch?v=q6hBSSfokzY','힙으뜸',2),
+	('ENG)매일하는 30일 플랭크 챌린지 (feat.기초근력, 코어힘 기르기)','https://www.youtube.com/watch?v=v54Jtmi2BwU','힙으뜸',3),
+	('[ENG] (층간소음X, 설명O) 복근운동과 유산소를 한번에❗️서서하는 복근운동 1탄🔥','https://www.youtube.com/watch?v=kETh8T3it4k','힙으뜸',3),
+	('운동후 스트레칭 모음, 이거 하나면 운동효과 2배! 쿨다운 끝!','https://www.youtube.com/watch?v=4TwQwVFLi4Q','힙으뜸',1),
+	('[EN/CH]하체비만 탈출 첫번째는 골반교정! 저녁에도 아침같은 다리 완성 (Lower Body Stretching, 다노레전드 스트레칭, 골반교정 스트레칭) ㅣ 다노티비','https://www.youtube.com/watch?v=VVn5IUM8sms','다노',1),
+	('다노 레전드 상체 스트레칭으로 허리/어깨통증/거북목 잠재우고, 겨살/팔살/등살 상체 군살까지 싹 정리!ㅣ다노티비','https://www.youtube.com/watch?v=PCLEMCSVx_M','다노',1),
+	('한번만 따라 해도 시원함에 중독되는 폼롤러 마사지!! (근막이완 마사지, 폼롤러운동)ㅣ다노티비','https://www.youtube.com/watch?v=NlMjP_uaIW8','다노',1),
+	('매일매일 꼭 하고 자는 10분 스트레칭! (워밍업, 쿨 다운, 아침, 저녁용 스트레칭영상) total body stretch | 다노티비','https://www.youtube.com/watch?v=SAsE6JUbSWQ','다노',1),
+	('[EN/CH]눈뜨스:아침에 눈뜨자마자 따라하는 스트레칭 (First Thing in the Morning Stretching, Morning Stretching)ㅣ다노티비','https://www.youtube.com/watch?v=6_LYz_XxD-g','다노',1),
+	('종아리 가늘어지는 5분 셀프 마사지 (5min calf massage)','https://www.youtube.com/watch?v=prkgLZUX2Dk','다노',1);
+
+-- 3. (review) 리뷰 
+SELECT * FROM review;
+INSERT INTO review (review_writer, review_title, review_content, video_num) VALUES 
+(12, '카즈하 사랑해', '마음으로 따라했습니다', 1),
+(12, '으악', '여기가...지옥?',18),
+(12, '나의 빛 안쌤', '안쌤없이 못살아 정말못살아', 13),
+(12, '흠...', '하고는 싶은데 스트레칭 할바에 15분 더잠 ㅅㄱ',22),
+(12, '맨날 하는데 감량 안되던데요', '사실 맨날 한다는건 뻥임',4);
+
+-- 4. (calendar) 캘린더 
+SELECT * FROM calendar;
+	-- 생략 (작성하게 되면 여기에 추가)
+
+-- 5. (daily) 운동 체크
+SELECT * FROM daily;
+	-- 생략 (작성하게 되면 여기에 추가)
+
+-- 6. (viewlog) 영상 시청 여부 저장
+SELECT * FROM viewlog;
+INSERT INTO viewlog (view_date, video_num, user_num) VALUES 
+	("2023-11-17 16:33:23", 2, 1),
+    ("2023-11-20 16:33:23", 1, 1),
+    ("2023-11-22 16:33:23", 2, 1),
+    ("2023-11-30 16:33:23", 3, 1),
+    ("2023-12-30 16:33:23", 1, 1),
+    ("2023-11-17 16:33:23", 2, 2),
+    ("2023-11-20 16:33:23", 1, 2),
+    ("2023-11-22 16:33:23", 2, 2);
+	
+-- 7. (wish) 운동 찜
+SELECT * FROM wish;
+SELECT video_num, user_nickname FROM wish LEFT JOIN user ON wish.user_num = user.user_num;
+INSERT INTO wish (video_num, user_num) VALUES
+	(2,1),(3,1),(4,1),
+	(1,10),(3,10),(5,10),(7,10),(9,10);
+
+-- 8. (playlist) 운동용 플레이리스트 
+SELECT * FROM playlist;
+INSERT INTO playlist (playlist_title, playlist_url, playlist_weather) VALUES
+	('비 오는 날, 처진 기분을 업시켜줄 플레이리스트', 'https://youtu.be/Oz7MAt-5iKY', 1),
+    ('눈도 오는데, 크리스마스 기분 내 볼래?', 'https://www.youtube.com/watch?v=GFb_kXitoG0', 2),
+    ('안개 낀 날, 비장하게 운동해 보자', 'https://www.youtube.com/watch?v=7yg3Cp7Y0sQ', 3),
+    ('맑은 날, 설레는 마음으로 운동 go go!', 'https://www.youtube.com/watch?v=VmZJHIWByJU', 4),
+    ('흐린 날이지만 살살 워밍업부터 해 봐요', 'https://www.youtube.com/watch?v=S3b641gs830', 5), 
+    ('먼지도 이겨내는 운동 타임', 'https://www.youtube.com/watch?v=MUpIS_9ontQ', 6);
+
+-- 9. (quote) 명언, 응원문구
+SELECT * FROM quote;
+INSERT INTO quote (quote_content, quote_writer, quote_weather) VALUES
+	("비 오는 날 우리 실내 운동 어때요?", "운영자", 1),
+	("운동을 위해 시간을 내지 않으면, 병 때문에 시간을 내야 하게 될지도 모른다.", "로빈 샤르마", 1),
+	("인생은 당신이 편안한 곳에서 나올 때 시작한다.", "닐 도날드 월쉬", 1),
+	("포기하지 않는 사람을 이기기는 어렵다.", "베이브 루스", 1),
+	("땀흘린 자에게 좋은 일이 찾아온다", "미상", 2),
+	("운동은 하루를 짧게 하지만 인생을 길게 해준다.", "다니엘 W.조스린", 2),
+	("일단 규칙적으로 운동하면, 이것을 멈추기가 어려울 것이다.", "에린 그레이", 2),
+	("당신의 몸은 거의 모든 것을 견딜 수 있다. 당신이 설득해야 하는 것은 당신의 의지다.", "미상", 2),
+	("위험을 무릅쓸 용기가 없으면 인생에서 아무것도 이룰 수 없다.", "무하마드 알리", 3),
+	("자기 몸을 잘 돌보라. 몸은 내 영혼의 유일한 안식처다.", "짐 론", 3),
+	("건강 계좌와 은행 계좌의 가치는 똑같다. 많이 쌓을수록 더 많이 사용할 수 있다.", "잭 라렌", 3),
+	("세상에는 두 종류의 고통이 있다. 당신을 힘들게 하는 고통과 당신을 변화시키는 고통이다.", "미상", 3),
+	("잘 훈련된 육체만큼 아름다운 것은 없다.", "미상", 4),
+	("아직 목표에 도달하진 않았지만, 어제의 나보다 오늘의 내가 그 목표에 더 가까워졌다.", "존 N.해리스", 4),
+	("오늘 할 수 있는 일에 최선을 다해라", "뉴턴", 4),
+	("날씨도 좋은데 잠깐 산책하고 올까요?", "운영자", 4),
+	("우리가 반복하는 것들로 우리 스스로를 구성한다. 우수함은 행동이 아니라 습관에서 나온다", "미상", 5),
+	("오늘로부터 1년 뒤 당신은 '그때 시작할걸...' 할지도 모른다.", "카렌 램", 5),
+	("운동할 시간이 없는 사람은 병들 시간을 찾아야만 한다.", "더비 백작", 5),
+	("독서가 정신에 미치는 효과는 운동이 신체에 미치는 효과와 같다", "리처드 스틸", 5),
+	("건강할 때 건강함을 지키는 것은 의외로 대단한 결단이 필요하다.","제러미 벤담", 6),
+	("건강한 신체는 정신을 강하게 만든다", "토마스 제퍼슨", 6),
+	("한 번 포기하면 습관이 된다. 절대 포기하지 마라", "마이클 조던", 6),
+	("좋은 몸매는 단거리 빨리 달리기로 얻는 것이 아니다. 그것은 긴 여정이다.", "케리 월쉬 제닝스",6),
+	("매일매일 반복된 작은 노력이 모여 성공을 이룬다.", "로버트 콜리어", 6);
+
+-- 10. (map) 카카오 map api
+SELECT * FROM map;
+	-- 생략 (작성하게 되면 여기에 추가)
+
+-- 11. 팔로우 (앞의 애가 뒤의 애를 팔로우하는 것)
+SELECT * FROM follow;
+INSERT INTO follow (follower_num, followee_num) VALUES
+	(1,5),(2,5),(3,5),(4,5),(6,5),
+	(5,4),(5,6),
+	(7,3),(7,4),(7,9),
+	(9,8),
+	(12,1),(12,2),(12,3),(12,4),(12,5),(12,6),(12,7),(12,8),(12,9),(12,10),(12,11),
+	(11,10),(11,12);
+
+-- 12. (grade) 회원 등급
+SELECT * FROM grade;
+INSERT INTO grade (grade_name, grade_min_exp) VALUES 
+	('Bronze',0), ('Silver',100), ('Gold',600), ('Platinum',1600);
+
+-- 13. (weather) 날씨 
+SELECT * FROM weather;
+INSERT INTO weather (weather_category) VALUES ('비'),('눈'),('안개'),('화창'),('구름'),('먼지');
+
+
