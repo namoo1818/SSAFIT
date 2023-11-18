@@ -6,10 +6,11 @@
 	<resultMap type="Video" id="videoMap">
 		<result column="video_num" property="num"/>
 		<result column="video_title" property="title"/>
-		<result column="video_part" property="part"/>
+		<result column="video_keyword" property="keyword"/>
 		<result column="video_channel" property="channel"/>
 		<result column="video_url" property="url"/>
 		<result column="video_viewcnt" property="viewcnt"/>
+		<result column="video_intensity" property="intensity"/>
 	</resultMap>
 
 	<select id="selectOne" resultMap="videoMap" parameterType="int">
@@ -19,8 +20,8 @@
 	</select>
 
 	<insert id="insertVideo" parameterType="video" keyProperty="num" useGeneratedKeys="true">
-		INSERT INTO video (video_title, video_part, video_channel, video_url)
-		VALUES (#{title}, #{part}, #{channel}, #{url})
+		INSERT INTO video (video_title, video_part, video_channel, video_url, video_intensity)
+		VALUES (#{title}, #{part}, #{channel}, #{url}, #{intensity})
 	</insert>
 	
 	<delete id="deleteVideo" parameterType="int">
@@ -36,7 +37,7 @@
 	
 	<update id="updateVideo" parameterType="video">
 		UPDATE video
-		SET video_title = #{title}, video_part = #{part}, video_channel = #{channel}, video_url = #{url}
+		SET video_title = #{title}, video_part = #{part}, video_channel = #{channel}, video_url = #{url}, video_intensity = #{intensity}
 		WHERE video_num = #{num}
 	</update>
 	
@@ -55,5 +56,19 @@
 	</select>
 	
 	<!-- 최근에 본 영상 -->
+	<select id="RecentlyViewedVideo" resultMap="videoMap" parameterType="int">
+		SELECT DISTINCT *
+		FROM video v
+		RIGHT JOIN viewlog vl
+		ON v.video_num = vl.video_num
+		JOIN (
+			SELECT max(view_date) as 'recently_view'
+		    FROM viewlog
+		    WHERE user_num = #{id}
+		    GROUP BY video_num
+		) vl2 
+		ON vl.view_date = vl2.recently_view
+		ORDER BY vl.view_date DESC;
+	</select>
 
 </mapper>
