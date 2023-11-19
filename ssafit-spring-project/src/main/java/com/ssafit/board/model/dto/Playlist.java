@@ -4,12 +4,12 @@ public class Playlist {
 	private int num;
 	private String playlistTitle;
 	private String playlistUrl;
-	private int weather;
+	private String weather;
 	
 	public Playlist() {
 	}
 
-	public Playlist(String playlistTitle, String playlistUrl, int weather) {
+	public Playlist(String playlistTitle, String playlistUrl, String weather) {
 		super();
 		this.playlistTitle = playlistTitle;
 		this.playlistUrl = playlistUrl;
@@ -40,11 +40,11 @@ public class Playlist {
 		this.playlistUrl = playlistUrl;
 	}
 
-	public int getWeather() {
+	public String getWeather() {
 		return weather;
 	}
 
-	public void setWeather(int weather) {
+	public void setWeather(String weather) {
 		this.weather = weather;
 	}
 

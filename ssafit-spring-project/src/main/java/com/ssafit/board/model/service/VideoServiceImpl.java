@@ -1,14 +1,16 @@
 package com.ssafit.board.model.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ssafit.board.model.dao.VideoDao;
-import com.ssafit.board.model.dto.Video;
 import com.ssafit.board.model.dto.SearchCondition;
+import com.ssafit.board.model.dto.Video;
 
 @Service
 public class VideoServiceImpl implements VideoService {
@@ -23,9 +25,11 @@ public class VideoServiceImpl implements VideoService {
 	}
 
 	@Override
-	public Video getVideo(int id) {
-		videoDao.updateViewCnt(id);
-		return videoDao.selectOne(id);
+	public Video getVideo(int videoNum, int userNum) {
+		Map<Integer, Integer> map = new HashMap<>();
+		map.put(videoNum, userNum);
+		videoDao.updateViewCnt(map);
+		return videoDao.selectOne(videoNum);
 	}
 
 	@Transactional

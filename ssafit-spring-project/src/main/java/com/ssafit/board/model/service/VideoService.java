@@ -11,7 +11,7 @@ public interface VideoService {
 	void writeVideo(Video video);
 
 	// 영상 상세 조회
-	Video getVideo(int id);
+	Video getVideo(int videoNum, int userNum);
 
 	// 영상 수정
 	boolean modifyVideo(Video video);

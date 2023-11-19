@@ -32,7 +32,7 @@
 	<update id="updateViewCnt" parameterType="int">
 		UPDATE video
 		SET video_viewcnt = video_viewcnt+1
-		WHERE video_num = #{num}
+		WHERE video_num = #{num};
 	</update>
 	
 	<update id="updateVideo" parameterType="video">

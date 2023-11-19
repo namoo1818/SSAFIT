@@ -47,11 +47,6 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public String getGrade(int id) {
-		return userDao.selectGrade(id);
-	}
-
-	@Override
 	public List<Video> getWish(int id) {
 		return userDao.selectWish(id);
 	}

@@ -4,12 +4,12 @@ public class Quote {
 	private int num;
 	private String writer;
 	private String content;
-	private int weather;
+	private String weather;
 	
 	public Quote() {
 	}
 	
-	public Quote(String writer, String content, int weather) {
+	public Quote(String writer, String content, String weather) {
 		super();
 		this.writer = writer;
 		this.content = content;
@@ -40,11 +40,11 @@ public class Quote {
 		this.content = content;
 	}
 
-	public int getWeather() {
+	public String getWeather() {
 		return weather;
 	}
 
-	public void setWeater(int weather) {
+	public void setWeater(String weather) {
 		this.weather = weather;
 	}
 

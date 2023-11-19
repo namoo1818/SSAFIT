@@ -11,10 +11,12 @@
 		<result column="user_nickname" property="userNickname"/>
 		<result column="user_email" property="userEmail"/>
 		<result column="user_regdate" property="userRegdate"/>
+		<result column="user_goal" property="userGoal"/>
+		<result column="user_exp" property="userExp"/>
 		<result column="user_grade" property="userGrade"/>
 	</resultMap>
 	
-	<resultMap type="Video" id="videoMap">
+	<resultMap type="com.ssafit.board.model.dto.Video" id="videoMap">
 		<result column="video_num" property="num"/>
 		<result column="video_title" property="title"/>
 		<result column="video_keyword" property="keyword"/>
@@ -24,7 +26,7 @@
 		<result column="video_intensity" property="intensity"/>
 	</resultMap>
 	
-	<resultMap type="Review" id="reviewMap">
+	<resultMap type="com.ssafit.board.model.dto.Review" id="reviewMap">
 		<result column="review_num" property="num"/>
 		<result column="review_writer" property="writer"/>
 		<result column="review_title" property="title"/>
@@ -42,7 +44,12 @@
 	</insert>
 
 	<select id="selectOne" resultMap="userMap" parameterType="int">
-		SELECT *
+		SELECT *,
+			CASE
+			WHEN user_exp >= 1600 THEN 'Platinum'
+		    WHEN user_exp >= 600 THEN 'Gold'
+		    WHEN user_exp >= 100 THEN 'Silver'
+		    ELSE 'Bronze' END AS user_grade
 		FROM user
 		WHERE user_num = #{userNum};
 	</select>
@@ -73,17 +80,6 @@
 		</if>
 	</select>
 	
-	<select id="selectGrade" resultType="String" parameterType="int">
-		SELECT *,
-			CASE
-			WHEN user_exp >= 1600 THEN 'Platinum'
-		    WHEN user_exp >= 600 THEN 'Gold'
-		    WHEN user_exp >= 100 THEN 'Silver'
-		    ELSE 'Bronze' END AS user_grade
-		FROM user
-		WHERE user_num = #{id};
-	</select>
-	
 	<select id="selectWish" resultMap="videoMap" parameterType="int">
 		SELECT *
 		FROM wish
@@ -92,7 +88,7 @@
 		WHERE user_num = #{id};
 	</select> 
 	
-	<select id="getReview" resultMap="ReviewMap" parameterType="int">
+	<select id="selectReview" resultMap="reviewMap" parameterType="int">
 		SELECT *
 		FROM review
 		WHERE review_writer = #{id};

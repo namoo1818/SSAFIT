@@ -24,9 +24,6 @@ public interface UserService {
 	
 	//검색 
 	List<User> search(SearchCondition condition);
-	
-	//회원 등급 조회
-	String getGrade(int id);
 		
 	//내가 찜한 영상 조회
 	List<Video> getWish(int id);

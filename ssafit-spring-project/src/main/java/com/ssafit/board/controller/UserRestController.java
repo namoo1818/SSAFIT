@@ -1,9 +1,6 @@
 package com.ssafit.board.controller;
 
-import java.io.UnsupportedEncodingException;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,8 +14,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ssafit.board.model.dto.Review;
 import com.ssafit.board.model.dto.SearchCondition;
 import com.ssafit.board.model.dto.User;
+import com.ssafit.board.model.dto.Video;
 import com.ssafit.board.model.service.UserService;
 
 @RestController
@@ -71,5 +70,25 @@ public class UserRestController {
 		if (userService.modifyUser(user))
 			return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
 		return new ResponseEntity<String>(FAIL, HttpStatus.BAD_REQUEST);
+	}
+	
+	// 6. 찜한 영상 조회
+	@GetMapping("/user/{userNum}/wish")
+	public ResponseEntity<?> myWish(@PathVariable int userNum) {
+		List<Video> list = userService.getWish(userNum);
+		System.out.println(list);
+		if (list == null || list.size() == 0)
+			return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+		return new ResponseEntity<List<Video>>(list, HttpStatus.OK);
+	}
+	
+	// 7. 내가 쓴 리뷰 조회
+	@GetMapping("/user/{userNum}/review")
+	public ResponseEntity<?> myReview(@PathVariable int userNum) {
+		List<Review> list = userService.getReview(userNum);
+		System.out.println(list);
+		if (list == null || list.size() == 0)
+			return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+		return new ResponseEntity<List<Review>>(list, HttpStatus.OK);
 	}
 }
