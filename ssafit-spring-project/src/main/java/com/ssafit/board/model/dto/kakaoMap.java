@@ -1,6 +1,6 @@
 package com.ssafit.board.model.dto;
 
-public class Map {
+public class kakaoMap {
 	private int mapId;
 	private float mapLatitud;
 	private float mapLongitud;
@@ -8,11 +8,11 @@ public class Map {
 	private String mapContent;
 	private int userNum;
 	
-	public Map() {
+	public kakaoMap() {
 		super();
 	}
 
-	public Map(float mapLatitud, float mapLongitud, String mapTitle, String mapContent, int userNum) {
+	public kakaoMap(float mapLatitud, float mapLongitud, String mapTitle, String mapContent, int userNum) {
 		super();
 		this.mapLatitud = mapLatitud;
 		this.mapLongitud = mapLongitud;
@@ -71,7 +71,7 @@ public class Map {
 
 	@Override
 	public String toString() {
-		return "Map [mapId=" + mapId + ", mapLatitud=" + mapLatitud + ", mapLongitud=" + mapLongitud + ", mapTitle="
+		return "kakaoMap [mapId=" + mapId + ", mapLatitud=" + mapLatitud + ", mapLongitud=" + mapLongitud + ", mapTitle="
 				+ mapTitle + ", mapContent=" + mapContent + ", userNum=" + userNum + "]";
 	}
 	
