@@ -7,8 +7,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ssafit.board.model.dao.UserDao;
+import com.ssafit.board.model.dto.Review;
 import com.ssafit.board.model.dto.SearchCondition;
 import com.ssafit.board.model.dto.User;
+import com.ssafit.board.model.dto.Video;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -42,6 +44,21 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public List<User> search(SearchCondition condition) {
 		return userDao.search(condition);
+	}
+
+	@Override
+	public String getGrade(int id) {
+		return userDao.selectGrade(id);
+	}
+
+	@Override
+	public List<Video> getWish(int id) {
+		return userDao.selectWish(id);
+	}
+
+	@Override
+	public List<Review> getReview(int id) {
+		return userDao.selectReview(id);
 	}
 
 }

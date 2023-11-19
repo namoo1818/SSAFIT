@@ -3,7 +3,14 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ssafit.board.model.dao.FollowDao">
-
+	<resultMap id="followResultMap" type="com.ssafit.board.model.dto.Follow">
+	    <id property="num" column="follow_num" />
+	    <result property="followernum" column="follower_num" />
+	    <result property="followeenum" column="followee_num" />
+	    <result property="follower" column="user_nickname" />
+	    <result property="followee" column="user_nickname" />
+	</resultMap>
+	
 	<insert id="insertFollow" parameterType="Follow" keyProperty="num" useGeneratedKeys="true">
 		INSERT INTO follow (follower_num, followee_num) 
 		VALUES (#{follower}, #{followee})
@@ -15,19 +22,17 @@
 	</delete>
 	
 	<!-- 나를 팔로우하는 사람(follower) 조회  -->
-	<select id="followerSearch" resultType="Follow" parameterType="int">
-		SELECT follow_num as num, follower_num as followernum, followee_num as followeenum, 
-		user_nickname as follower
-		FROM follow LEFT JOIN user 
-		ON follower_num = user_num
-		WHERE followee_num = #{myNum}
-		ORDER BY follow_num DESC
+	<select id="followerSearch" resultMap="followResultMap" parameterType="int">
+    SELECT follow_num, follower_num, followee_num, user_nickname as follower
+    FROM follow LEFT JOIN user 
+    ON follower_num = user_num
+    WHERE followee_num = #{myNum}
+    ORDER BY follow_num DESC
 	</select>
 	
 	<!-- 내가 팔로우하는 사람(followee) 조회 -->
 	<select id="followingSearch" resultType="Follow" parameterType="int">
-		SELECT follow_num as num, follower_num as followernum, followee_num as followeenum, 
-		user_nickname as followee
+		SELECT follow_num, follower_num, followee_num, user_nickname as follower
 		FROM follow LEFT JOIN user
 		ON followee_num = user_num 
 		Where follower_num = #{myNum}

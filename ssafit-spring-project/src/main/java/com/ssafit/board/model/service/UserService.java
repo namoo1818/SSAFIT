@@ -2,8 +2,10 @@ package com.ssafit.board.model.service;
 
 import java.util.List;
 
+import com.ssafit.board.model.dto.Review;
 import com.ssafit.board.model.dto.SearchCondition;
 import com.ssafit.board.model.dto.User;
+import com.ssafit.board.model.dto.Video;
 
 //사용자 친화적으로 작성  
 public interface UserService {
@@ -23,17 +25,14 @@ public interface UserService {
 	//검색 
 	List<User> search(SearchCondition condition);
 	
-	////게시글 등록
-	//void writeBoard(Board board);
-	//
-	////게시글 상세 조회	
-	//Board getBoard(int id);
-	//
-	////게시글 수정
-	//boolean modifyBoard(Board board);
-	//
-	////게시글 삭제
-	//boolean removeBoard(int id);
+	//회원 등급 조회
+	String getGrade(int id);
+		
+	//내가 찜한 영상 조회
+	List<Video> getWish(int id);
+	
+	//내가 쓴 리뷰 조회
+	List<Review> getReview(int id);
 	
 }
 

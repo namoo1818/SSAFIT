@@ -11,13 +11,14 @@ public class User {
 	private String userRegdate;
 	private int userGoal;
 	private int userExp;
+	private String userGrade;
 	
 	public User() {
 		// TODO Auto-generated constructor stub
 	}
 
 	public User(String userId, String userPassword, String userName, String userNickname, String userEmail,
-			String userRegdate, int userGoal, int userExp) {
+			String userRegdate, int userGoal, int userExp, String userGrade) {
 		super();
 		this.userId = userId;
 		this.userPassword = userPassword;
@@ -27,6 +28,7 @@ public class User {
 		this.userRegdate = userRegdate;
 		this.userGoal = userGoal;
 		this.userExp = userExp;
+		this.userGrade = userGrade;
 	}
 
 	public int getUserNum() {
@@ -101,11 +103,19 @@ public class User {
 		this.userExp = userExp;
 	}
 
+	public String getUserGrade() {
+		return userGrade;
+	}
+
+	public void setUserGrade(String userGrade) {
+		this.userGrade = userGrade;
+	}
+
 	@Override
 	public String toString() {
 		return "User [userNum=" + userNum + ", userId=" + userId + ", userPassword=" + userPassword + ", userName="
 				+ userName + ", userNickname=" + userNickname + ", userEmail=" + userEmail + ", userRegdate="
-				+ userRegdate + ", userGoal=" + userGoal + ", userExp=" + userExp + "]";
+				+ userRegdate + ", userGoal=" + userGoal + ", userExp=" + userExp + ", userGrade=" + userGrade + "]";
 	}
-	
+
 }
