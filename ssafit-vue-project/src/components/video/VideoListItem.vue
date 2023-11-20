@@ -12,7 +12,7 @@
         
     </li> -->
         <iframe width="280" height="158" :src=video.url></iframe>
-        <div><RouterLink :to="`/video/${video.num}`">{{video.title}}</RouterLink></div>
+        <div class="text-truncate" style="max-width:280px;"><RouterLink :to="`/video/${video.num}`">{{video.title}}</RouterLink></div>
     </div>
 </template>
 

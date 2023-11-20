@@ -1,6 +1,6 @@
 <template>
     <div>
-        <header class="justify-content-between align-content-center">
+        <header class="justify-content-between align-items-center">
             <nav>
                 <span class="d-inline-flex mx-4">
                     <input class="form-control" type="text"  v-model="keyword" placeholder="영상 제목으로 검색">

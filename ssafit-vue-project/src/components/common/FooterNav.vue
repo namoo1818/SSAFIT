@@ -1,5 +1,5 @@
 <template>
-    <div id="container">
+    <div id="container" class="fixed-bottom">
         <footer>
             <div>SSAFIT BY TEAM JOY</div>
             <div>SSAFY 10기 1학기 최종 관통 프로젝트</div>
