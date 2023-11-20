@@ -39,7 +39,7 @@
 
 <script setup>
 
-import {ref, onMounted} from 'vue';
+import {ref} from 'vue';
 import {useVideoStore} from '@/stores/video'
 import {useRouter} from "vue-router";
 
@@ -49,10 +49,11 @@ const store = useVideoStore()
 const keyword = ref('')
 
 const search = function() {
-    console.log(keyword)
     store.videoSearch(keyword.value)
     router.push({
-      path: "/result"
+        path: "/search",
+        name: 'searchResult',
+        query: { title: keyword.value }
     })
 }
 

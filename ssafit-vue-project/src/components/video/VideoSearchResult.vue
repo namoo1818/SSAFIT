@@ -17,9 +17,18 @@
 //전체복붙
 import VideoListItem from './VideoListItem.vue';
 import {useVideoStore} from '@/stores/video'
+import { useRoute } from 'vue-router';
+import { onMounted } from 'vue';
 
-const store = useVideoStore()
+const route = useRoute()
 
+const store = useVideoStore();
+const keyword = route.query.title;
+console.log(keyword);
+
+onMounted(() => {
+    store.videoSearch(keyword);
+})
 </script>
 
 <style scoped>

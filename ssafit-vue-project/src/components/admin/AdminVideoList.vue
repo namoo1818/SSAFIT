@@ -35,9 +35,17 @@
                 </tbody>
             </table>
             <nav>
-        <span class="d-inline-flex my-4">
+                <span class="d-inline-flex my-4">
+                    <select name="">
+                        <option value="channel">채널</option>
+                        <option value="title">제목</option>
+                        <option value="keyword">키워드</option>
+                        <option value="intensity">운동강도</option>
+                    </select>
                     <input class="form-control" type="text" placeholder="영상 검색">
-                    <span class="input-group-text"><i class="bi bi-search"></i></span>
+                    <span class="input-group-text">
+                        <i class="bi bi-search"></i>
+                    </span>
                 </span>
             </nav>
         </section>
@@ -46,13 +54,20 @@
 </template>
 
 <script setup>
-import { useVideoStore } from "@/stores/video";
-import { onMounted } from "vue";
-const store = useVideoStore()
+import {ref} from 'vue';
+import {useVideoStore} from '@/stores/video'
 
-onMounted(() => {
-    store.getVideoList()
-})
+const store = useVideoStore()
+const keyword = ref('')
+
+const search = function() {
+    store.videoSearch(keyword.value)
+    router.push({
+        path: "/search",
+        name: 'searchResult',
+        query: { title: keyword.value }
+    })
+}
 
 
 </script>

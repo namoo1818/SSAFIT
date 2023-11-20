@@ -31,12 +31,12 @@
                 </tbody>
             </table>
             <nav>
-        <span class="d-inline-flex my-4">
-            <select name="">
-                <option value="name">아이디</option>
-                <option value="title">닉네임</option>
-                <option value="title">회원등급</option>
-            </select>
+                <span class="d-inline-flex my-4">
+                    <select name="">
+                        <option value="name">아이디</option>
+                        <option value="nickname">닉네임</option>
+                        <option value="grade">회원등급</option>
+                    </select>
                     <input class="form-control" type="text" placeholder="유저 검색">
                     <span class="input-group-text">
                         <i class="bi bi-search"></i>

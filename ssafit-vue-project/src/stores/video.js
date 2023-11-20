@@ -31,30 +31,8 @@ export const useVideoStore = defineStore('video', ()=>{
         video.value = response.data)
     }
 
-    // 영상 검색 (유튜브 API 사용)
-    // const videoSearch = function(keyword){
-    //     const URL = 'https://www.googleapis.com/youtube/v3/search';
-    //     const API_KEY = 'AIzaSyB4uKplPhOnhHhJ9MLK8ITIJUmwbls-WkE';
-
-    //     axios({
-    //         url:URL,
-    //         method:"GET",
-    //         params: {
-    //             key: API_KEY,
-    //             part: "snippet",
-    //             q: keyword,
-    //             type: 'video',
-    //             maxResults: 10
-    //         }
-    //     })
-    //     .then((response)=>{
-    //         videos.value = response.data.items
-    //     })
-    //     .catch(()=>{})
-    // }
-
+    //제목 검색
     const videoSearch = function(keyword){
-        console.log(keyword)
         axios({
             url:REST_VIDEO_API,
             method:"GET",
@@ -67,6 +45,16 @@ export const useVideoStore = defineStore('video', ()=>{
         .then((response)=>{
             videos.value = response.data
             console.log(videos)
+        })
+    }
+
+    // 조건 검색
+    const searchCondition = function(searchCondition){
+        axios.get(REST_BOARD_API, {
+            params: searchCondition
+        })
+        .then((res)=>{
+            videos.value = res.data
         })
     }
 
@@ -104,5 +92,5 @@ export const useVideoStore = defineStore('video', ()=>{
   }
 
     return { videos, videoList, video, getVideo, selectedVideo, getVideoList, createVideo,
-        videoSearch, clickVideo, partVideos, getPartVideo, popularVideos }
+        videoSearch, clickVideo, partVideos, getPartVideo, popularVideos, searchCondition }
 })
