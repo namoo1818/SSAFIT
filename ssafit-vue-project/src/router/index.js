@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import VideoSearchResult from '@/components/video/VideoSearchResult.vue'
 import VideoView from '@/views/VideoView.vue'
 import Weather from '@/components/common/Weather.vue'
 import KakaoMap from '@/components/common/KakaoMap.vue'
@@ -24,8 +25,8 @@ const router = createRouter({
   routes: [
     {
       path: '/search',
-      component: VideoSearchResult,
       name: 'searchResult',
+      component: VideoSearchResult,
       props: true
     },
     {
