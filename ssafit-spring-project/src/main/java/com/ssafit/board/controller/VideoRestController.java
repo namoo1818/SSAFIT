@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,12 +15,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ssafit.board.model.dto.Video;
 import com.ssafit.board.model.dto.SearchCondition;
+import com.ssafit.board.model.dto.Video;
 import com.ssafit.board.model.service.VideoService;
 
 @RestController
-@RequestMapping("/apiVideo")
+@RequestMapping("/video")
+@CrossOrigin(origins = "http://localhost:5173")
 public class VideoRestController {
 	// 응답을 편하게 하기 위해 상수로 지정
 	private static final String SUCCESS = "succes";
@@ -29,7 +31,7 @@ public class VideoRestController {
 	private VideoService videoService;
 
 	// 1. 목록
-	@GetMapping("/video")
+	@GetMapping("")
 	public ResponseEntity<?> list(SearchCondition condition) {
 		List<Video> list = videoService.search(condition);
 		
@@ -39,7 +41,7 @@ public class VideoRestController {
 	}
 
 	// 2. 상세보기
-	@GetMapping("/video/{videoNum}/user/{userNum}")
+	@GetMapping("/{videoNum}/user/{userNum}")
 	public ResponseEntity<Video> detail(@PathVariable int videoNum, @PathVariable int userNum) {
 		Video video = videoService.getVideo(videoNum, userNum);
 		if (video != null)
@@ -48,14 +50,14 @@ public class VideoRestController {
 	}
 
 	// 3. 등록
-	@PostMapping("/video")
+	@PostMapping("")
 	public ResponseEntity<Video> write(@RequestBody Video video) {
 		videoService.writeVideo(video);
 		return new ResponseEntity<Video>(video, HttpStatus.CREATED);
 	}
 
 	// 4. 삭제
-	@DeleteMapping("/video/{id}")
+	@DeleteMapping("/{id}")
 	public ResponseEntity<String> delete(@PathVariable int id) {
 		if (videoService.removeVideo(id))
 			return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
@@ -63,7 +65,7 @@ public class VideoRestController {
 	}
 
 	// 5. 수정
-	@PutMapping("/video")
+	@PutMapping("")
 	public ResponseEntity<String> update(@RequestBody Video video) {
 		if (videoService.modifyVideo(video))
 			return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);

@@ -14,13 +14,13 @@ import com.ssafit.board.model.dto.Weather;
 import com.ssafit.board.model.service.WeatherService;
 
 @RestController
-@RequestMapping("/apiWeather")
+@RequestMapping("/weather")
 public class WeatherRestController {
 	@Autowired
 	private WeatherService weatherService;
 
 	// 1. 날씨 보기
-	@GetMapping("/weather/{id}")
+	@GetMapping("/{id}")
 	public ResponseEntity<Weather> weather(@PathVariable String id) {
 		Weather weather = weatherService.getWeather(id);
 		if (weather != null)

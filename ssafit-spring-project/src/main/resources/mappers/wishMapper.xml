@@ -5,25 +5,13 @@
 <mapper namespace="com.ssafit.board.model.dao.WishDao">
 
 	<insert id="insertWish" parameterType="Wish" keyProperty="num" useGeneratedKeys="true">
-		INSERT INTO wish (video_num, wish_writer) 
-		VALUES (#{videonum}, #{writer})
+		INSERT INTO wish (video_num, user_num) 
+		VALUES (#{videoNum}, #{userNum})
 	</insert>
 
 	<delete id="deleteWish" parameterType="int">
 		DELETE FROM wish
 		WHERE wish_num = #{num}
 	</delete>
-	
-	<!-- 검색기능  -->
-	<select id="wishSearch" resultType="Wish" parameterType="int">
-		SELECT wish_num as num, wish.video_num as videonum, wish_writer as writer, 
-		user_nickname as userNickname, video_title as videoTitle, video_url as videoUrl 
-		FROM wish LEFT JOIN user
-		ON wish_writer = user_num 
-		LEFT JOIN video
-		ON wish.video_num = video.video_num
-		Where wish.wish_writer = #{writer}
-		ORDER BY wish_num DESC
-	</select>
 
 </mapper>

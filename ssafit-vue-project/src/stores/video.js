@@ -3,7 +3,7 @@ import {defineStore} from 'pinia'
 import axios from 'axios'
 import router from '@/router'
 
-const REST_VIDEO_API = `http://localhost:8080/apiVideo/video`
+const REST_VIDEO_API = `http://localhost:8080/video`
 
 export const useVideoStore = defineStore('video', ()=>{
     const videos = ref([])
@@ -31,42 +31,13 @@ export const useVideoStore = defineStore('video', ()=>{
         video.value = response.data)
     }
 
-    // 영상 검색 (유튜브 API 사용)
-    // const videoSearch = function(keyword){
-    //     const URL = 'https://www.googleapis.com/youtube/v3/search';
-    //     const API_KEY = 'AIzaSyB4uKplPhOnhHhJ9MLK8ITIJUmwbls-WkE';
-
-    //     axios({
-    //         url:URL,
-    //         method:"GET",
-    //         params: {
-    //             key: API_KEY,
-    //             part: "snippet",
-    //             q: keyword,
-    //             type: 'video',
-    //             maxResults: 10
-    //         }
-    //     })
-    //     .then((response)=>{
-    //         videos.value = response.data.items
-    //     })
-    //     .catch(()=>{})
-    // }
-
-    const videoSearch = function(keyword){
-        console.log(keyword)
-        axios({
-            url:REST_VIDEO_API,
-            method:"GET",
-            params: {
-                key: "video.video_title",
-                word: keyword,
-                maxResults: 10
-            }
+    // 조건 검색
+    const videoSearch = function(searchCondition){
+        axios.get(REST_VIDEO_API, {
+            params: searchCondition
         })
-        .then((response)=>{
-            videos.value = response.data
-            console.log(videos)
+        .then((res)=>{
+            videos.value = res.data
         })
     }
 

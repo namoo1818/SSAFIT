@@ -19,7 +19,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="video in store.videoList">
+                    <tr v-for="video in store.videos">
                         <td>{{ video.num }}</td>
                         <td>{{ video.channel }}</td>
                         <td>{{video.title}}</td>
@@ -35,9 +35,17 @@
                 </tbody>
             </table>
             <nav>
-        <span class="d-inline-flex my-4">
-                    <input class="form-control" type="text" placeholder="영상 검색">
-                    <span class="input-group-text"><i class="bi bi-search"></i></span>
+                <span class="d-inline-flex my-4">
+                    <select v-model="searchInfo.key">
+                        <option value="video.video_channel">채널</option>
+                        <option value="video.video_title">제목</option>
+                        <option value="video.video_keyword">키워드</option>
+                        <option value="video.video_intensity">운동강도</option>
+                    </select>
+                    <input class="form-control" type="text" v-model="searchInfo.word" placeholder="영상 검색">
+                    <span class="input-group-text" type="submit" @click="search" @keyup.enter="search">
+                        <i class="bi bi-search"></i>
+                    </span>
                 </span>
             </nav>
         </section>
@@ -46,13 +54,20 @@
 </template>
 
 <script setup>
-import { useVideoStore } from "@/stores/video";
-import { onMounted } from "vue";
-const store = useVideoStore()
+import {ref} from 'vue';
+import {useVideoStore} from '@/stores/video'
+import {useRouter} from "vue-router";
 
-onMounted(() => {
-    store.getVideoList()
+const router = useRouter()
+const store = useVideoStore()
+const searchInfo = ref({
+    key: 'video.video_title',
+    word: ''
 })
+
+const search = function() {
+    store.videoSearch(searchInfo.value)
+}
 
 
 </script>

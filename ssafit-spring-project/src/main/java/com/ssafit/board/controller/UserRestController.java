@@ -21,7 +21,7 @@ import com.ssafit.board.model.dto.Video;
 import com.ssafit.board.model.service.UserService;
 
 @RestController
-@RequestMapping("/apiUser")
+@RequestMapping("/user")
 public class UserRestController {
 	// 응답을 편하게 하기 위해 상수로 지정
 	private static final String SUCCESS = "success";
@@ -31,7 +31,7 @@ public class UserRestController {
 	private UserService userService;
 
 	// 1. 목록
-	@GetMapping("/user")
+	@GetMapping("")
 	public ResponseEntity<?> list(SearchCondition condition) {
 		List<User> list = userService.search(condition);
 
@@ -41,7 +41,7 @@ public class UserRestController {
 	}
 
 	// 2. 상세보기
-	@GetMapping("/user/{userNum}")
+	@GetMapping("/{userNum}")
 	public ResponseEntity<User> detail(@PathVariable int userNum) {
 		User user = userService.getUser(userNum);
 		if (user != null)
@@ -50,14 +50,14 @@ public class UserRestController {
 	}
 
 	// 3. 등록
-	@PostMapping("/user")
+	@PostMapping("")
 	public ResponseEntity<User> write(@RequestBody User user) {
 		userService.regist(user);
 		return new ResponseEntity<User>(user, HttpStatus.CREATED);
 	}
 
 	// 4. 삭제
-	@DeleteMapping("/user/{userNum}")
+	@DeleteMapping("/{userNum}")
 	public ResponseEntity<String> delete(@PathVariable int userNum) {
 		if (userService.removeUser(userNum))
 			return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
@@ -65,7 +65,7 @@ public class UserRestController {
 	}
 
 	// 5. 수정
-	@PutMapping("/user")
+	@PutMapping("")
 	public ResponseEntity<String> update(@RequestBody User user) {
 		if (userService.modifyUser(user))
 			return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
@@ -73,7 +73,7 @@ public class UserRestController {
 	}
 	
 	// 6. 찜한 영상 조회
-	@GetMapping("/user/{userNum}/wish")
+	@GetMapping("/{userNum}/wish")
 	public ResponseEntity<?> myWish(@PathVariable int userNum) {
 		List<Video> list = userService.getWish(userNum);
 		System.out.println(list);
@@ -83,7 +83,7 @@ public class UserRestController {
 	}
 	
 	// 7. 내가 쓴 리뷰 조회
-	@GetMapping("/user/{userNum}/review")
+	@GetMapping("/{userNum}/review")
 	public ResponseEntity<?> myReview(@PathVariable int userNum) {
 		List<Review> list = userService.getReview(userNum);
 		System.out.println(list);

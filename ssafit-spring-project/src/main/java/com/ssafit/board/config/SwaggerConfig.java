@@ -18,7 +18,7 @@ public class SwaggerConfig {
 				.select()
 				.apis(RequestHandlerSelectors.basePackage("com.ssafit.board.controller"))
 //				.paths(PathSelectors.ant("/api/**")) 
-				.paths(PathSelectors.ant("/api*/**")) 
+				.paths(PathSelectors.ant("/**")) 
 				.build()
 				.apiInfo(apiInfo());
 	}

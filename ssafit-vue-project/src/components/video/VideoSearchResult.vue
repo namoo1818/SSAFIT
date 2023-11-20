@@ -14,12 +14,23 @@
 </template>
 
 <script setup>
-//전체복붙
 import VideoListItem from './VideoListItem.vue';
 import {useVideoStore} from '@/stores/video'
+import { useRoute } from 'vue-router';
+import { ref, onMounted } from 'vue';
 
-const store = useVideoStore()
+const route = useRoute()
 
+const searchInfo = ref({
+    key: 'video.video_title',
+    word: route.query.title
+})
+
+const store = useVideoStore();
+
+onMounted(() => {
+    store.videoSearch(searchInfo);
+})
 </script>
 
 <style scoped>

@@ -2,7 +2,9 @@ import {ref,computed} from 'vue'
 import {defineStore} from 'pinia'
 import axios from 'axios'
 
-const REST_USER_API = `http://localhost:8080/apiUser/user`
+const REST_USER_API = `http://localhost:8080/user`
+const REST_WISH_API = `http://localhost:8080/wish`
+const REST_FOLLOW_API = `http://localhost:8080/follow`
 
 export const useUserStore = defineStore('user',()=>{
 
@@ -87,8 +89,7 @@ export const useUserStore = defineStore('user',()=>{
         })
     }
 
-    const REST_WISH_API = `http://localhost:8080/apiWish/wish`
-    const REST_FOLLOW_API = `http://localhost:8080/apiFollow`
+
 
     const wishList = ref(null)
     const followerList = ref(null)
