@@ -81,6 +81,7 @@ CREATE TABLE IF NOT EXISTS `ssafit`.`calendar` (
 
 -- 5. 날마다 운동 여부 체크
 CREATE TABLE IF NOT EXISTS `ssafit`.`daily` (
+  `daily_num` INT AUTO_INCREMENT PRIMARY KEY,
   `exercise_date` DATE NOT NULL,
   `user_num` INT PRIMARY KEY,
   CONSTRAINT `fk_#dailyExercise_user1`
@@ -90,7 +91,7 @@ CREATE TABLE IF NOT EXISTS `ssafit`.`daily` (
 
 -- 6. 영상 시청 여부 저장 테이블 
 CREATE TABLE IF NOT EXISTS `ssafit`.`viewlog` (
-  `view_date` DATETIME NOT NULL,
+  `view_date` DATETIME NOT NULL DEFAULT now(),
   `video_num` INT NOT NULL,
   `user_num` INT NOT NULL,
   CONSTRAINT `fk_viewLog_video`

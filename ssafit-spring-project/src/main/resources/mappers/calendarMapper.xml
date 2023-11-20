@@ -12,18 +12,24 @@
 		<result column="user_num" property="userNum"/>
 	</resultMap>
 	
+	<resultMap type="com.ssafit.board.model.dto.Daily" id="dailyMap">
+		<result column="daily_num" property="dailyNum"/>
+		<result column="exercise_date" property="exerciseDate"/>
+		<result column="user_num" property="userNum"/>
+	</resultMap>
+	
 	<insert id="insertCal" parameterType="calendar" keyProperty="num" useGeneratedKeys="true">
 		INSERT INTO calendar (calendar_title, calendar_content, calendar_start, calendar_end, user_num)
 		VALUES (#{title}, #{content}, #{start}, #{end}, #{userNum})
 	</insert>
 	
-	<select id="selectOne">
+	<select id="selectOne" resultMap="calendarMap">
 		SELECT *
 		FROM calendar
 		WHERE calendar_num = #{id};
 	</select>
 	
-	<select id="selectList">
+	<select id="selectList" resultMap="calendarMap">
 		SELECT *
 		FROM calendar
 		WHERE user_num = #{userNum};
@@ -38,5 +44,21 @@
 	<delete id="deleteCal" parameterType="int">
 		DELETE FROM calendar
 		WHERE calendar_num = #{num}
+	</delete>
+	
+	<select id="selectDaily" resultMap="dailyMap" parameterType="int ">
+		SELECT *
+		FROM daily
+		WHERE user_num= #{userNum};
+	</select>
+	
+	<insert id="insertDaily" parameterType="Daily" keyProperty="num" useGeneratedKeys="true">
+		INSERT INTO daily (exercise_date, user_num)
+		VALUES (#{exercise_date}, #{userNum})
+	</insert>
+	
+	<delete id="deleteDaily" parameterType="int">
+		DELETE FROM daily
+		WHERE daily_num = #{id}
 	</delete>
 </mapper>

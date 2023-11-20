@@ -39,9 +39,9 @@ public class VideoRestController {
 	}
 
 	// 2. 상세보기
-	@GetMapping("/video/{id}")
-	public ResponseEntity<Video> detail(@PathVariable int id) {
-		Video video = videoService.getVideo(id);
+	@GetMapping("/video/{videoNum}/user/{userNum}")
+	public ResponseEntity<Video> detail(@PathVariable int videoNum, @PathVariable int userNum) {
+		Video video = videoService.getVideo(videoNum, userNum);
 		if (video != null)
 			return new ResponseEntity<Video>(video, HttpStatus.OK);
 		return new ResponseEntity<Video>(HttpStatus.NOT_FOUND);

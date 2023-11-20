@@ -1,9 +1,9 @@
 package com.ssafit.board.model.dao;
 
 import java.util.List;
-import java.util.Map;
 
 import com.ssafit.board.model.dto.Calendar;
+import com.ssafit.board.model.dto.Daily;
 
 public interface CalendarDao {
 	// 일정 등록
@@ -22,8 +22,11 @@ public interface CalendarDao {
 	int deleteCal(int id);
 	
 	// 출석 조회
+	List<Daily> selectDaily(int id);
 	
 	// 출석 등록
+	void insertDaily(Daily daily);
 	
 	// 출석 삭제
+	int deleteDaily(int id);
 }

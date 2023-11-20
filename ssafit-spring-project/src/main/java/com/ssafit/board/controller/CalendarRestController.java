@@ -5,8 +5,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -44,5 +47,25 @@ public class CalendarRestController {
 	}
 	
 	// 3. 등록
+	@PostMapping("/calendar")
+	public ResponseEntity<Calendar> write(@RequestBody Calendar cal){
+		calendarService.writeCal(cal);
+		return new ResponseEntity<Calendar>(cal, HttpStatus.CREATED);
+	}
+	
+	// 4. 삭제
+	@DeleteMapping("/calendar/{id}")
+	public ResponseEntity<String> delete(@PathVariable int id) {
+		if (calendarService.removeCal(id))
+			return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
+		return new ResponseEntity<String>(FAIL, HttpStatus.NOT_FOUND);
+	}
+	
+	// 5. 출석 조회
+	
+	// 6. 출석 등록
+	
+	// 7. 출석 삭제
+	
 	
 }

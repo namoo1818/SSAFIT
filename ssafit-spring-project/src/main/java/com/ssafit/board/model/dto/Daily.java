@@ -1,17 +1,26 @@
 package com.ssafit.board.model.dto;
 
-public class DailyExercise {
+public class Daily {
+	private int DailyNum;
 	private String exerciseDate;
 	private int userNum;
 	
-	public DailyExercise() {
+	public Daily() {
 		super();
 	}
 
-	public DailyExercise(String exerciseDate, int userNum) {
+	public Daily(String exerciseDate, int userNum) {
 		super();
 		this.exerciseDate = exerciseDate;
 		this.userNum = userNum;
+	}
+
+	public int getDailyNum() {
+		return DailyNum;
+	}
+
+	public void setDailyNum(int dailyNum) {
+		DailyNum = dailyNum;
 	}
 
 	public String getExerciseDate() {
@@ -32,7 +41,7 @@ public class DailyExercise {
 
 	@Override
 	public String toString() {
-		return "DailyExercise [exerciseDate=" + exerciseDate + ", userNum=" + userNum + "]";
+		return "Daily [DailyNum=" + DailyNum + ", exerciseDate=" + exerciseDate + ", userNum=" + userNum + "]";
 	}
-	
+
 }

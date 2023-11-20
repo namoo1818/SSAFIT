@@ -3,6 +3,7 @@ package com.ssafit.board.model.service;
 import java.util.List;
 
 import com.ssafit.board.model.dto.Calendar;
+import com.ssafit.board.model.dto.Daily;
 
 public interface CalendarService {
 	// 일정 등록
@@ -15,8 +16,17 @@ public interface CalendarService {
 	List<Calendar> getList(int userNum);
 	
 	// 일정 수정
-	int modifyCal(Calendar cal);
+	boolean modifyCal(Calendar cal);
 	
 	// 일정 삭제
-	int removeCal(int id);
+	boolean removeCal(int id);
+	
+	// 출석 조회
+	List<Daily> gettDaily(int id);
+		
+	// 출석 등록
+	void writeDaily(Daily daily);
+	
+	// 출석 삭제
+	boolean removeDaily(int id);
 }

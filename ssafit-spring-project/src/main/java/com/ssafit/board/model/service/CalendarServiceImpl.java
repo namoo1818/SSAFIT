@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.ssafit.board.model.dao.CalendarDao;
 import com.ssafit.board.model.dto.Calendar;
+import com.ssafit.board.model.dto.Daily;
 
 @Service
 public class CalendarServiceImpl implements CalendarService {
@@ -32,14 +33,30 @@ public class CalendarServiceImpl implements CalendarService {
 
 	@Transactional
 	@Override
-	public int modifyCal(Calendar cal) {
-		return calendarDao.updateCal(cal);
+	public boolean modifyCal(Calendar cal) {
+		return calendarDao.updateCal(cal) > 0;
 	}
 
 	@Transactional
 	@Override
-	public int removeCal(int id) {
-		return calendarDao.deleteCal(id);
+	public boolean removeCal(int id) {
+		return calendarDao.deleteCal(id) == 1;
+	}
+
+	@Override
+	public List<Daily> gettDaily(int id) {
+		return calendarDao.selectDaily(id);
+	}
+
+	@Override
+	public void writeDaily(Daily daily) {
+		calendarDao.insertDaily(daily);
+		
+	}
+
+	@Override
+	public boolean removeDaily(int id) {
+		return calendarDao.deleteDaily(id) == 1;
 	}
 
 }
