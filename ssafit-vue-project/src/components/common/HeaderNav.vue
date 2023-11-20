@@ -1,26 +1,44 @@
 <template>
-  <header>
-    <nav class="header-nav">
-      <div>
-        <RouterLink to="/" class="logo">SSAFIT</RouterLink>
-      </div>
-        <form @submit.prevent class="form-inline my-2 my-lg-0">
-          <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" v-model="keyword">
-          <button class="btn btn-outline-success my-2 my-sm-0" type="submit" @click="search">검색</button>
-        </form>
-      <div>
-        <RouterLink to="/user" class="nabMenu" v-if="loginUser!=null">
-          {{loginUser.userNickname}}
-        </RouterLink>
-        <RouterLink to="/user" class="nabMenu" v-else>
-          로그인하기
-        </RouterLink>
-      </div>
-    </nav>
-  </header>
+    <div>
+        <header class="justify-content-between">
+            <nav>
+                <span class="d-inline-flex mx-4">
+                    <input class="form-control" type="text"  v-model="keyword" placeholder="영상 제목으로 검색">
+                    <span class="input-group-text" type="submit" @click="search"><i class="bi bi-search"></i></span>
+                </span>
+                <span>
+                <RouterLink to="/"><img alt="SSAFIT logo" class="p-5" src="@/assets/logo.png" /></RouterLink>
+                </span>
+                <div class="d-inline-flex" style="font-size:14px;">{{loginUser.userNickname}} 님,<br>환영합니다</div>
+                <RouterLink to="/weather"><i class="bi bi-cloud-sun"></i></RouterLink>
+                <RouterLink to="/map"><i class="bi bi-map"></i></RouterLink>
+                <div class="dropdown d-inline-flex">
+                    <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-person"></i></button>
+                    <ul class="dropdown-menu">
+                        <li><RouterLink class="dropdown-item" to="/login">
+                            <i class="bi bi-box-arrow-in-right"></i>로그인</RouterLink>
+                        </li>
+                        <li><RouterLink class="dropdown-item" to="/regist">
+                            <i class="bi bi-person-plus"></i>회원가입</RouterLink>
+                        </li>
+                        <li><RouterLink class="dropdown-item" to="/user/mypage" v-if="loginUser!=null">
+                            <i class="bi bi-person-circle"></i>마이페이지</RouterLink>
+                        </li>
+                        <li><RouterLink class="dropdown-item" to="/logout">
+                            <i class="bi bi-box-arrow-in-right"></i>로그아웃</RouterLink>
+                        </li>
+                        <li><RouterLink class="dropdown-item"  to="/admin/videolist">
+                            <i class="bi bi-gear"></i>관리자</RouterLink>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+    </div>
 </template>
 
 <script setup>
+
 import {ref, onMounted} from 'vue';
 import {useVideoStore} from '@/stores/video'
 import {useRouter} from "vue-router";
@@ -29,7 +47,6 @@ const router = useRouter();
 
 const store = useVideoStore()
 const keyword = ref('')
-const dropdownlist = ref(['마이페이지', '내가 찜한 동영상', '최근에 본 영상', '설정', '고객센터', '로그아웃'])
 
 const search = function() {
     console.log(keyword)
@@ -41,42 +58,9 @@ const search = function() {
 
 const loadedUser = localStorage.getItem("loginUser");
 const loginUser = JSON.parse(loadedUser);
+
 </script>
 
-<style>
-/* header 태그 안에 CSS 속성 */
-header {
-  height: 70px;
-  background-color:deepskyblue;
-  color: white;
-  line-height: 70px;
-  padding: 0px 30px;
-}
-
-header a {
-  text-decoration: none;
-  color: white;
-}
-
-.header-nav {
-  display: flex;
-  justify-content: space-between;
-}
-
-.logo {
-  display: inline-block;
-  font-size: 2rem;
-  font-weight: bold;
-  color: white;
-}
-
-.nabMenu {
-  margin: 10px;
-}
-
-.dropdown-toggle > img {
-  width: 30px;
-  height: 30px;
-}
+<style scoped>
 
 </style>

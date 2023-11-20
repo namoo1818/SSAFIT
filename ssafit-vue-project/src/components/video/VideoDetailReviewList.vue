@@ -31,6 +31,7 @@
 
 
 <script setup>
+//전체복붙
 import { useRoute, useRouter } from 'vue-router';
 import {useReviewStore} from '@/stores/review'
 import {onMounted} from 'vue'
@@ -55,13 +56,5 @@ const getNickname = async function(id) {
 </script>
 
 <style scoped>
-.container {
-  margin: 0px 30px;
-}
-.my-h2{
-    display: inline;
-}
-.my-underline {
-    background : linear-gradient(to top, rgb(255, 213, 135)20%, transparent 30%)
-}
+
 </style>

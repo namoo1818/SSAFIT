@@ -62,6 +62,9 @@
                   <th>조회수</th>
                   <th>좋아요</th>
                 </tr>
+                <tr v-for="review in myReviewList">
+                  <td>{{ review.title }}</td>
+                </tr>
               </table>
             </div>
             <!-- <div>
@@ -69,13 +72,31 @@
               <ul class="mx-3 list-group" id="my-comment-list"></ul>
             </div> -->
             <div>
+              <h4 class="text-center mb-3">찜한 영상</h4>
+              <!-- 위시리스트 프뢉스로 내리기 -->
+              <!-- <UserWish :usernum="loginUser['userNum']"/> -->
+              <table>
+                <tr v-for="wish in wishList" :key="wish.num">
+                <td>{{ wish.num }}</td>
+                <td>{{ wish.videoTitle }}</td>
+                </tr>
+              </table>
+            </div>
+            <div>
               <h4 class="text-center mb-3">팔로워</h4>
+              <table>
+                <tr v-for="f in followerList">
+                <td>{{ f.follower }}</td>
+                </tr>
+              </table>
             </div>
             <div>
               <h4 class="text-center mb-3">팔로잉</h4>
-            </div>
-            <div>
-              <h4 class="text-center mb-3">찜한 영상</h4>
+              <table>
+                <tr v-for="f in followingList">
+                <td>{{ f.followee }}</td>
+                </tr>
+              </table>
             </div>
           </div>
         </div>
@@ -97,16 +118,28 @@
   const loginUser = ref({})
   const loginOffDisplay = ref('block')
   const loginOnDisplay = ref('none')
-  
+
   const fetchLoginUser = () => {
     const storedUser = localStorage.getItem('loginUser')
     if (storedUser !== null) {
       loginUser.value = JSON.parse(storedUser)
       loginOffDisplay.value = 'none'
       loginOnDisplay.value = 'block'
+
+      //여기서 위시리스트를 얻어오기 
+      // console.log(loginUser.value.userNum)
+      store.getWishList(loginUser.value.userNum)
+      store.getFollowerList(loginUser.value.userNum)
+      store.getFollowingList(loginUser.value.userNum)
+      store.getMyReviewList(loginUser.value.userNum)
     }
   }
-  
+
+  const wishList = store.wishList
+  const followingList = store.followingList
+  const followerList = store.followerList
+  const myReviewList = store.myReviewList
+
   const logout = () => {
     axios
     .get(REST_USER_API)
@@ -119,7 +152,10 @@
     }
 
 
-  onMounted(fetchLoginUser)
+
+  onMounted(()=>{
+    fetchLoginUser()
+  })
     
   </script>
   

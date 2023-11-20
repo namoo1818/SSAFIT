@@ -2,7 +2,7 @@
     <div>
         <h4>검색 결과</h4>
         <ul>
-            <VideoListItemView
+            <VideoListItem
                 v-if="store.videos.length!=0"
                 v-for="video in store.videos"
                 :key="video.num"
@@ -14,7 +14,8 @@
 </template>
 
 <script setup>
-import VideoListItemView from './VideoListItemView.vue';
+//전체복붙
+import VideoListItem from './VideoListItem.vue';
 import {useVideoStore} from '@/stores/video'
 
 const store = useVideoStore()

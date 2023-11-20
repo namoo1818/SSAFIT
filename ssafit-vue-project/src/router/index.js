@@ -1,91 +1,125 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import Home from '@/views/HomeView.vue'
-import Video from '@/views/VideoView.vue'
-import User from '@/views/UserView.vue'
-import Review from '@/views/ReviewView.vue'
-import UserLoginView from '../components/user/UserLoginView.vue'
-import UserSignupView from '../components/user/UserSignupView.vue'
-import UserMyPageView from '../components/user/UserMyPageView.vue'
+import VideoView from '@/views/VideoView.vue'
+import Weather from '@/components/common/Weather.vue'
+import KakaoMap from '@/components/common/KakaoMap.vue'
+import UserView from '@/views/UserView.vue'
+  import UserMyPage from '@/components/user/UserMyPage.vue'
+  import UserMyExpList from '@/components/user/UserMyExpList.vue'
+  import UserMyReviewList from '@/components/user/UserMyReviewList.vue'
+  import UserMyCalendarList from '@/components/user/UserMyCalendarList.vue'
+  import UserMyBookmarkList from '@/components/user/UserMyBookmarkList.vue'
+  import UserMyFollow from '@/components/user/UserMyFollow.vue'
+  import UserMyMapMarkerList from '@/components/user/UserMyMapMarkerList.vue'
+import HeaderUserLogin from '@/components/common/HeaderUserLogin.vue'
+import HeaderUserRegist from '@/components/common/HeaderUserRegist.vue'
+import AdminView from '@/views/AdminView.vue'
+  import AdminVideoCreate from '@/components/admin/AdminVideoCreate.vue'
+  import AdminVideoList from '@/components/admin/AdminVideoList.vue'
+  import AdminReviewList from '@/components/admin/AdminReviewList.vue'
+  import AdminUserList from '@/components/admin/AdminUserList.vue'
+  import ErrorPage from '@/components/common/ErrorPage.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
-      path: '/result',
-      name: 'result',
-      component: () => import('../components/video/VideoSearchResultView.vue')
-    },
-    {
-      path: '/review',
-      name: 'review',
-      component: Review,
-      redirect: '/review/',
-      children: [
-        {
-          path: '',
-          name: 'reviewList',
-          component: () => import('../components/review/ReviewListView.vue')
-        },
-        {
-          path: 'create',
-          name: 'reviewCreate',
-          component: () => import('../components/review/ReviewCreateView.vue'),
-          meta: { requiresAuth: true }
-        },
-        {
-          path: ':id',
-          name: 'reviewDetail',
-          component: () => import('../components/review/ReviewDetailView.vue')
-        },
-        {
-          path: "update",
-          name: "reviewUpdate",
-          component: () => import('../components/review/ReviewUpdateView.vue')
-        },
-      ]
-    },
-    {
       path: '/',
-      name: 'home',
-      component: () => import('../components/video/VideoListView.vue')
+      name: 'video',
+      component: VideoView
     },
     {
-      path: '/video',
-      name: "video",
-      component: Video,
-      redirect: '/video/',
-      children: [
-        {
-          path: '',
-          name: 'videoList',
-          component: () => import('../components/video/VideoListView.vue')
-        },
-        {
-          path: ':id',
-          name: 'videoDetail',
-          component: () => import('../components/video/VideoDetailView.vue')
-        },
-      ]
+      path: '/weather',
+      name: 'weather',
+      component: Weather
+    },
+    {
+      path: '/map',
+      name: 'map',
+      component: KakaoMap
     },
     {
       path: '/user',
-      name: 'User',
-      component: User
+      name: 'user',
+      component: UserView, 
+      children: [
+        {
+          path: ":userNum",
+          name: 'mypage',
+          component: UserMyPage
+        },
+        {
+          path: 'exp',
+          name: 'exp',
+          component: UserMyExpList
+        },
+        {
+          path: 'review',
+          name: 'review',
+          component: UserMyReviewList
+        },
+        {
+          path: 'calendar',
+          name: 'calendar',
+          component: UserMyCalendarList
+        },
+        {
+          path: 'bookmark',
+          name: 'bookmark',
+          component: UserMyBookmarkList
+        },
+        {
+          path: 'follow',
+          name: 'follow',
+          component: UserMyFollow
+        },
+        {
+          path: 'marker',
+          name: 'marker',
+          component: UserMyMapMarkerList
+        },
+      ]
     },
     {
       path: '/login',
       name: 'login',
-      component: UserLoginView
+      component: HeaderUserLogin
     },
     {
-      path: '/signup',
-      name: 'signup',
-      component: UserSignupView
+      path: '/regist',
+      name: 'regist',
+      component: HeaderUserRegist
     },
     {
-      path: '/mypage',
-      name: 'mypage',
-      component: UserMyPageView
+      path: '/admin',
+      name: 'admin',
+      component: AdminView,
+      children: [
+        {
+          path: 'videocreate',
+          name: 'videocreate',
+          component: AdminVideoCreate
+        },
+        {
+          path: 'videolist',
+          name: 'videolist',
+          component: AdminVideoList
+        },
+        {
+          path: 'reviewlist',
+          name: 'reviewlist',
+          component: AdminReviewList
+        },
+        {
+          path: 'userlist',
+          name: 'userlist',
+          component: AdminUserList
+        },
+        {
+          path: 'error',
+          name: 'error',
+          component: ErrorPage
+        },
+      ]
     },
   ]
 })

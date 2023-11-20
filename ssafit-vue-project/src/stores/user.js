@@ -5,8 +5,9 @@ import axios from 'axios'
 const REST_USER_API = `http://localhost:8080/apiUser/user`
 
 export const useUserStore = defineStore('user',()=>{
+
+    //필요한 거면 주석 해제 ㄱㄱ 
     const loginUserId = ref('')
-    const userList = ref([])
     const userLogin = function(id, pw){
 
         axios.post(`${REST_USER_API}/login`,{userId: id, userPassword: pw})
@@ -20,7 +21,7 @@ export const useUserStore = defineStore('user',()=>{
             console.log(id)
             loginUserId.value = id['id']
 
-            router.push({name:"home"})
+            router.push({name:"video"})
         })
         .catch(()=>{
 
@@ -28,12 +29,20 @@ export const useUserStore = defineStore('user',()=>{
     }
 
     // 사용자 전체
-    const getUserList = function(){
-        axios.put(`${REST_USER_API}/${user.id}`, user)
-        .then(() => {
-        router.push({name: 'home'})
-        })
-    }
+    const userList = ref([])
+    const getUserList = function () {
+        axios.get(REST_USER_API)
+          .then((response) => {
+          userList.value = response.data
+          })
+      }
+
+    // const getUserList = function(){
+    //     axios.put(`${REST_USER_API}/${user.id}`, user)
+    //     .then(() => {
+    //     router.push({name: 'home'})
+    //     })
+    // }
 
     // 사용자 조회
     const user = ref({})
@@ -43,7 +52,7 @@ export const useUserStore = defineStore('user',()=>{
         user.value = response.data)
     }
 
-
+    
     // 사용자 등록
     const createUser = function(user){
         axios({
@@ -78,7 +87,63 @@ export const useUserStore = defineStore('user',()=>{
         })
     }
 
-    return {userLogin, userList, getUserList, user, getUser, createUser, updateUser, deleteUser}
+    const REST_WISH_API = `http://localhost:8080/apiWish/wish`
+    const REST_FOLLOW_API = `http://localhost:8080/apiFollow`
 
+    const wishList = ref(null)
+    const followerList = ref(null)
+    const followingList = ref(null)
+
+
+    //사용자 찜 목록
+    const getWishList = function(usernum) {
+        axios.get(REST_WISH_API, {
+            params : {
+                writer : usernum
+            }})
+        .then((response)=>{
+            wishList.value = response.data
+        })
+    }
+
+    //내 팔로워 목록 조회 
+    const getFollowerList = function(usernum) {
+        axios.get(`${REST_FOLLOW_API}/follower`, {
+            params : {
+                myNum : usernum
+            }})
+        .then((response)=>{
+            followerList.value = response.data
+        })
+    }
+
+    //내 팔로잉 목록 조회 
+    const getFollowingList = function(usernum) {
+        axios.get(`${REST_FOLLOW_API}/following`, {
+            params : {
+                myNum : usernum
+            }})
+        .then((response)=>{
+            followingList.value = response.data
+        })
+    }
+
+    const myReviewList = ref(null)
+    //내 리뷰 리스트 조회
+    const getMyReviewList = function(usernum) {
+        axios.get(`http://localhost:8080/api/review`, {
+            params : {
+                key: "review_writer",
+                word: usernum
+        }})
+        .then((response)=>{
+        myReviewList.value = response.data
+    })
+      }
+
+      return {userList, loginUserId, userLogin, getUserList, user, getUser, createUser, updateUser, deleteUser,
+        getWishList, getFollowerList, getFollowingList,
+        wishList, followerList, followingList, getMyReviewList, myReviewList}
+    
 
 })

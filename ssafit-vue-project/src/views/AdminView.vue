@@ -1,12 +1,12 @@
 <template>
     <div>
-        <HeaderUserNav />
+        <HeaderAdminNav />
         <RouterView />
     </div>
 </template>
 
 <script setup>
-import HeaderUserNav from '../components/common/HeaderUserNav.vue';
+import HeaderAdminNav from '@/components/common/HeaderAdminNav.vue';
 
 
 </script>

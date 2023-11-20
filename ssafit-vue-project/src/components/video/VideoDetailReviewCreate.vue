@@ -23,6 +23,7 @@
 </template>
 
 <script setup>
+//전체복붙
 import {ref} from 'vue';
 import { useReviewStore } from '@/stores/review';
 

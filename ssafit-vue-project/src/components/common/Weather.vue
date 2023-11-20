@@ -1,7 +1,5 @@
 <template>
-    <div>
-        <RouterView />
-    </div>
+<h2>Weather</h2>
 </template>
 
 <script setup>

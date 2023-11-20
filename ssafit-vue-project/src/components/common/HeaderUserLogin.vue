@@ -1,31 +1,28 @@
 <template>
-    <main>
-      <div>
-        <div>
-          <h3 class="text-center user-logo">로그인</h3>
+    <div id="container" class="row justify-content-center">
+            <h2>로그인</h2>
+            <div class="col-4">
+        <form>
+        <table>
+            <tr>
+                <td>아이디</td>
+                <td><input type="text" class="form-control" placeholder="아이디" v-model.trim="id" id="id"></td>
+            </tr>
+            <tr>
+                <td>비밀번호</td>
+                <td><input type="text" class="form-control" placeholder="비밀번호" v-model.trim="pw" id="pw"></td>
+            </tr>
+        </table>
+        <div class="d-flex btn-group" role="group">
+                        <button type="button" class="btn btn-outline-primary" @click="login">로그인</button>
+                        <button type="button" class="btn btn-outline-secondary">뒤로가기</button>
         </div>
-        <form class="form">
-          <div>
-            <input type="text" placeholder="아이디" v-model.trim="id" id="id" />
-          </div>
-          <div>
-            <input type="password" placeholder="비밀번호" v-model.trim="pw" id="pw" />
-          </div>
-          <div class="checkbox">
-            <input type="checkbox" id="id-save" style="width: auto; margin: 0 10px 0 0" />
-            <label for="id-save">아이디 저장</label>
-          </div>
-          <button type="button" @click="login">로그인</button>
-          <div style="display: flex; justify-content: space-between">
-            <p>회원이 아니신가요?</p>
-            <RouterLink :to="{ name: 'signup' }" class="link">회원 가입하기</RouterLink>
-          </div>
-        </form>
-      </div>
-    </main>
-  </template>
-  
-  <script setup>
+    </form>
+</div>
+    </div>
+</template>
+
+<script setup>
   import { ref } from 'vue'
   import { RouterLink, useRouter } from 'vue-router'
   import axios from 'axios'
@@ -98,7 +95,12 @@
   //     console.error('Failed to fetch user data:', error)
   //   }
   // }
-  </script>
-  
-  <style scoped></style>
-  
+</script>
+
+<style scoped>
+
+table tr td input {
+    border:none;
+}
+
+</style>

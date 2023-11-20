@@ -49,7 +49,6 @@ onMounted(()=>{
     store.getVideo(route.params.id)
     rStore.getVideoReview(route.params.id)
 })
-
 </script>
 
 <style scoped>

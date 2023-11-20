@@ -1,7 +1,6 @@
 <template>
-    <li @click="clickVideo">
-        <!-- <img :src="video.snippet.thumbnails.default.url"> -->
-        <!-- <span>{{video.snippet.title}}</span> -->
+    <div class="m-2">
+      <!-- <li @click="clickVideo">
         <iframe 
         width="560" 
         height="315" 
@@ -10,8 +9,11 @@
         frameborder="0" 
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
         allowfullscreen></iframe><br>
-        <RouterLink :to="`/video/${video.num}`">{{video.title}}</RouterLink>
-    </li>
+        
+    </li> -->
+        <iframe width="280" height="158" :src=video.url></iframe>
+        <div><RouterLink :to="`/video/${video.num}`">{{video.title}}</RouterLink></div>
+    </div>
 </template>
 
 <script setup>
