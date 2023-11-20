@@ -1,7 +1,7 @@
 <template>
-    <div id="container" class="d-flex" >
-        <section class="text-center justify-content-center cen">
+    <div id="container" class="row justify-content-center">
         <h2>새 비디오 등록</h2>
+        <div class="col-4">
         <form>
         <table>
             <tr>
@@ -30,7 +30,7 @@
                         <button type="button" class="btn btn-outline-secondary">취소</button>
         </div>
     </form>
-    </section>
+    </div>
     </div>
 </template>
 
@@ -54,10 +54,6 @@ const createVideo = function () {
 
 <style scoped>
 
-#container {
-    width:500px;
-    height:500px;
-}
 
 table tr td input {
     border:none;

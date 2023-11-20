@@ -26,7 +26,8 @@
                         <td>{{user.userRegdate}}</td>
                         <td>{{user.userExp}}</td>
                         <td>{{ user.userGrade }}</td>
-                        <td><button><RouterLink :to="`/user/${user.userNum}`">상세조회</RouterLink></button><button>삭제</button></td>
+                        <td><RouterLink :to="`/admin/user/${user.userNum}`">상세조회</RouterLink>&nbsp;
+                            <button @click="deleteUser(user.userNum)">삭제</button></td>
                     </tr>
                 </tbody>
             </table>
@@ -51,8 +52,18 @@
 <script setup>
 import { useUserStore } from "@/stores/user";
 import { onMounted } from "vue";
+import axios from 'axios'
+
 const store = useUserStore()
 
+//DB에서 다른 테이블이 user_num을 외래키로 사용하고 있어서 삭제 안 됨 
+//mapper에 DELETE sql구문 쓸 때 CASCADE 넣어줘야 할 듯 
+const deleteUser = function (num) {
+    axios.delete(`http://localhost:8080/apiUser/user/${num}`)
+        .then(() => {
+            router.push({ name: '/' })
+        })
+}
 onMounted(() => {
     store.getUserList()
 })
