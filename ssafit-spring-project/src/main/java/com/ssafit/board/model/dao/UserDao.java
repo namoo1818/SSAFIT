@@ -31,4 +31,10 @@ public interface UserDao {
 	//내가 쓴 리뷰 조회
 	List<Review> selectReview(int id);
 	
+	// 경험치 증가
+	public void plusExp(int id);
+	
+	// 경험치 감소
+	public void minusExp(int id);
+	
 }

@@ -26,6 +26,12 @@
 		ON review.video_num = video.video_num
 		WHERE review_num = #{num}
 	</select>
+	
+	<update id="plusExp" parameterType="int">
+		UPDATE user
+		SET user_exp = user_exp+5
+		WHERE user_num = #{num}
+	</update>
 
 	<!-- <select id="selectOne" resultMap="reviewMap" parameterType="int">
 		SELECT *

@@ -83,7 +83,7 @@ CREATE TABLE IF NOT EXISTS `ssafit`.`calendar` (
 CREATE TABLE IF NOT EXISTS `ssafit`.`daily` (
   `daily_num` INT AUTO_INCREMENT PRIMARY KEY,
   `exercise_date` DATE NOT NULL,
-  `user_num` INT PRIMARY KEY,
+  `user_num` INT NOT NULL,
   CONSTRAINT `fk_#dailyExercise_user1`
     FOREIGN KEY (`user_num`)
     REFERENCES `ssafit`.`user` (`user_num`)
@@ -120,7 +120,7 @@ CREATE TABLE IF NOT EXISTS `ssafit`.`playlist` (
   `playlist_num` INT AUTO_INCREMENT PRIMARY KEY,
   `playlist_title` VARCHAR(100) NOT NULL,
   `playlist_url` TEXT NOT NULL,
-  `playlist_weather` INT NOT NULL
+  `playlist_weather` VARCHAR(10) NOT NULL
   );
 
 -- 9. 명언, 응원문구
@@ -128,7 +128,7 @@ CREATE TABLE IF NOT EXISTS `ssafit`.`quote` (
   `quote_num` INT AUTO_INCREMENT PRIMARY KEY,
   `quote_writer` VARCHAR(20) NOT NULL,
   `quote_content` TEXT NOT NULL,
-  `quote_weather` INT NOT NULL
+  `quote_weather` VARCHAR(10) NOT NULL
   );
   
 -- 10. 카카오 map api 사용을 위한 테이블 
@@ -167,6 +167,7 @@ CREATE TABLE IF NOT EXISTS ssafit.grade (
 -- 13. 날씨
 CREATE TABLE IF NOT EXISTS ssafit.weather (
 	weather_num INT PRIMARY KEY AUTO_INCREMENT, 
+    weather_main VARCHAR(20) NOT NULL,
     weather_category VARCHAR(10) NOT NULL
     );
 

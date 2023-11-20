@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ssafit.board.model.dao.ReviewDao;
+import com.ssafit.board.model.dao.UserDao;
 import com.ssafit.board.model.dto.Review;
 import com.ssafit.board.model.dto.SearchCondition;
 
@@ -15,10 +16,15 @@ public class ReviewServiceImpl implements ReviewService {
 
 	@Autowired
 	private ReviewDao reviewDao;
+	
+	@Autowired
+	private UserDao userDao;
 
 	@Transactional
 	@Override
 	public void writeReview(Review review) {
+		int userNum = review.getWriter();
+		userDao.plusExp(userNum);
 		reviewDao.insertReview(review);
 	}
 
@@ -37,6 +43,9 @@ public class ReviewServiceImpl implements ReviewService {
 	@Transactional
 	@Override
 	public boolean removeReview(int id) {
+		Review review = reviewDao.selectOne(id);
+		int userNum = review.getWriter();
+		userDao.minusExp(userNum);
 		return reviewDao.deleteReview(id) == 1;
 	}
 

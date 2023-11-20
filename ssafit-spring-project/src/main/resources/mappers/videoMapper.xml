@@ -20,8 +20,8 @@
 	</select>
 
 	<insert id="insertVideo" parameterType="video" keyProperty="num" useGeneratedKeys="true">
-		INSERT INTO video (video_title, video_part, video_channel, video_url, video_intensity)
-		VALUES (#{title}, #{part}, #{channel}, #{url}, #{intensity})
+		INSERT INTO video (video_title, video_keyword, video_channel, video_url, video_intensity)
+		VALUES (#{title}, #{keyword}, #{channel}, #{url}, #{intensity})
 	</insert>
 	
 	<delete id="deleteVideo" parameterType="int">
@@ -42,7 +42,7 @@
 	
 	<update id="updateVideo" parameterType="video">
 		UPDATE video
-		SET video_title = #{title}, video_part = #{part}, video_channel = #{channel}, video_url = #{url}, video_intensity = #{intensity}
+		SET video_title = #{title}, video_keyword = #{keyword}, video_channel = #{channel}, video_url = #{url}, video_intensity = #{intensity}
 		WHERE video_num = #{num}
 	</update>
 	

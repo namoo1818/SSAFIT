@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssafit.board.model.dao.KakaoMapDao">
+	<resultMap type="kakaoMap" id="kakaoMapMap">
+		<result column="map_id" property="mapId"/>
+		<result column="map_latitud" property="mapLatitud"/>
+		<result column="map_longitud" property="mapLongitud"/>
+		<result column="map_title" property="mapTitle"/>
+		<result column="map_content" property="mapContent"/>
+		<result column="user_num" property="userNum"/>
+	</resultMap>
+
+	<select id="selectList" resultMap="kakaoMapMap" parameterType="int">
+		SELECT *
+		FROM map
+		WHERE user_num = #{id}
+	</select>
+	
+	<select id="selectOne" resultMap="kakaoMapMap" parameterType="int">
+		SELECT *
+		FROM map
+		WHERE map_id = #{id}
+	</select>
+	
+	<insert id="insertMap" parameterType="kakaoMap">
+		INSERT INTO map (map_id, map_latitud, map_longitud, map_title, map_content, user_num)
+		VALUES (#{mapId}, #{mapLatitud}, #{mapLongitud}, #{mapTitle}, #{mapContent}, #{userNum});
+	</insert>
+	
+	<delete id="deleteMap" parameterType="int">
+		DELETE FROM map
+		WHERE map_id = #{id}
+	</delete>
+	
+	<update id="updateMap" parameterType="kakaoMap">
+		UPDATE map
+		SET map_title = #{mapTitle}, map_content = #{mapContent}
+		WHERE map_id = #{mapId}
+	</update>
+</mapper>

@@ -8,12 +8,42 @@
 		<result column="weather_main" property="weatherMain"/>
 		<result column="weather_category" property="weatherCategory"/>
 	</resultMap>
+	
+	<resultMap type="com.ssafit.board.model.dto.Playlist" id="playlistMap">
+		<result column="playlist_num" property="num"/>
+		<result column="playlist_title" property="playlistTitle"/>
+		<result column="playlist_url" property="playlistUrl"/>
+		<result column="playlist_weather" property="weather"/>
+	</resultMap>
+	
+	<resultMap type="com.ssafit.board.model.dto.Quote" id="quoteMap">
+		<result column="quote_num" property="num"/>
+		<result column="quote_writer" property="writer"/>
+		<result column="quote_content" property="content"/>
+		<result column="quote_weather" property="weather"/>
+	</resultMap>
 
 	<!-- 검색기능  -->
 	<select id="selectWeather" resultMap="weatherMap" parameterType="String">
 		SELECT *
 		FROM weather
 		WHERE weather_main = #{id};
+	</select>
+	
+	<select id="selectPlayList" resultMap="playlistMap" parameterType="String">
+		SELECT *
+		FROM playlist
+		WHERE playlist_weather = #{id}
+		ORDER BY RAND()
+		LIMIT 1;
+	</select>
+	
+	<select id="selectQuote" resultMap="quoteMap" parameterType="String">
+		SELECT *
+		FROM quote
+		WHERE quote_weather = #{id}
+		ORDER BY RAND()
+		LIMIT 1;
 	</select>
 
 </mapper>

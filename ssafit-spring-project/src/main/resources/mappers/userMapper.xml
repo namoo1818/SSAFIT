@@ -94,4 +94,15 @@
 		WHERE review_writer = #{id};
 	</select>
 
+	<update id="plusExp" parameterType="int">
+		UPDATE user
+		SET user_exp = user_exp+5
+		WHERE user_num = #{num};
+	</update>
+	
+	<update id="minusExp" parameterType="int">
+	    UPDATE user
+	    SET user_exp = GREATEST(user_exp - 5, 0)
+	    WHERE user_num = #{num};
+	</update>
 </mapper>
