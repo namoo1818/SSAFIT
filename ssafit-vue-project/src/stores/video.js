@@ -3,7 +3,7 @@ import {defineStore} from 'pinia'
 import axios from 'axios'
 import router from '@/router'
 
-const REST_VIDEO_API = `http://localhost:8080/apiVideo/video`
+const REST_VIDEO_API = `http://localhost:8080/video`
 
 export const useVideoStore = defineStore('video', ()=>{
     const videos = ref([])
@@ -31,26 +31,9 @@ export const useVideoStore = defineStore('video', ()=>{
         video.value = response.data)
     }
 
-    //제목 검색
-    const videoSearch = function(keyword){
-        axios({
-            url:REST_VIDEO_API,
-            method:"GET",
-            params: {
-                key: "video.video_title",
-                word: keyword,
-                maxResults: 10
-            }
-        })
-        .then((response)=>{
-            videos.value = response.data
-            console.log(videos)
-        })
-    }
-
     // 조건 검색
-    const searchCondition = function(searchCondition){
-        axios.get(REST_BOARD_API, {
+    const videoSearch = function(searchCondition){
+        axios.get(REST_VIDEO_API, {
             params: searchCondition
         })
         .then((res)=>{
@@ -92,5 +75,5 @@ export const useVideoStore = defineStore('video', ()=>{
   }
 
     return { videos, videoList, video, getVideo, selectedVideo, getVideoList, createVideo,
-        videoSearch, clickVideo, partVideos, getPartVideo, popularVideos, searchCondition }
+        videoSearch, clickVideo, partVideos, getPartVideo, popularVideos }
 })

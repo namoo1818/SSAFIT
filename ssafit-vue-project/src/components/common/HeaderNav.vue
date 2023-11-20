@@ -3,7 +3,7 @@
         <header class="justify-content-between">
             <nav>
                 <span class="d-inline-flex mx-4">
-                    <input class="form-control" type="text"  v-model="keyword" placeholder="영상 제목으로 검색">
+                    <input class="form-control" type="text"  v-model="searchInfo.word" placeholder="영상 제목으로 검색">
                     <span class="input-group-text" type="submit" @click="search"><i class="bi bi-search"></i></span>
                 </span>
                 <span>
@@ -44,12 +44,14 @@ import {useVideoStore} from '@/stores/video'
 import {useRouter} from "vue-router";
 
 const router = useRouter();
-
 const store = useVideoStore()
-const keyword = ref('')
+const searchInfo = ref({
+    key: 'video.video_title',
+    word: ''
+})
 
-const search = function() {
-    store.videoSearch(keyword.value)
+const search = function(keyword) {
+    store.videoSearch(searchInfo.value)
     router.push({
         path: "/search",
         name: 'searchResult',
