@@ -18,6 +18,7 @@ import AdminView from '@/views/AdminView.vue'
   import AdminVideoList from '@/components/admin/AdminVideoList.vue'
   import AdminReviewList from '@/components/admin/AdminReviewList.vue'
   import AdminUserList from '@/components/admin/AdminUserList.vue'
+  import AdminUserDetail from '@/components/admin/AdminUserDetail.vue'
   import ErrorPage from '@/components/common/ErrorPage.vue'
 
 const router = createRouter({
