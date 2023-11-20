@@ -10,9 +10,4 @@ public interface WishService {
 	void wish(Wish wish);
 	
 	boolean unwish(int id);
-	
-	//회원별 위시 조회 
-	List<Wish> wishSearch(int id);
-	
-	
 }

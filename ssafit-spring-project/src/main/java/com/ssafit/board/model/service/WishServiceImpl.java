@@ -26,11 +26,5 @@ public class WishServiceImpl implements WishService {
 	public boolean unwish(int id) {
 		return wishDao.deleteWish(id) == 1;
 	}
-	
-
-	@Override
-	public List<Wish> wishSearch(int id) {
-		return wishDao.wishSearch(id);
-	}
 
 }

@@ -20,7 +20,7 @@ import com.ssafit.board.model.dto.Review;
 import com.ssafit.board.model.service.CalendarService;
 
 @RestController
-@RequestMapping("/apiCalendar")
+@RequestMapping("/calendar")
 public class CalendarRestController {
 	// 응답을 편하게 하기 위해 상수로 지정
 	private static final String SUCCESS = "succes";
@@ -30,7 +30,7 @@ public class CalendarRestController {
 	private CalendarService calendarService;
 	
 	// 1. 목록
-	@GetMapping("/calendar/{userNum}")
+	@GetMapping("/{userNum}")
 	public ResponseEntity<?> list(@PathVariable int userNum) {
 		List<Calendar> list = calendarService.getList(userNum);
 		
@@ -40,7 +40,7 @@ public class CalendarRestController {
 	}
 	
 	// 2. 상세보기
-	@GetMapping("/calendar/{id}")
+	@GetMapping("/detail/{id}")
 	public ResponseEntity<Calendar> detail(@PathVariable int id) {
 		Calendar calendar = calendarService.getCal(id);
 		if(calendar != null)
@@ -49,14 +49,14 @@ public class CalendarRestController {
 	}
 	
 	// 3. 등록
-	@PostMapping("/calendar")
+	@PostMapping("")
 	public ResponseEntity<Calendar> write(@RequestBody Calendar cal){
 		calendarService.writeCal(cal);
 		return new ResponseEntity<Calendar>(cal, HttpStatus.CREATED);
 	}
 	
 	// 4. 삭제
-	@DeleteMapping("/calendar/{id}")
+	@DeleteMapping("/{id}")
 	public ResponseEntity<String> delete(@PathVariable int id) {
 		if (calendarService.removeCal(id))
 			return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
@@ -64,7 +64,7 @@ public class CalendarRestController {
 	}
 	
 	// 5. 수정
-	@PutMapping("/calendar")
+	@PutMapping("")
 	public ResponseEntity<String> update(@RequestBody Calendar cal) {
 		if (calendarService.modifyCal(cal))
 			return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
@@ -82,7 +82,7 @@ public class CalendarRestController {
 	}
 	
 	// 7. 상세보기
-	@GetMapping("/daily/{id}")
+	@GetMapping("/daily/detail/{id}")
 	public ResponseEntity<Daily> dailyDetail(@PathVariable int id) {
 		Daily daily = calendarService.getDailyOne(id);
 		if(daily != null)

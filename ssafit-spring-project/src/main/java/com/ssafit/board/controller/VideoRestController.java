@@ -19,7 +19,7 @@ import com.ssafit.board.model.dto.SearchCondition;
 import com.ssafit.board.model.service.VideoService;
 
 @RestController
-@RequestMapping("/apiVideo")
+@RequestMapping("/video")
 public class VideoRestController {
 	// 응답을 편하게 하기 위해 상수로 지정
 	private static final String SUCCESS = "succes";
@@ -29,7 +29,7 @@ public class VideoRestController {
 	private VideoService videoService;
 
 	// 1. 목록
-	@GetMapping("/video")
+	@GetMapping("")
 	public ResponseEntity<?> list(SearchCondition condition) {
 		List<Video> list = videoService.search(condition);
 		
@@ -39,7 +39,7 @@ public class VideoRestController {
 	}
 
 	// 2. 상세보기
-	@GetMapping("/video/{videoNum}/user/{userNum}")
+	@GetMapping("/{videoNum}/user/{userNum}")
 	public ResponseEntity<Video> detail(@PathVariable int videoNum, @PathVariable int userNum) {
 		Video video = videoService.getVideo(videoNum, userNum);
 		if (video != null)
@@ -48,14 +48,14 @@ public class VideoRestController {
 	}
 
 	// 3. 등록
-	@PostMapping("/video")
+	@PostMapping("")
 	public ResponseEntity<Video> write(@RequestBody Video video) {
 		videoService.writeVideo(video);
 		return new ResponseEntity<Video>(video, HttpStatus.CREATED);
 	}
 
 	// 4. 삭제
-	@DeleteMapping("/video/{id}")
+	@DeleteMapping("/{id}")
 	public ResponseEntity<String> delete(@PathVariable int id) {
 		if (videoService.removeVideo(id))
 			return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
@@ -63,7 +63,7 @@ public class VideoRestController {
 	}
 
 	// 5. 수정
-	@PutMapping("/video")
+	@PutMapping("")
 	public ResponseEntity<String> update(@RequestBody Video video) {
 		if (videoService.modifyVideo(video))
 			return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);

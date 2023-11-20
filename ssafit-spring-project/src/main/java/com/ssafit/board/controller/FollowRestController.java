@@ -16,7 +16,7 @@ import com.ssafit.board.model.dto.Follow;
 import com.ssafit.board.model.service.FollowService;
 
 @RestController
-@RequestMapping("/apiFollow")
+@RequestMapping("/follow")
 public class FollowRestController {
 
 	// 응답을 편하게 하기 위해 상수로 지정
@@ -26,13 +26,13 @@ public class FollowRestController {
 	@Autowired
 	private FollowService followService;
 
-	@PostMapping("/follow")
+	@PostMapping("")
 	public ResponseEntity<Follow> follow(@RequestBody Follow follow) {
 		followService.follow(follow);
 		return new ResponseEntity<Follow>(follow, HttpStatus.CREATED);
 	}
 
-	@DeleteMapping("/follow")
+	@DeleteMapping("")
 	public ResponseEntity<String> unfollow(int num) { 
 		if (followService.unfollow(num))
 			return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);

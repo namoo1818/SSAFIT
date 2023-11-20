@@ -13,7 +13,4 @@ public interface WishDao {
 	//위시삭제
 	int deleteWish(int id);
 	
-	//회원별 위시 조회 
-	List<Wish> wishSearch(int id);
-	
 }

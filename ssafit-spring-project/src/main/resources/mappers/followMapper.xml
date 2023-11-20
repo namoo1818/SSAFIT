@@ -13,7 +13,7 @@
 	
 	<insert id="insertFollow" parameterType="Follow" keyProperty="num" useGeneratedKeys="true">
 		INSERT INTO follow (follower_num, followee_num) 
-		VALUES (#{follower}, #{followee})
+		VALUES (#{followernum}, #{followeenum})
 	</insert>
 
 	<delete id="deleteFollow" parameterType="int">

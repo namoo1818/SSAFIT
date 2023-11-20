@@ -19,7 +19,7 @@ import com.ssafit.board.model.dto.SearchCondition;
 import com.ssafit.board.model.service.ReviewService;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/review")
 public class ReviewRestController {
 	// 응답을 편하게 하기 위해 상수로 지정
 	private static final String SUCCESS = "succes";
@@ -29,7 +29,7 @@ public class ReviewRestController {
 	private ReviewService reviewService;
 
 	// 1. 목록
-	@GetMapping("/review")
+	@GetMapping("")
 	public ResponseEntity<?> list(SearchCondition condition) {
 		List<Review> list = reviewService.search(condition);
 		
@@ -39,7 +39,7 @@ public class ReviewRestController {
 	}
 
 	// 2. 상세보기
-	@GetMapping("/review/{id}")
+	@GetMapping("/{id}")
 	public ResponseEntity<Review> detail(@PathVariable int id) {
 		Review review = reviewService.getReview(id);
 		if (review != null)
@@ -48,14 +48,14 @@ public class ReviewRestController {
 	}
 
 	// 3. 등록
-	@PostMapping("/review")
+	@PostMapping("")
 	public ResponseEntity<Review> write(@RequestBody Review review) {
 		reviewService.writeReview(review);
 		return new ResponseEntity<Review>(review, HttpStatus.CREATED);
 	}
 
 	// 4. 삭제
-	@DeleteMapping("/review/{id}")
+	@DeleteMapping("/{id}")
 	public ResponseEntity<String> delete(@PathVariable int id) {
 		if (reviewService.removeReview(id))
 			return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
@@ -63,14 +63,14 @@ public class ReviewRestController {
 	}
 
 	// 5. 수정
-	@PutMapping("/review")
+	@PutMapping("")
 	public ResponseEntity<String> update(@RequestBody Review review) {
 		if (reviewService.modifyReview(review))
 			return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
 		return new ResponseEntity<String>(FAIL, HttpStatus.BAD_REQUEST);
 	}
 	
-	@GetMapping("/videoReview/{id}")
+	@GetMapping("/video/{id}")
     public ResponseEntity<?> videoReview(@PathVariable int id){
         List<Review> list = reviewService.getVideoReveiw(id);
         if (list == null || list.size() == 0)

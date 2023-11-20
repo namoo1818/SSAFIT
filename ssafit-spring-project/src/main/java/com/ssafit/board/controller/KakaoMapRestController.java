@@ -20,7 +20,7 @@ import com.ssafit.board.model.dto.kakaoMap;
 import com.ssafit.board.model.service.KakaoMapService;
 
 @RestController
-@RequestMapping("/apiMap")
+@RequestMapping("/map")
 public class KakaoMapRestController {
 	// 응답을 편하게 하기 위해 상수로 지정
 	private static final String SUCCESS = "succes";
@@ -30,7 +30,7 @@ public class KakaoMapRestController {
 	private KakaoMapService kakaoMapService;
 	
 	// 1. 목록
-	@GetMapping("/map/{id}")
+	@GetMapping("/{id}")
 	public ResponseEntity<?> list(@PathVariable int id) {
 		List<kakaoMap> list = kakaoMapService.getList(id);
 		
@@ -40,7 +40,7 @@ public class KakaoMapRestController {
 	}
 	
 	//2. 상세보기
-	@GetMapping("/map/detail/{id}")
+	@GetMapping("/detail/{id}")
 	public ResponseEntity<kakaoMap> detail(@PathVariable int id) {
 		kakaoMap kakaoMap = kakaoMapService.getMap(id);
 		if(kakaoMap != null)
@@ -49,14 +49,14 @@ public class KakaoMapRestController {
 	}
 	
 	// 3. 등록
-	@PostMapping("/map")
+	@PostMapping("")
 	public ResponseEntity<kakaoMap> write(@RequestBody kakaoMap kakaoMap){
 		kakaoMapService.writeMap(kakaoMap);
 		return new ResponseEntity<kakaoMap>(kakaoMap, HttpStatus.CREATED);
 	}
 	
 	// 4. 삭제
-	@DeleteMapping("/map/{id}")
+	@DeleteMapping("/{id}")
 	public ResponseEntity<String> delete(@PathVariable int id) {
 		if (kakaoMapService.removeMap(id))
 			return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
@@ -64,7 +64,7 @@ public class KakaoMapRestController {
 	}
 	
 	// 5. 수정
-	@PutMapping("/map")
+	@PutMapping("")
 	public ResponseEntity<String> update(@RequestBody kakaoMap kakaoMap) {
 		if (kakaoMapService.modifyMap(kakaoMap))
 			return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);

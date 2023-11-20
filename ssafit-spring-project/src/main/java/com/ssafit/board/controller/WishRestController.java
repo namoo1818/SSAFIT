@@ -16,7 +16,7 @@ import com.ssafit.board.model.dto.Wish;
 import com.ssafit.board.model.service.WishService;
 
 @RestController
-@RequestMapping("/apiWish")
+@RequestMapping("/wish")
 public class WishRestController {
 	
 	// 응답을 편하게 하기 위해 상수로 지정
@@ -26,26 +26,17 @@ public class WishRestController {
 	@Autowired
 	private WishService wishService;
 	
-	@PostMapping("/wish")
+	@PostMapping("")
 	public ResponseEntity<Wish> wish(@RequestBody Wish wish) {
 		wishService.wish(wish);
 		return new ResponseEntity<Wish>(wish, HttpStatus.CREATED);
 	}
 
-	@DeleteMapping("/wish")
+	@DeleteMapping("")
 	public ResponseEntity<String> unwish(int num) { 
 		if (wishService.unwish(num))
 			return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
 		return new ResponseEntity<String>(FAIL, HttpStatus.NOT_FOUND);
-	}
-	
-	@GetMapping("/wish")
-	public ResponseEntity<?> list(int writer) { 
-		List<Wish> list = wishService.wishSearch(writer);
-		
-		if (list == null || list.size() == 0)
-			return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
-		return new ResponseEntity<List<Wish>>(list, HttpStatus.OK);
 	}
 	
 }
