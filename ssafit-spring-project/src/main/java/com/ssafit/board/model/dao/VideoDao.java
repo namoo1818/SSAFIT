@@ -23,7 +23,7 @@ public interface VideoDao {
 	public void updateViewCnt(int id);
 	
 	// 시청기록 등록
-	public void insertViewLog(Map<String, Integer> map);
+	public void insertViewLog(int id);
 
 	// 검색 기능
 	public List<Video> search(SearchCondition condition);

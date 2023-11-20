@@ -25,12 +25,8 @@ public class VideoServiceImpl implements VideoService {
 	}
 
 	@Override
-	public Video getVideo(int videoNum, int userNum) {
-		Map<String, Integer> map = new HashMap<>();
-		map.put("videoNum", videoNum);
-		map.put("userNum", userNum);
+	public Video getVideo(int videoNum) {
 		videoDao.updateViewCnt(videoNum);
-		videoDao.insertViewLog(map);
 		return videoDao.selectOne(videoNum);
 	}
 

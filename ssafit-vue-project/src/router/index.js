@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import VideoSearchResult from '@/components/video/VideoSearchResult.vue'
 import VideoView from '@/views/VideoView.vue'
+import VideoDetail from '@/components/video/VideoDetail.vue'
 import Weather from '@/components/common/Weather.vue'
 import KakaoMap from '@/components/common/KakaoMap.vue'
 import UserView from '@/views/UserView.vue'
@@ -21,6 +22,7 @@ import AdminView from '@/views/AdminView.vue'
   import AdminUserDetail from '@/components/admin/AdminUserDetail.vue'
   import ErrorPage from '@/components/common/ErrorPage.vue'
 
+
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -31,9 +33,16 @@ const router = createRouter({
       props: true
     },
     {
-      path: '/',
+      path: '/video',
       name: 'video',
-      component: VideoView
+      component: VideoView,
+      children: [
+        {
+          path: ':id',
+          name: 'videodetail',
+          component: VideoDetail
+        },
+      ]
     },
     {
       path: '/weather',

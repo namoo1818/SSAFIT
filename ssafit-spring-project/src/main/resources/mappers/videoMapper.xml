@@ -35,11 +35,6 @@
 		WHERE video_num = #{num};
 	</update>
 	
-	<insert id="insertViewLog" parameterType="java.util.HashMap">
-		INSERT INTO viewlog (video_num, user_num) VALUES 
-		(#{videoNum}, #{userNum});
-	</insert>
-	
 	<update id="updateVideo" parameterType="video">
 		UPDATE video
 		SET video_title = #{title}, video_keyword = #{keyword}, video_channel = #{channel}, video_url = #{url}, video_intensity = #{intensity}
