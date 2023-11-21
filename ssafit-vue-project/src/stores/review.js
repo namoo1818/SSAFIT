@@ -9,7 +9,7 @@ const REST_USER_API = `http://localhost:8080/user`
 export const useReviewStore = defineStore('review', ()=>{
     const reviewList = ref([])
 
-    // 리뷰 전체
+    //리뷰 전체
     const getReviewList = function(){
         axios.get(REST_REVIEW_API)
         .then((response)=>{
@@ -46,12 +46,17 @@ export const useReviewStore = defineStore('review', ()=>{
         })
     }
 
-    // 리뷰 수정
+    //리뷰 수정
     const updateReview = function(review){
         axios.put(REST_REVIEW_API, review)
         .then(()=>{
             router.push({name:'reviewList'})
         })
+    }
+
+    //리뷰 삭제
+    const deleteReview = function(id){
+        axios.
     }
 
     //리뷰 검색
@@ -64,6 +69,7 @@ export const useReviewStore = defineStore('review', ()=>{
         })
     }
 
+    //영상 리뷰 목록
     const videoReview = ref([])
     const getVideoReview = function(id){
         axios.get(REST_REVIEW_API, {

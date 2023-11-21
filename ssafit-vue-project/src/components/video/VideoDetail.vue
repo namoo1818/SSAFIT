@@ -25,13 +25,13 @@
         </tr>
         <tr v-for="review in rStore.videoReview" :key="review.num">
                     <td>{{ review.num }}</td>
-                    <td>
-                        <RouterLink :to="`/review/${review.num}`">{{ review.title }}</RouterLink>
-                        </td>
+                    <td>{{ review.title }}</td>
                     <td>{{ review.writer }}</td>
                     <td>{{ review.content }}</td>
                     <td>{{ review.viewcnt }}</td>
                     <td>{{ review.regdate }}</td>
+                    <button class="btn btn-outline-info mx-2" @click="deleteReview(review.num)">삭제</button>
+        
         </tr>
     </table>
 </template>
@@ -44,6 +44,10 @@ import {onMounted} from 'vue'
 const store = useVideoStore();
 const rStore = useReviewStore();
 const route = useRoute();
+
+const deleteReview = function(id){
+    rStore.deleteReview(id);
+}
 
 onMounted(()=>{
     store.getVideo(route.params.id)

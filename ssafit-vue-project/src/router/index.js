@@ -1,10 +1,15 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import VideoSearchResult from '@/components/video/VideoSearchResult.vue'
 import VideoView from '@/views/VideoView.vue'
+import UserView from '@/views/UserView.vue'
+import AdminView from '@/views/AdminView.vue'
+
+import VideoSearchResult from '@/components/video/VideoSearchResult.vue'
+import VideoMain from '@/components/video/VideoMain.vue'
 import VideoDetail from '@/components/video/VideoDetail.vue'
+
 import Weather from '@/components/common/Weather.vue'
 import KakaoMap from '@/components/common/KakaoMap.vue'
-import UserView from '@/views/UserView.vue'
+
 import UserMyPage from '@/components/user/UserMyPage.vue'
 import UserMyExpList from '@/components/user/UserMyExpList.vue'
 import UserMyReviewList from '@/components/user/UserMyReviewList.vue'
@@ -12,15 +17,16 @@ import UserMyCalendarList from '@/components/user/UserMyCalendarList.vue'
 import UserMyBookmarkList from '@/components/user/UserMyBookmarkList.vue'
 import UserMyFollow from '@/components/user/UserMyFollow.vue'
 import UserMyMapMarkerList from '@/components/user/UserMyMapMarkerList.vue'
+
 import HeaderUserLogin from '@/components/common/HeaderUserLogin.vue'
 import HeaderUserRegist from '@/components/common/HeaderUserRegist.vue'
-import AdminView from '@/views/AdminView.vue'
-  import AdminVideoCreate from '@/components/admin/AdminVideoCreate.vue'
-  import AdminVideoList from '@/components/admin/AdminVideoList.vue'
-  import AdminReviewList from '@/components/admin/AdminReviewList.vue'
-  import AdminUserList from '@/components/admin/AdminUserList.vue'
-  import AdminUserDetail from '@/components/admin/AdminUserDetail.vue'
-  import ErrorPage from '@/components/common/ErrorPage.vue'
+
+import AdminVideoCreate from '@/components/admin/AdminVideoCreate.vue'
+import AdminVideoList from '@/components/admin/AdminVideoList.vue'
+import AdminReviewList from '@/components/admin/AdminReviewList.vue'
+import AdminUserList from '@/components/admin/AdminUserList.vue'
+import AdminUserDetail from '@/components/admin/AdminUserDetail.vue'
+import ErrorPage from '@/components/common/ErrorPage.vue'
 
 
 const router = createRouter({
@@ -33,15 +39,20 @@ const router = createRouter({
       props: true
     },
     {
-      path: '/video',
+      path: '/',
       name: 'video',
       component: VideoView,
       children: [
         {
-          path: ':id',
+          path: '',
+          name: 'videomain',
+          component: VideoMain
+        },
+        {
+          path: '/video/:id',
           name: 'videodetail',
           component: VideoDetail
-        },
+        }
       ]
     },
     {

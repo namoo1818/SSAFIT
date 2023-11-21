@@ -1,18 +1,13 @@
 <template>
   <div>
     <HeaderVideoNav />
-      <h3 class="m-4">🔥 베스트 오브 베스트</h3>
-        <VideoList />
-      <h3 class="m-4">💪 오늘 사람들이 많이 한 운동</h3>
-        <VideoList />
-      <h3 class="m-4">🌈 비 오는 날, 처지는 기분을 홈트로 UP!</h3>
-        <VideoList />
+      <RouterView />
   </div>
 </template>
 
 <script setup>
+import { RouterView } from 'vue-router'
 import HeaderVideoNav from '@/components/common/HeaderVideoNav.vue';
-import VideoList from '../components/video/VideoList.vue';
 
 </script>
 
