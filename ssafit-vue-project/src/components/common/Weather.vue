@@ -1,18 +1,28 @@
 <template>
-    <div>
+    <div style="text-align: center;">
       <h4>날씨정보</h4>
       <div>기온 : {{ tmp }}℃</div>
       <div>하늘상태 : {{ sky }}</div>
       <div>강수형태 : {{ pty }}</div>
       <div>강수확률 : {{ pop }}%</div>
+      <br>
+        <div>{{ store.playlist.playlistTitle }}</div>
+        <iframe width="560" height="315" :src="`${store.playlist.playlistUrl}`" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+      <br>
+      <div>{{ store.quote.content }}</div>
+      <div>{{ store.quote.writer }}</div>
     </div>
   </template>
   
   <script setup>
 
 //수업코드 일단 복붙해옴 
+  import { useWeatherStore } from "@/stores/weather";
   import { onMounted, ref } from "vue";
   import axios from "axios";
+
+  const store = useWeatherStore()
+  const weather = ref('')
   const tmp = ref(null);
   const sky = ref(null);
   const pty = ref(null);
@@ -27,7 +37,7 @@
     month = month < 10 ? "0" + month : month;
     day = day < 10 ? "0" + day : day;
     const todayStr = `${year}${month}${day}`;
-    console.log(todayStr);
+    // console.log(todayStr);
     //발표시간을 전부 넣어둬
     const times = ['0200', '0500', ]//8개넣어 
     axios
@@ -67,20 +77,49 @@
             switch (item.fcstValue) {
               case "1":
                 sky.value = "맑음";
+                weather.value = "화창";
                 break;
               case "3":
                 sky.value = "구름많음";
+                weather.value = "구름";
                 break;
               case "4":
                 sky.value = "흐림";
+                weather.value = "구름";
                 break;
             }
           } else if (item.category === "PTY") {
-            pty.value = item.fcstValue;
+            switch (item.fcstValue) {
+              case "0":
+                pty.value = "없음";
+                break;
+              case "1":
+                pty.value = "비";
+                weather.value = "비";
+                break;
+              case "2":
+                pty.value = "비/눈";
+                weather.value = "비";
+                break;
+              case "3":
+                pty.value = "눈";
+                weather.value = "눈";
+                break;
+              case "4":
+                pty.value = "소나기";
+                weather.value = "비";
+                break;
+            }
           } else if (item.category === "POP") {
             pop.value = item.fcstValue;
           }
         });
+
+        // 음악 추천
+        store.getPlaylist(weather.value);
+        // 응원멘트 추천
+        store.getQuote(weather.value);
+
       });
   });
   </script>

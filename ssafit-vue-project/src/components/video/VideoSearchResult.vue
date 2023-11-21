@@ -3,8 +3,8 @@
         <h4>검색 결과</h4>
         <ul>
             <VideoListItem
-                v-if="store.videos.length!=0"
-                v-for="video in store.videos"
+                v-if="store.videos!=[]"
+                v-for="video in store.videoList"
                 :key="video.num"
                 :video="video"
             />

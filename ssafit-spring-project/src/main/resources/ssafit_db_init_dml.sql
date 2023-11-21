@@ -126,12 +126,12 @@ INSERT INTO wish (video_num, user_num) VALUES
 -- 8. (playlist) 운동용 플레이리스트 
 SELECT * FROM playlist;
 INSERT INTO playlist (playlist_title, playlist_url, playlist_weather) VALUES
-	('비 오는 날, 처진 기분을 업시켜줄 플레이리스트', 'https://youtu.be/Oz7MAt-5iKY', '비'),
-    ('눈도 오는데, 크리스마스 기분 내 볼래?', 'https://www.youtube.com/watch?v=GFb_kXitoG0', '눈'),
-    ('안개 낀 날, 비장하게 운동해 보자', 'https://www.youtube.com/watch?v=7yg3Cp7Y0sQ', '안개'),
-    ('맑은 날, 설레는 마음으로 운동 go go!', 'https://www.youtube.com/watch?v=VmZJHIWByJU', '화창'),
-    ('흐린 날이지만 살살 워밍업부터 해 봐요', 'https://www.youtube.com/watch?v=S3b641gs830', '구름'), 
-    ('먼지도 이겨내는 운동 타임', 'https://www.youtube.com/watch?v=MUpIS_9ontQ', '먼지');
+	('비 오는 날, 처진 기분을 업시켜줄 플레이리스트', 'https://www.youtube.com/embed/Oz7MAt-5iKY?si=3uxe-ggzoG5J1UMB', '비'),
+    ('눈도 오는데, 크리스마스 기분 내 볼래?', 'https://www.youtube.com/embed/GFb_kXitoG0?si=ffHyICPwPxW0EYqU', '눈'),
+    ('안개 낀 날, 비장하게 운동해 보자', 'https://www.youtube.com/embed/7yg3Cp7Y0sQ?si=8g6DaN8dnEfFXkwn', '안개'),
+    ('맑은 날, 설레는 마음으로 운동 go go!', 'https://www.youtube.com/embed/AzpDd4ZBW1w?si=g7ewcnPXQSG54MKM', '화창'),
+    ('흐린 날이지만 살살 워밍업부터 해 봐요', 'https://www.youtube.com/embed/S3b641gs830?si=9HD5-sWYljxaue-u', '구름'), 
+    ('먼지도 이겨내는 운동 타임', 'https://www.youtube.com/embed/MUpIS_9ontQ?si=oJGqVOMVmOLVVnk6', '먼지');
 
 -- 9. (quote) 명언, 응원문구
 SELECT * FROM quote;
