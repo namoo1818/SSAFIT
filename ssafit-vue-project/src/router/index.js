@@ -6,6 +6,7 @@ import AdminView from '@/views/AdminView.vue'
 import VideoSearchResult from '@/components/video/VideoSearchResult.vue'
 import VideoMain from '@/components/video/VideoMain.vue'
 import VideoDetail from '@/components/video/VideoDetail.vue'
+import ReviewCreate from '@/components/video/VideoDetailReviewCreate.vue'
 
 import Weather from '@/components/common/Weather.vue'
 import KakaoMap from '@/components/common/KakaoMap.vue'
@@ -52,6 +53,11 @@ const router = createRouter({
           path: '/video/:id',
           name: 'videodetail',
           component: VideoDetail
+        },
+        {
+          path: '/review/:id',
+          name: 'reviewcreate',
+          component: ReviewCreate
         }
       ]
     },

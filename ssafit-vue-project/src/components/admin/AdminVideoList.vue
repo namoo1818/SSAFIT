@@ -19,19 +19,22 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="video in store.videos">
-                        <td>{{ video.num }}</td>
-                        <td>{{ video.channel }}</td>
-                        <td>{{video.title}}</td>
-                        <td><a href="#">링크</a></td>
-                        <td>{{ video.keyword }}</td>
-                        <td>{{ video.intensity }}</td>
-                        <td>{{ video.viewcnt }}</td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td><button>상세조회</button><button>삭제</button></td>
-                    </tr>
+                        <tr v-for="video in store.videoList">
+                            <td>{{ video.num }}</td>
+                            <td>{{ video.channel }}</td>
+                            <td>{{video.title}}</td>
+                            <td><a :href="`https://www.youtube.com/watch?v=${video.url}`">링크</a></td>
+                            <td>{{ video.keyword }}</td>
+                            <td>{{ video.intensity }}</td>
+                            <td>{{ video.viewcnt }}</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>
+                                <RouterLink :to="`/video/${video.num}`"><button>상세조회</button></RouterLink>
+                                <button @click="deleteReview(review.num)">삭제</button>
+                            </td>
+                        </tr>
                 </tbody>
             </table>
             <nav>
@@ -54,11 +57,9 @@
 </template>
 
 <script setup>
-import {ref} from 'vue';
+import {ref, onMounted} from 'vue';
 import {useVideoStore} from '@/stores/video'
-import {useRouter} from "vue-router";
 
-const router = useRouter()
 const store = useVideoStore()
 const searchInfo = ref({
     key: 'video.video_title',
@@ -69,7 +70,9 @@ const search = function() {
     store.videoSearch(searchInfo.value)
 }
 
-
+onMounted(() => {
+    store.getVideoList()
+})
 </script>
 
 <style scoped></style>

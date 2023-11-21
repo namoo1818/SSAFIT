@@ -27,13 +27,13 @@
         </table>
         <nav>
             <span class="d-inline-flex my-4">
-                <select name="">
-                    <option value="name">작성자</option>
-                    <option value="title">리뷰제목</option>
-                    <option value="content">리뷰내용</option>
+                <select v-model="searchInfo.key">
+                    <option value="user_nickname">작성자</option>
+                    <option value="review.review_title">리뷰제목</option>
+                    <option value="review.review_content">리뷰내용</option>
                 </select>
-                <input class="form-control" type="text" placeholder="리뷰 검색">
-                <span class="input-group-text">
+                <input class="form-control" type="text" v-model="searchInfo.word" placeholder="리뷰 검색">
+                <span class="input-group-text" type="submit" @click="search" @keyup.enter="search">
                     <i class="bi bi-search"></i>
                 </span>
             </span>
@@ -43,8 +43,17 @@
 
 <script setup>
 import { useReviewStore } from "@/stores/review";
-import { onMounted } from "vue";
+import { ref, onMounted } from "vue";
+
 const store = useReviewStore()
+const searchInfo = ref({
+    key : 'user_nickname',
+    word : ''
+})
+
+const search = function() {
+    store.searchReviewList(searchInfo.value);
+}
 
 onMounted(() => {
     store.getReviewList()

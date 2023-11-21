@@ -68,7 +68,11 @@
 	
 	<!-- 검색기능  -->
 	<select id="search" resultMap="userMap" parameterType="SearchCondition">
-		SELECT *
+		SELECT *, CASE
+			WHEN user_exp >= 1600 THEN 'Platinum'
+		    WHEN user_exp >= 600 THEN 'Gold'
+		    WHEN user_exp >= 100 THEN 'Silver'
+		    ELSE 'Bronze' END AS user_grade
 		FROM user
 		<!-- 검색 조건 (동적쿼리)-->
 		<if test="key != 'none'">

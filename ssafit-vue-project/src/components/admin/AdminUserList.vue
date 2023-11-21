@@ -21,25 +21,26 @@
                         <td>{{ user.userNum }}</td>
                         <td>{{ user.userId }}</td>
                         <td>{{ user.userNickname }}</td>
-                        <td>{{user.userName}}</td>
-                        <td>{{user.userEmail}}</td>
-                        <td>{{user.userRegdate}}</td>
-                        <td>{{user.userExp}}</td>
+                        <td>{{ user.userName }}</td>
+                        <td>{{ user.userEmail }}</td>
+                        <td>{{ user.userRegdate }}</td>
+                        <td>{{ user.userExp }}</td>
                         <td>{{ user.userGrade }}</td>
-                        <td><RouterLink :to="`/admin/user/${user.userNum}`">상세조회</RouterLink>&nbsp;
+                        <td><RouterLink :to="`/admin/user/${user.userNum}`"><button>상세조회</button></RouterLink>&nbsp;
                             <button @click="deleteUser(user.userNum)">삭제</button></td>
                     </tr>
                 </tbody>
             </table>
             <nav>
                 <span class="d-inline-flex my-4">
-                    <select name="">
-                        <option value="name">아이디</option>
-                        <option value="nickname">닉네임</option>
-                        <option value="grade">회원등급</option>
+                    <select v-model="searchInfo.key">
+                        <option value="user_id">아이디</option>
+                        <option value="user_name">이름</option>
+                        <option value="user_nickname">닉네임</option>
+                        <!-- <option value="grade">회원등급</option> -->
                     </select>
-                    <input class="form-control" type="text" placeholder="유저 검색">
-                    <span class="input-group-text">
+                    <input class="form-control" type="text" v-model="searchInfo.word" placeholder="유저 검색">
+                    <span class="input-group-text" type="submit" @click="search" @keyup.enter="search">
                         <i class="bi bi-search"></i>
                     </span>
                 </span>
@@ -51,11 +52,18 @@
 
 <script setup>
 import { useUserStore } from "@/stores/user";
-import { onMounted } from "vue";
+import { ref, onMounted } from "vue";
 import axios from 'axios'
 
 const store = useUserStore()
+const searchInfo = ref({
+    key: 'user_id',
+    word: ''
+})
 
+const search = function() {
+    store.searchUser(searchInfo.value)
+}
 //DB에서 다른 테이블이 user_num을 외래키로 사용하고 있어서 삭제 안 됨 
 //mapper에 DELETE sql구문 쓸 때 CASCADE 넣어줘야 할 듯 
 const deleteUser = function (num) {

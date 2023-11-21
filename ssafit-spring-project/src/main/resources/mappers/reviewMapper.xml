@@ -33,13 +33,6 @@
 		WHERE user_num = #{num}
 	</update>
 
-	<!-- <select id="selectOne" resultMap="reviewMap" parameterType="int">
-		SELECT *
-		FROM review 
-		WHERE review_num = #{num}
-	</select>
-	 -->
-
 	<insert id="insertReview" parameterType="review" keyProperty="num" useGeneratedKeys="true">
 		INSERT INTO review (review_title, review_writer, review_content, video_num)
 		VALUES (#{title}, #{writer}, #{content}, #{videoNum})
@@ -84,8 +77,10 @@
 	
 
 	<select id="selectVideoReview" resultType="review" parameterType="int">
-	    SELECT review_num as num, review_title as title, review_content as content,
-	    review_viewcnt as viewcnt, review_regdate as regdate, user_nickname as userNickname, video_url as videoUrl 
+	    SELECT review_num as num, review_writer as writer, 
+		review_title as title, review_content as content,
+		review_viewcnt as viewcnt, review_regdate as regdate, 
+		review.video_num as videoNum, user_nickname as userNickname, video_url as videoUrl 
 	    FROM review LEFT JOIN user 
 	    ON review_writer = user_num 
 	    LEFT JOIN video

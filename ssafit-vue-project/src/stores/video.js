@@ -6,7 +6,6 @@ import router from '@/router'
 const REST_VIDEO_API = `http://localhost:8080/video`
 
 export const useVideoStore = defineStore('video', ()=>{
-    const videos = ref([])
     const videoList = ref([])
     const selectedVideo = ref(null)
 
@@ -37,13 +36,12 @@ export const useVideoStore = defineStore('video', ()=>{
             params: searchCondition
         })
         .then((res)=>{
-            videos.value = res.data
+            videoList.value = res.data
         })
     }
 
     // 영상 클릭
     const clickVideo = function(video){
-        console.log(video)
         selectedVideo.value = video
     }
 
@@ -52,28 +50,22 @@ export const useVideoStore = defineStore('video', ()=>{
         return videoList.value.sort((a,b)=>b.viewcnt - a.viewcnt).slice(0,3);
     })
 
-    const partVideos = ref([])
-    // 부위별 영상 
-    const getPartVideo = function(val){
-        console.log(typeof val)
-        partVideos.value = videoList.value.filter((video)=> video.part === val)
-    }
 
   //비디오 등록
-  const createVideo = function (video) {
-    axios({
-      url: REST_VIDEO_API,
-      method: 'POST',
-      data: video
-    })
-      .then(() => {
-        router.push({ name: 'videolist'})
-      })
-      .catch((err) => {
-      console.log(err)
-    })
-  }
+    const createVideo = function (video) {
+        axios({
+        url: REST_VIDEO_API,
+        method: 'POST',
+        data: video
+        })
+        .then(() => {
+            router.push({ name: 'videolist'})
+        })
+        .catch((err) => {
+        console.log(err)
+        })
+    }
 
-    return { videos, videoList, video, getVideo, selectedVideo, getVideoList, createVideo,
-        videoSearch, clickVideo, partVideos, getPartVideo, popularVideos }
+    return { videoList, video, getVideo, selectedVideo, getVideoList, createVideo,
+        videoSearch, clickVideo, popularVideos }
 })

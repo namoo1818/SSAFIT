@@ -14,7 +14,6 @@ export const useReviewStore = defineStore('review', ()=>{
         axios.get(REST_REVIEW_API)
         .then((response)=>{
             reviewList.value = response.data
-            // console.log(reviewList.value)
         })
         
     }
@@ -29,7 +28,6 @@ export const useReviewStore = defineStore('review', ()=>{
 
     //리뷰 등록
     const createReview = function(review){
-        console.log(review)
         axios({
             url:REST_REVIEW_API,
             method:'POST',
@@ -50,13 +48,16 @@ export const useReviewStore = defineStore('review', ()=>{
     const updateReview = function(review){
         axios.put(REST_REVIEW_API, review)
         .then(()=>{
-            router.push({name:'reviewList'})
+            router.push({name:'videodetail'})
         })
     }
 
     //리뷰 삭제
     const deleteReview = function(id){
-        axios.
+        axios.delete(`${REST_REVIEW_API}/${id}`)
+        .then(()=>{
+            router.push({name:'videodetail'})
+        })
     }
 
     //리뷰 검색
@@ -72,16 +73,16 @@ export const useReviewStore = defineStore('review', ()=>{
     //영상 리뷰 목록
     const videoReview = ref([])
     const getVideoReview = function(id){
-        axios.get(REST_REVIEW_API, {
+        axios.get(`${REST_REVIEW_API}/video/${id}`, {
             key: "video.video_num",
             word: id
         })
         .then((res)=>{
             videoReview.value = res.data
-            console.log(videoReview)
+
         })
     }
 
 
-    return {videoReview, getVideoReview, reviewList, getReviewList, review, getReview, createReview, updateReview, searchReviewList}
+    return {videoReview, getVideoReview, reviewList, getReviewList, review, getReview, createReview, updateReview, searchReviewList, deleteReview}
 })

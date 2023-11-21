@@ -39,12 +39,6 @@ export const useUserStore = defineStore('user',()=>{
           })
       }
 
-    // const getUserList = function(){
-    //     axios.put(`${REST_USER_API}/${user.id}`, user)
-    //     .then(() => {
-    //     router.push({name: 'home'})
-    //     })
-    // }
 
     // 사용자 조회
     const user = ref({})
@@ -142,9 +136,24 @@ export const useUserStore = defineStore('user',()=>{
     })
       }
 
+      // 찜하기
+      const updateWish = function() {
+        
+      }
+
+      // 사용자 검색
+      const searchUser = function(searchCondition){
+        axios.get(REST_USER_API, {
+            params: searchCondition
+        })
+        .then((res)=>{
+            userList.value = res.data
+        })
+      }
+
       return {userList, loginUserId, userLogin, getUserList, user, getUser, createUser, updateUser, deleteUser,
         getWishList, getFollowerList, getFollowingList,
-        wishList, followerList, followingList, getMyReviewList, myReviewList}
+        wishList, followerList, followingList, getMyReviewList, myReviewList, updateWish, searchUser}
     
 
 })

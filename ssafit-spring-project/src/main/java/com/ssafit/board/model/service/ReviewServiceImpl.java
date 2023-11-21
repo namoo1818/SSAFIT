@@ -56,7 +56,12 @@ public class ReviewServiceImpl implements ReviewService {
 	
 	@Override
 	public List<Review> getVideoReveiw(int id) {
-	    return reviewDao.selectVideoReview(id);
+		List<Review> list = reviewDao.selectVideoReview(id);
+		for(int i = 0; i<list.size();i++) {
+			int reviewNum = list.get(i).getNum();
+			reviewDao.updateViewCnt(reviewNum);
+		}
+	    return list;
 	}
 
 }

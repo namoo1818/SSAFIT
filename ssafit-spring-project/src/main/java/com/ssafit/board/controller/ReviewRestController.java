@@ -70,6 +70,7 @@ public class ReviewRestController {
 		return new ResponseEntity<String>(FAIL, HttpStatus.BAD_REQUEST);
 	}
 	
+	// 6. 영상 리뷰
 	@GetMapping("/video/{id}")
     public ResponseEntity<?> videoReview(@PathVariable int id){
         List<Review> list = reviewService.getVideoReveiw(id);
