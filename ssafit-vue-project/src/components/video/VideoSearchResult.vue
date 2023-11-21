@@ -14,23 +14,8 @@
 </template>
 
 <script setup>
-import VideoListItem from './VideoListItem.vue';
-import {useVideoStore} from '@/stores/video'
-import { useRoute } from 'vue-router';
-import { ref, onMounted } from 'vue';
 
-const route = useRoute()
 
-const searchInfo = ref({
-    key: 'video.video_title',
-    word: route.query.title
-})
-
-const store = useVideoStore();
-
-onMounted(() => {
-    store.videoSearch(searchInfo);
-})
 </script>
 
 <style scoped>

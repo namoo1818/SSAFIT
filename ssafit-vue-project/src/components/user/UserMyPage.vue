@@ -6,30 +6,27 @@
             <tr>
                 <td>아이디</td>
                 <td><input type="text" class="form-control" 
-                  v-model="store.user.userId" id="id" readonly></td>
+                  v-model="loginUser.userId" id="id" readonly></td>
             </tr>
             <tr>
                 <td>이름</td>
                 <td><input type="text" class="form-control" 
-                  v-model="store.user.userName" id="name"></td>
+                  v-model="loginUser.userName" id="name" readonly></td>
             </tr>
             <tr>
                 <td>닉네임</td>
                 <td><input type="text" class="form-control" 
-                  v-model="store.user.userNickname" id="nickname"></td>
+                  v-model="loginUser.userNickname" id="nickname" readonly></td>
             </tr>
             <tr>
                 <td>이메일</td>
                 <td><input type="text" class="form-control" 
-                  v-model="store.user.userEmail" id="email"></td>
+                  v-model="loginUser.userEmail" id="email" readonly></td>
             </tr>
         </table>
-        <div class="d-flex btn-group" role="group">
-                        <button type="button" class="btn btn-outline-primary" 
-                          @click="updateUser">업데이트</button>
-                        <button type="button" class="btn btn-outline-secondary" 
-                          @click="logout">로그아웃</button>   
-        </div>
+        <!-- <div class="d-flex btn-group" role="group">
+          <button type="button" class="btn btn-outline-primary">업데이트</button>
+        </div> -->
     </div>
     </div>
 </template>
@@ -38,7 +35,7 @@
   import { ref, onMounted } from 'vue'
 import { useUserStore } from '@/stores/user';
 
-const store = useUserStore();
+const store = useUserStore()
 
 const loginUser = ref({})
   const loginOffDisplay = ref('block')
