@@ -42,7 +42,35 @@
 </template>
 
 <script setup>
+import {useReviewStore} from '@/stores/review'
+import { ref, onMounted } from 'vue';
 
+const store = useReviewStore();
+
+const loginUser = ref({})
+  const loginOffDisplay = ref('block')
+  const loginOnDisplay = ref('none')
+  
+  const fetchLoginUser = () => {
+    const storedUser = localStorage.getItem('loginUser')
+    if (storedUser !== null) {
+      loginUser.value = JSON.parse(storedUser)
+      loginOffDisplay.value = 'none'
+      loginOnDisplay.value = 'block'
+    }
+  }
+  onMounted(() => {
+    fetchLoginUser;
+    console.log(loginUser)
+
+    // console.log(loginUser.userNum)
+
+    // const searchInfo = ref({
+    //     key: 'review.writer',
+    //     word: loginUser.userNum
+    // })
+    // store.searchReviewList(searchInfo);
+})
 
 </script>
 

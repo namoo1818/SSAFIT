@@ -3,11 +3,10 @@
         <div class="col-5">
         <h2>내가 팔로우한 유저</h2>
         <table class="table">
-            <tr><th>번호</th><th>등급</th><th>닉네임</th><th>관리</th></tr>
-            <tr v-for="f in store.followerList">
-                <td>{{ follower.followernum }}</td>
-                <td>🏆</td>
-                <td><a href="#">관리자</a></td>
+            <tr><th>번호</th><th>닉네임</th><th>관리</th></tr>
+            <tr v-for="f in store.followingList">
+                <td>{{ f.followeenum }}</td>
+                <td><a href="#">{{ f.followee }}</a></td>
                 <td><button>언팔로우</button></td>
             </tr>
         </table>
@@ -15,11 +14,10 @@
         <div class="col-5">
         <h2>나를 팔로우하는 유저</h2>
         <table class="table">
-            <tr><th>번호</th><th>등급</th><th>닉네임</th><th>관리</th></tr>
-            <tr>
-                <td>1</td>
-                <td>🏆</td>
-                <td><a href="#">관리자</a></td>
+            <tr><th>번호</th><th>닉네임</th><th>관리</th></tr>
+            <tr v-for="f in store.followerList">
+                <td>{{ f.followernum }}</td>
+                <td><a href="#">{{f.follower}}</a></td>
                 <td><button>삭제</button></td>
             </tr>
         </table>
@@ -35,8 +33,9 @@ const store = useUserStore()
 const route = useRoute()
 
 onMounted(()=>{
-    store.getFollowerList(route.params.id)
-    store.getFollowingList(route.params.id)
+    const currentUserNum = JSON.parse(localStorage.getItem('loginUser')).userNum
+    store.getFollowerList(currentUserNum)
+    store.getFollowingList(currentUserNum)
 })
 
 </script>

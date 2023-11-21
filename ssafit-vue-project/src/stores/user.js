@@ -8,27 +8,6 @@ const REST_FOLLOW_API = `http://localhost:8080/follow`
 
 export const useUserStore = defineStore('user',()=>{
 
-    //작동이 안됨 
-    // const login = function(id, pw){
-    //     axios.post(`${REST_USER_API}/login`,{userId: id, userPassword: pw})
-    //     .then((response)=>{
-    //         let matchedUser = res.data.find(
-    //             (u) => u.id === login.id && u.password === login.password
-    //         );
-    //         if (matchedUser) {
-    //             user.value = matchedUser;
-    //             localStorage.setItem("loginUser",Json.stringify(matchedUser))
-    //             alert("로그인에 성공하였습니다.");
-    //         } else {
-    //             alert("아이디 또는 비밀번호가 맞지 않습니다.");
-    //         }
-    //     })
-    //     .catch((err) => {
-    //         console.log(err);
-    //         alert("에러가 발생하였습니다.");
-    //     })
-    // }
-
     // 사용자 전체
     const userList = ref([])
     const getUserList = function () {
@@ -147,7 +126,7 @@ export const useUserStore = defineStore('user',()=>{
         })
       }
 
-      return {userList, loginUserId, userLogin, getUserList, user, getUser, createUser, updateUser, deleteUser,
+      return {userList, getUserList, user, getUser, createUser, updateUser, deleteUser,
         getWishList, getFollowerList, getFollowingList,
         wishList, followerList, followingList, getMyReviewList, myReviewList, updateWish, searchUser}
     
