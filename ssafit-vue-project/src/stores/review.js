@@ -54,10 +54,6 @@ export const useReviewStore = defineStore('review', ()=>{
         })
     }
 
-    //리뷰 삭제
-    const deleteReview = function(id){
-        axios.
-    }
 
     //리뷰 검색
     const searchReviewList = function(searchCondition){

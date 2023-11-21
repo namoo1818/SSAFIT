@@ -60,13 +60,10 @@ export const useUserStore = defineStore('user',()=>{
         axios({
             url: REST_USER_API,
             method: 'POST',
-            headers: {
-                "Content-Type": "application/json"
-            },
             data: user
             })
             .then(()=>{
-                    router.push({name:'home'})
+                    router.push({name:'/'})
                 })
                 .catch((err)=>{
                     console.log(err)
