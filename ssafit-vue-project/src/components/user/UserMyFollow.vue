@@ -4,8 +4,8 @@
         <h2>내가 팔로우한 유저</h2>
         <table class="table">
             <tr><th>번호</th><th>등급</th><th>닉네임</th><th>관리</th></tr>
-            <tr>
-                <td>1</td>
+            <tr v-for="f in store.followerList">
+                <td>{{ follower.followernum }}</td>
                 <td>🏆</td>
                 <td><a href="#">관리자</a></td>
                 <td><button>언팔로우</button></td>
@@ -28,6 +28,16 @@
 </template>
 
 <script setup>
+import { useRoute, useRouter } from 'vue-router'
+import { onMounted } from 'vue'
+import { useUserStore } from '@/stores/user'
+const store = useUserStore()
+const route = useRoute()
+
+onMounted(()=>{
+    store.getFollowerList(route.params.id)
+    store.getFollowingList(route.params.id)
+})
 
 </script>
 

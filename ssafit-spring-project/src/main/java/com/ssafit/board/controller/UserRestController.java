@@ -52,6 +52,7 @@ public class UserRestController {
 	// 3. 등록
 	@PostMapping("")
 	public ResponseEntity<User> write(@RequestBody User user) {
+		System.out.println(user);
 		userService.regist(user);
 		return new ResponseEntity<User>(user, HttpStatus.CREATED);
 	}
