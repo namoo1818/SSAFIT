@@ -3,7 +3,7 @@
         <h4>검색 결과</h4>
         <ul>
             <VideoListItem
-                v-if="store.videos!=[]"
+                v-if="store.videoList.length!=0"
                 v-for="video in store.videoList"
                 :key="video.num"
                 :video="video"
@@ -14,7 +14,22 @@
 </template>
 
 <script setup>
+import VideoListItem from './VideoListItem.vue';
+import {useVideoStore} from '@/stores/video'
+import { useRoute } from 'vue-router';
+import { ref, onMounted } from 'vue';
 
+const route = useRoute()
+const store = useVideoStore();
+
+const searchInfo = ref({
+    key: 'video.video_title',
+    word: route.query.title
+})
+
+onMounted(() => {
+    store.videoSearch(searchInfo);
+})
 
 </script>
 
