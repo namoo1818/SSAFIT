@@ -1,6 +1,5 @@
 <template>
   <div id="container" class="row text-center justify-content-center">
-
     <div class="col-5">
       <h2>회원 등급</h2>
       <div>{{ loginUser.userNickname }} 님은
@@ -34,8 +33,7 @@
         <tr><td>🥉</td><td>Bronze</td><td>0 P ~ 99 P</td></tr>
       </table>
       <div>
-        *경험치는 영상 시청 완료 표시, 영상 리뷰 작성,<br> 
-        캘린더 작성 시 각 5 P씩 획득 가능합니다.<br><br>
+        *경험치는 영상 리뷰 또는 캘린더 작성 시 각 5 P씩 획득 가능합니다.<br><br>
       </div>
     </div>
 
