@@ -115,8 +115,8 @@ hearts.innerHTML = ''
   .review-app {
     width: 500px;
     line-height: 1.5;
-    // background: #eaf9ff;
-    border-right: 1px solid #d3e2e8;
+    background: #eaf9ff;
+    
 
     padding: 2em;
   }
@@ -124,6 +124,7 @@ hearts.innerHTML = ''
     text-align: center;
     flex-grow: 1;
     padding: 3em;
+    // border-right: 1px solid #d3e2e8;
   }
 
   .review-table {
