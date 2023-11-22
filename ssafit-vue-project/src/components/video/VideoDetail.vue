@@ -1,7 +1,8 @@
 <template>
-  <div class="main-app">
-    <div class="video-app">
-      <h4>영상 상세보기</h4>
+  <div id="container" class="row justify-content-center">
+
+    <!-- 영상 정보 영역 -->
+    <div class="text-center col-7 m-2">
       <iframe
         width="560"
         height="315"
@@ -9,12 +10,13 @@
         title="YouTube video player"
         frameborder="0"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        allowfullscreen
-      ></iframe>
-      <div> 제목 : {{ store.video.title }}</div>
-      <div> 채널 : {{ store.video.channel }}</div>
-      <div> 조회수 : {{ store.video.viewcnt }}</div>
-      <div id="app">
+        allowfullscreen></iframe>
+        <h2>{{ store.video.title }}</h2>
+      <div>By {{ store.video.channel }}&nbsp;&nbsp;|&nbsp;&nbsp;조회수 {{ store.video.viewcnt }}</div>
+
+      <!-- 찜 버튼 -->
+      <!-- 찜 버튼도 로그인해야 보이게 하고 싶은데... -->
+      <div class="p-4">
         <button :class="['heart-btn', { liked }]" @click="heartit">
             <svg class="heart heart-icon" viewBox="0 0 32 29.6">
             <path
@@ -25,19 +27,11 @@
         </button>
       </div>
     </div>
-    <div class="review-app">
-      <!--글쓰기 버튼 위치 화면 오른쪽 하단으로 이동하고싶다!-->
-      <RouterLink :to="`/review/${route.params.id}`"><button class="btn btn-outline-info mx-2">글쓰기</button></RouterLink>
+
+    <!-- 해당 영상에 대한 리뷰 영역 -->
+    <div class="col-4 m-2">
       <div v-if="rStore.videoReview==''">등록된 리뷰가 없습니다.</div>
       <table v-else class="review-table">
-        <!-- <tr>
-          <th>번호</th>
-          <th>제목</th>
-          <th>쓰니</th>
-          <th>내용</th>
-          <th>조회수</th>
-          <th>등록</th>
-        </tr> -->
         <tr v-for="review in rStore.videoReview" :key="review.num">
           <!-- <td>{{ review.num }}</td> -->
           <td>{{ review.userNickname }}</td>
@@ -45,13 +39,19 @@
           <td><b>{{ review.title }}</b></td>
           <td>&nbsp;&nbsp;|&nbsp;&nbsp;</td>
           <td>{{ review.content }}</td>
-          <!-- <td>{{ review.viewcnt }}</td> -->
           <td>&nbsp;&nbsp;|&nbsp;&nbsp;</td>
           <td>{{ review.regdate }}</td>
           <!-- <button @click="deleteReview(review.num)">
             삭제
           </button> -->
         </tr>
+
+        <!--로그인해야 리뷰쓰기 버튼 보이게 하고 싶은데 어렵다 -->
+        <tr v-show="true"><td colspan="6"></td>
+          <td><RouterLink :to="`/review/${route.params.id}`">
+        <button class="btn btn-outline-info mx-2">리뷰쓰기</button>
+      </RouterLink>
+        </td></tr>
       </table>
     </div>
   </div>
@@ -61,7 +61,7 @@
 import { useRoute } from 'vue-router';
 import { useVideoStore } from '@/stores/video';
 import { useReviewStore } from '@/stores/review';
-import { ref, onMounted } from 'vue';
+import {ref, onMounted} from 'vue';
 
 const store = useVideoStore();
 const rStore = useReviewStore();
@@ -79,13 +79,14 @@ const heartit = (e) => {
     wish.value.videonum = route.params.id;
     console.log(wish);
     // 위시함수 추가해야함
-const hearts = document.createElement('div');
-hearts.innerHTML = ''
-    e.target.appendChild(hearts);
-    liked.value = !liked.value;
-    setTimeout(() => {
-        e.target.removeChild(hearts);
-    }, 3000);
+
+    const hearts = document.createElement('div');
+    hearts.innerHTML = ''
+        e.target.appendChild(hearts);
+        liked.value = !liked.value;
+        setTimeout(() => {
+            e.target.removeChild(hearts);
+        }, 3000);
     };
 
   const deleteReview = (id) => {
@@ -95,59 +96,10 @@ hearts.innerHTML = ''
   onMounted(() => {
     store.getVideo(route.params.id);
     rStore.getVideoReview(route.params.id);
-    document.body.addEventListener('mousedown', () => {
-    document.body.classList.add('using-mouse');
-    });
-    document.body.addEventListener('keydown', () => {
-        document.body.classList.remove('using-mouse');
-    });
   });
   </script>
   
   <style lang="scss" scoped>
-  .main-app {
-    display: flex;
-    min-height: 100%;
-    font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
-    font-size: 14px;
-  }
-
-  .review-app {
-    width: 500px;
-    line-height: 1.5;
-    background: #eaf9ff;
-    
-
-    padding: 2em;
-  }
-  .video-app {
-    text-align: center;
-    flex-grow: 1;
-    padding: 3em;
-    // border-right: 1px solid #d3e2e8;
-  }
-
-  .review-table {
-    font-size: 10px; // 외않되?
-  }
-  // 포커스 스타일링
-  :focus {
-    outline: #08f auto 2px;
-  }
-
-  body {
-    background-color: #f9c2c2;
-
-    &.using-mouse :focus {
-      outline: none;
-    }
-  }
-
-  #app {
-    padding: 50px;
-    text-align: center;
-  }
-
   .heart {
     width: 20px;
     fill: gray;

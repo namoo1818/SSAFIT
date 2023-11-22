@@ -1,7 +1,7 @@
 <template>
   <div>
     <HeaderVideoNav />
-      <RouterView />
+    <RouterView />
   </div>
 </template>
 

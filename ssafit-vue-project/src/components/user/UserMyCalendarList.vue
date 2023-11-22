@@ -1,6 +1,5 @@
 <template>
   <div id="container" class="text-center">
-    <h2>내 캘린더</h2>
     <div class="demo-app">
       <!-- <div class="demo-app-sidebar">
         <div class="demo-app-sidebar-section">
@@ -108,9 +107,9 @@ const handleWeekendsToggle = () => {
 
 </script>
 
-<style lang='css'>
+<style lang='css' scoped>
 
-h2 {
+/* h2 {
   margin: 0;
   font-size: 16px;
 }
@@ -123,7 +122,7 @@ ul {
 li {
   margin: 1.5em 0;
   padding: 0;
-}
+} */
 
 b { /* used for event dates/times */
   margin-right: 3px;

@@ -12,7 +12,6 @@ import Weather from '@/components/common/Weather.vue'
 import KakaoMap from '@/components/common/KakaoMap.vue'
 
 import UserMyPage from '@/components/user/UserMyPage.vue'
-import UserMyExpList from '@/components/user/UserMyExpList.vue'
 import UserMyCalendarList from '@/components/user/UserMyCalendarList.vue'
 import UserMyBookmarkList from '@/components/user/UserMyBookmarkList.vue'
 import UserMyFollow from '@/components/user/UserMyFollow.vue'
@@ -79,11 +78,6 @@ const router = createRouter({
           path: ":userNum",
           name: 'mypage',
           component: UserMyPage
-        },
-        {
-          path: 'exp',
-          name: 'exp',
-          component: UserMyExpList
         },
         {
           path: 'calendar',
