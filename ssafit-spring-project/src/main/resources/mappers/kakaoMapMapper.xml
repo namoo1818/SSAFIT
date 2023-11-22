@@ -25,8 +25,8 @@
 	</select>
 	
 	<insert id="insertMap" parameterType="kakaoMap">
-		INSERT INTO map (map_id, map_latitud, map_longitud, map_title, map_content, user_num)
-		VALUES (#{mapId}, #{mapLatitud}, #{mapLongitud}, #{mapTitle}, #{mapContent}, #{userNum});
+		INSERT INTO map (map_latitud, map_longitud, map_title, map_content, user_num)
+		VALUES (#{mapLatitud}, #{mapLongitud}, #{mapTitle}, #{mapContent}, #{userNum});
 	</insert>
 	
 	<delete id="deleteMap" parameterType="int">

@@ -164,7 +164,8 @@ INSERT INTO quote (quote_content, quote_writer, quote_weather) VALUES
 
 -- 10. (map) 카카오 map api
 SELECT * FROM map;
-	-- 생략 (작성하게 되면 여기에 추가)
+INSERT INTO map (map_latitud, map_longitud, map_title, map_content, user_num)
+		VALUES (37.4928, 126.9197, "보라매공원", "여기서 운동하고싶다", 1);
 
 -- 11. 팔로우 (앞의 애가 뒤의 애를 팔로우하는 것)
 SELECT * FROM follow;

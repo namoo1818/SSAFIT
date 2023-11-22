@@ -1,60 +1,78 @@
 <template>
-  <div>
-    <div id="map"></div>
-    <button @click="initMap">내위치</button>
-    <button @click="displayMarker(myMarkerPosition)">즐겨찾기 마커 표시</button>
-    <button @click="displayMarker([])">즐겨찾기 마커 해제</button>
-    <button>즐겨찾기 메모</button>
+  <div id="container" class="row text-center justify-content-center">
+    <div class="col-5">
+      <span class="d-inline-flex mx-4">
+          <input class="form-control" type="text"  v-model="searchInfo.word" placeholder="장소 검색">
+          <span class="input-group-text" type="submit" @click=""><i class="bi bi-search"></i></span>
+      </span>
+      <button class="btn btn-info mx-2" @click="initMap">내위치</button>
+      <div id="map"></div>
+      
+      <!-- <button @click="displayMarker(myMarkerPosition)">즐겨찾기 마커 표시</button> -->
+      <!-- <button @click="displayMarker([])">즐겨찾기 마커 해제</button> -->
+    </div>
+    <div class="col-5">
+      <div v-if="store.mapList==''">장소를 저장해보세요.</div>
+      <table v-else>
+        <tr>
+          <!-- <th>장소</th>
+          <td>&nbsp;&nbsp;</td><th>제목</th>
+          <td>&nbsp;&nbsp;</td><th>메모</th> -->
+        </tr>
+        <tr v-for="map in store.mapList" :key="map.mapId">
+          <!-- <td>{{ map.mapId }}</td> -->
+          <!-- <td>{{ map.mapLatitud }}</td> -->
+          <!-- <td>{{ map.mapLongitud }}</td> -->
+          <td style="color:deepskyblue" @click="displayMarker(myMarkerPosition)">바로가기</td>
+          <td>&nbsp;&nbsp;</td><td>{{ map.mapTitle }}</td>
+          <td>&nbsp;&nbsp;</td><td>{{ map.mapContent }}</td>
+          <td>&nbsp;&nbsp;</td><button @click="deleteReview(review.num)">삭제</button>
+        </tr>
+      </table>
+      <div class="form-group">
+        <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="제목">
+        <textarea class="form-control" id="exampleFormControlTextarea1" placeholder="내용" rows="3"></textarea>
+        <button class="btn btn-outline-info mx-2">등록</button>
+      </div>
+    </div>
   </div>
-
-
-
-  <!-- <RouterLink :to="`/review/${route.params.id}`"><button class="btn btn-outline-info mx-2">글쓰기</button></RouterLink>
-  <div v-if="rStore.videoReview==''">장소를 저장해보세요.</div>
-  <table v-else>
-    <tr>
-      <th>번호</th>
-      <th>제목</th>
-      <th>쓰니</th>
-      <th>내용</th>
-      <th>조회수</th>
-      <th>등록</th>
-    </tr>
-    <tr v-for="map in store.mapList" :key="map.mapId">
-      <td>{{ map.mapId }}</td>
-      <td>{{ map.mapLatitud }}</td>
-      <td>{{ map.mapLongitud }}</td>
-      <td>{{ map.mapTitle }}</td>
-      <td>{{ map.mapContent }}</td>
-      <button class="btn btn-outline-info mx-2" @click="deleteReview(review.num)">
-        삭제
-      </button>
-    </tr>
-  </table> -->
-
 </template>
 
 <script setup>
 import { onMounted, ref, toRaw } from 'vue';
 import {useMapStore} from '@/stores/map'
 
-const store = useMapStore()
+const store = useMapStore();
+
+const place = ref('')
+const searchInfo = ref({
+    key: '',
+    word: ''
+})
+const currentUserNum = JSON.parse(localStorage.getItem('loginUser')).userNum;
+const createInfo = ref({
+  mapLatitud: null,
+  mapLongitud: null,
+  mapTitle: '',
+  mapContent: '',
+  userNum: currentUserNum
+})
 
 let map = null;
 const initMap = function () {
-  let myCenter = new kakao.maps.LatLng(33.450701, 126.570667); //카카오본사
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition((position) => {
-      const lat = position.coords.latitude;
-      const lon = position.coords.longitude;
-      myCenter = new kakao.maps.LatLng(lat, lon);
-      new kakao.maps.Marker({
-        map,
-        position: myCenter,
-      });
-      map.setCenter(myCenter);
-    });
-  }
+  let myCenter = new kakao.maps.LatLng(37.503407, 127.045717); //멀캠
+  // if (navigator.geolocation) {
+  //   navigator.geolocation.getCurrentPosition((position) => {
+  //     const lat = position.coords.latitude;
+  //     const lon = position.coords.longitude;
+  //     myCenter = new kakao.maps.LatLng(lat, lon);
+  //     new kakao.maps.Marker({
+  //       map,
+  //       position: myCenter,
+  //     });
+  //     map.setCenter(myCenter);
+  //   });
+  // }
   const container = document.getElementById('map');
   const options = {
     center: myCenter,
@@ -73,7 +91,8 @@ const initMap = function () {
 };
 
 onMounted(() => {
-  store.getMapList();
+  const currentUserNum = JSON.parse(localStorage.getItem('loginUser')).userNum;
+  store.getMapList(currentUserNum);
 
   if (window.kakao && window.kakao.maps) {
     initMap();
@@ -128,7 +147,29 @@ const displayMarker = function (markerPositions) {
 
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+.main-app {
+  display: flex;
+  min-height: 100%;
+  font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
+  font-size: 14px;
+}
+
+.map-app {
+  width: 500px;
+  line-height: 1.5;
+  // background: #eaf9ff;
+  // border-right: 1px solid #d3e2e8;
+
+  padding: 2em;
+}
+.memo-app {
+  text-align: center;
+  flex-grow: 1;
+  padding: 3em;
+  
+}
+
 #map {
   width: 500px;
   height: 400px;

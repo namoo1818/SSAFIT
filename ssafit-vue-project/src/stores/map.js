@@ -17,6 +17,7 @@ export const useMapStore = defineStore('map', ()=>{
             }})
         .then((response)=>{
             mapList.value = response.data
+            console.log(mapList)
         })
     }
 
