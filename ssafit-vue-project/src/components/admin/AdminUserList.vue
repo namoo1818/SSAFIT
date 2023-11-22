@@ -64,12 +64,16 @@ const searchInfo = ref({
 const search = function() {
     store.searchUser(searchInfo.value)
 }
+
 //DB에서 다른 테이블이 user_num을 외래키로 사용하고 있어서 삭제 안 됨 
-//mapper에 DELETE sql구문 쓸 때 CASCADE 넣어줘야 할 듯 
+//작성한 리뷰나 팔로워 등이 있으면 안 되는 듯 (없으면 삭제 잘 됨)
+//해결하려면 백에서 mapper에 ON DELETE CASCADE나 ON DELETE SET NULL 등 해줘야 함 
+//아니면 외래키 제약 자체를 없애도 될거같긴 한데... 일단은 걍 둠... 
 const deleteUser = function (num) {
-    axios.delete(`http://localhost:8080/apiUser/user/${num}`)
+    axios.delete(`http://localhost:8080/user/${num}`)
         .then(() => {
-            router.push({ name: '/' })
+            alert("해당 회원의 강제 탈퇴 처리가 완료 되었습니다.");
+            router.push("/admin/userlist")
         })
 }
 onMounted(() => {

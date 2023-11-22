@@ -98,6 +98,24 @@ export const useUserStore = defineStore('user',()=>{
         })
     }
 
+    //내가 팔로우한 유저 1명 삭제 
+    const unFollow = function(num) {
+        console.log(num)
+        axios.delete(REST_FOLLOW_API, {params: {num:num}})
+        .then(() => {
+            alert("해당 유저를 언팔로우했습니다. 결과를 확인하려면 새로고침해주세요.");
+        })
+    }
+
+    //나를 팔로우하는 유저 1명 삭제 
+    const deleteFollower = function(num) {
+        console.log(num)
+        axios.delete(REST_FOLLOW_API, {params: {num:num}})
+        .then(() => {
+            alert("해당 팔로워의 팔로우를 해제하였습니다. 결과를 확인하려면 새로고침해주세요.");
+        })
+    }
+
     const myReviewList = ref(null)
     //내 리뷰 리스트 조회
     const getMyReviewList = function(usernum) {
@@ -127,7 +145,7 @@ export const useUserStore = defineStore('user',()=>{
       }
 
       return {userList, getUserList, user, getUser, createUser, updateUser, deleteUser,
-        getWishList, getFollowerList, getFollowingList,
+        getWishList, getFollowerList, getFollowingList, unFollow, deleteFollower,
         wishList, followerList, followingList, getMyReviewList, myReviewList, updateWish, searchUser}
     
 

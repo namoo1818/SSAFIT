@@ -8,8 +8,7 @@
                 <input type="text" id="title" v-model="review.title">
             </div>
             <div>
-                <label for="writer">쓰니 : </label>
-                <input type="number" id="writer" v-model="review.writer">
+                <input type="hidden" id="writer" v-model="review.writer">
             </div>
             <div>
                 <label for="content">내용 : </label>

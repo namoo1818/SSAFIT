@@ -24,13 +24,15 @@
 
 <script setup>
   import { ref } from 'vue'
-  import { RouterLink, useRouter } from 'vue-router'
-  import axios from 'axios'
+//   import { RouterLink, useRouter } from 'vue-router'
+//   import axios from 'axios'
 
-  const router = useRouter()
+//   const router = useRouter()
+//   const REST_USER_API = `http://localhost:8080/user`
+
   const id = ref('')
   const pw = ref('')
-  const REST_USER_API = `http://localhost:8080/user`
+
 
   const emit = defineEmits(["loginUser"]);
   const login = () => {
