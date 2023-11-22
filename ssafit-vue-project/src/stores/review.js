@@ -1,14 +1,15 @@
-import {ref,computed} from 'vue'
+import {ref} from 'vue'
 import {defineStore} from 'pinia'
 import axios from 'axios'
 import router from '@/router'
 
 const REST_REVIEW_API = `http://localhost:8080/review`
-const REST_USER_API = `http://localhost:8080/user`
 
 export const useReviewStore = defineStore('review', ()=>{
     const reviewList = ref([])
-
+    const review = ref({})
+    const videoReview = ref([])
+    
     //리뷰 전체
     const getReviewList = function(){
         axios.get(REST_REVIEW_API)
@@ -19,7 +20,7 @@ export const useReviewStore = defineStore('review', ()=>{
     }
 
     //리뷰 하나
-    const review = ref({})
+    
     const getReview = function(id){
         axios.get(`${REST_REVIEW_API}/${id}`)
         .then((response)=>
@@ -71,11 +72,12 @@ export const useReviewStore = defineStore('review', ()=>{
     }
 
     //영상 리뷰 목록
-    const videoReview = ref([])
     const getVideoReview = function(id){
         axios.get(`${REST_REVIEW_API}/video/${id}`, {
             key: "video.video_num",
-            word: id
+            word: id,
+            orderBy: "review.review_regdate",
+            orderByDir: "desc"
         })
         .then((res)=>{
             videoReview.value = res.data
