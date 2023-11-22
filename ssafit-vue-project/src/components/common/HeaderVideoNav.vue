@@ -21,7 +21,6 @@ const searchInfo = ref({
 const keywordList = ref(['유산소', '하체', '복근', '요가', '명상'])
 const selectKeyword = function(keyword){
     searchInfo.value.word = keyword;
-    console.log(keyword)
     store.videoSearch(searchInfo.value)
     router.push({
         path: "/search",

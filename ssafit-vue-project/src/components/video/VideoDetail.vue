@@ -1,5 +1,6 @@
 <template>
-    <div style="text-align: center;">
+  <div class="main-app">
+    <div class="video-app">
       <h4>영상 상세보기</h4>
       <iframe
         width="560"
@@ -24,29 +25,36 @@
         </button>
       </div>
     </div>
-    <RouterLink :to="`/review/${route.params.id}`"><button class="btn btn-outline-info mx-2">글쓰기</button></RouterLink>
-    <div v-if="rStore.videoReview==''">등록된 리뷰가 없습니다.</div>
-    <table v-else>
-      <tr>
-        <th>번호</th>
-        <th>제목</th>
-        <th>쓰니</th>
-        <th>내용</th>
-        <th>조회수</th>
-        <th>등록</th>
-      </tr>
-      <tr v-for="review in rStore.videoReview" :key="review.num">
-        <td>{{ review.num }}</td>
-        <td>{{ review.title }}</td>
-        <td>{{ review.userNickname }}</td>
-        <td>{{ review.content }}</td>
-        <td>{{ review.viewcnt }}</td>
-        <td>{{ review.regdate }}</td>
-        <button class="btn btn-outline-info mx-2" @click="deleteReview(review.num)">
-          삭제
-        </button>
-      </tr>
-    </table>
+    <div class="review-app">
+      <!--글쓰기 버튼 위치 화면 오른쪽 하단으로 이동하고싶다!-->
+      <RouterLink :to="`/review/${route.params.id}`"><button class="btn btn-outline-info mx-2">글쓰기</button></RouterLink>
+      <div v-if="rStore.videoReview==''">등록된 리뷰가 없습니다.</div>
+      <table v-else class="review-table">
+        <!-- <tr>
+          <th>번호</th>
+          <th>제목</th>
+          <th>쓰니</th>
+          <th>내용</th>
+          <th>조회수</th>
+          <th>등록</th>
+        </tr> -->
+        <tr v-for="review in rStore.videoReview" :key="review.num">
+          <!-- <td>{{ review.num }}</td> -->
+          <td>{{ review.userNickname }}</td>
+          <td>&nbsp;&nbsp;|&nbsp;&nbsp;</td>
+          <td><b>{{ review.title }}</b></td>
+          <td>&nbsp;&nbsp;|&nbsp;&nbsp;</td>
+          <td>{{ review.content }}</td>
+          <!-- <td>{{ review.viewcnt }}</td> -->
+          <td>&nbsp;&nbsp;|&nbsp;&nbsp;</td>
+          <td>{{ review.regdate }}</td>
+          <!-- <button @click="deleteReview(review.num)">
+            삭제
+          </button> -->
+        </tr>
+      </table>
+    </div>
+  </div>
   </template>
   
   <script setup>
@@ -97,6 +105,30 @@ hearts.innerHTML = ''
   </script>
   
   <style lang="scss" scoped>
+  .main-app {
+    display: flex;
+    min-height: 100%;
+    font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
+    font-size: 14px;
+  }
+
+  .review-app {
+    width: 500px;
+    line-height: 1.5;
+    // background: #eaf9ff;
+    border-right: 1px solid #d3e2e8;
+
+    padding: 2em;
+  }
+  .video-app {
+    text-align: center;
+    flex-grow: 1;
+    padding: 3em;
+  }
+
+  .review-table {
+    font-size: 10px; // 외않되?
+  }
   // 포커스 스타일링
   :focus {
     outline: #08f auto 2px;
