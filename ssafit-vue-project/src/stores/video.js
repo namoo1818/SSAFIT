@@ -9,9 +9,14 @@ export const useVideoStore = defineStore('video', ()=>{
     const videoList = ref([])
     const selectedVideo = ref(null)
 
-    // 영상 전체 조회(등록일 오름차순)
+    // 영상 전체 조회(조회순 내림차순)
     const getVideoList = function(){
-        axios.get(REST_VIDEO_API)
+        axios.get(REST_VIDEO_API,{
+            params: {
+                orderBy: 'video.video_viewcnt',
+                orderByDir: 'desc'
+              }
+        })
         .then((response)=>{
             videoList.value = response.data
         })
