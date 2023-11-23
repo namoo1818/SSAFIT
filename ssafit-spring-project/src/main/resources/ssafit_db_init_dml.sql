@@ -32,9 +32,12 @@ INSERT INTO user (user_id, user_password, user_name, user_nickname, user_email) 
 	('voldemort','8888','톰리들','죽먹자','dontwannadie@azkaban.com'),
 	('bella','9999','벨라트릭스','볼드짱팬','bella@azkaban.com'),
 	('ssafy','0000','김싸피','관리자','ssafy@ssafy.com'),
-	('dlalswl','1004','이민지','MJ','dlalswl@ssafy.com'),
-	('cho','1234','조아영','ay','whdkdud@ssafy.com');
+	('dlalswl','1004','이민지','MJ','dlalswl@ssafy.com');
+	
 
+INSERT INTO user (user_id, user_password, user_name, user_nickname, user_email, user_exp) VALUES 
+	('cho','1234','조아영','ay','whdkdud@ssafy.com', 90);
+    
 -- 2. (video) 운동 영상 
 SELECT * FROM video;
 INSERT INTO video (video_keyword, video_title, video_url, video_channel, video_intensity) VALUES 
@@ -134,9 +137,9 @@ INSERT INTO calendar (calendar_title, calendar_content, calendar_start, calendar
 	("유산소", "", "2023-11-01", "2023-11-02", 1),
     ("상체", "", "2023-11-03", "2023-11-04", 1),
     ("하체", "", "2023-11-15", "2023-11-16", 1),
-    ("유산소", "", "2023-11-05", "2023-11-06", 11),
-    ("러닝", "", "2023-11-12", "2023-11-13", 11),
-    ("요가", "", "2023-11-19", "2023-11-20", 11),
+    ("유산소", "", "2023-11-05", "2023-11-06", 12),
+    ("러닝", "", "2023-11-12", "2023-11-13", 12),
+    ("요가", "", "2023-11-19", "2023-11-20", 12),
     ("르세라핌 이프케 연습", "", "2023-11-15", "2023-11-16", 12),
     ("뉴진스 디토 연습", "", "2023-11-23", "2023-11-24", 12);
 
@@ -161,7 +164,8 @@ SELECT * FROM wish;
 SELECT video_num, user_nickname FROM wish LEFT JOIN user ON wish.user_num = user.user_num;
 INSERT INTO wish (video_num, user_num) VALUES
 	(2,1),(3,1),(4,1),
-	(1,10),(3,10),(5,10),(7,10),(9,10);
+	(1,10),(3,10),(5,10),(7,10),(9,10),
+    (11,12),(13,12),(38,12);
 
 -- 8. (playlist) 운동용 플레이리스트 
 SELECT * FROM playlist;
@@ -204,8 +208,9 @@ INSERT INTO quote (quote_content, quote_writer, quote_weather) VALUES
 
 -- 10. (map) 카카오 map api
 SELECT * FROM map;
-INSERT INTO map (map_latitud, map_longitud, map_title, map_content, user_num)
-		VALUES (37.4928, 126.9197, "보라매공원", "여기서 운동하고싶다", 1);
+INSERT INTO map (map_latitud, map_longitud, map_title, map_content, user_num) VALUES
+	(37.4928, 126.9197, "보라매공원", "여기서 운동하고싶다", 12),
+    (33.4256590636221, 126.395685567869, "애월연어", "언젠가 가고말테야", 12);
 
 -- 11. 팔로우 (앞의 애가 뒤의 애를 팔로우하는 것)
 SELECT * FROM follow;
