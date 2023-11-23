@@ -59,7 +59,7 @@ export const useReviewStore = defineStore('review', ()=>{
     const deleteReview = function(id){
         axios.delete(`${REST_REVIEW_API}/${id}`)
         .then(()=>{
-            router.push({name:'videodetail'})
+            router.go(0);
         })
     }
 

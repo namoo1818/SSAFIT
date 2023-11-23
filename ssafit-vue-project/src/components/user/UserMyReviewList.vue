@@ -2,6 +2,8 @@
     <div id="container" class="row justify-content-center">
         <h2>작성 리뷰</h2>
         <div class="col-10">
+            <div class="row justify-content-center" v-if="store.myReviewList==''">작성한 리뷰가 없습니다.</div>
+            <div v-else>
             <table class="table table-hover text-center">
                 <thead>
                     <tr>
@@ -14,24 +16,31 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="review in store.reviewList">
+                    <tr v-for="review in store.myReviewList">
                         <td>{{ review.num }}</td>
                         <td>{{ review.title }}</td>
                         <td>{{ review.content }}</td>
                         <td>{{ review.regdate }}</td>
-                        <td><a href="#">바로가기</a></td>
-                        <td><button>삭제</button></td>
+                        <td><RouterLink :to="`/video/${review.videoNum}`">바로가기</RouterLink></td>
+                        <td><button @click="deleteReview(review.num)">삭제</button></td>
                     </tr>
                 </tbody>
             </table>
+            </div>
         </div>
     </div>
 </template>
 
 <script setup>
 import { ref, onMounted } from "vue";
-import { useReviewStore } from '@/stores/review'
-const store = useReviewStore()
+import { useUserStore } from '@/stores/user'
+import { useReviewStore } from '@/stores/review' 
+const store = useUserStore()
+const rStore = useReviewStore()
+
+const deleteReview = function(id){
+    rStore.deleteReview(id);
+}
 
 // const deleteFollower = function (num) {
 //     store.deleteFollower(num)
@@ -39,10 +48,7 @@ const store = useReviewStore()
 
 onMounted(()=>{
     const currentUserNum = JSON.parse(localStorage.getItem('loginUser')).userNum
-    store.searchReviewList({
-    key : 'user_num',
-    word : currentUserNum
-});
+    store.getMyReviewList(currentUserNum);
 })
 
 </script>

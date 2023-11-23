@@ -64,7 +64,6 @@ export const useUserStore = defineStore('user',()=>{
     const followerList = ref(null)
     const followingList = ref(null)
 
-
     //사용자 찜 목록
     const getWishList = function(usernum) {
         axios.get(REST_WISH_API, {
@@ -104,10 +103,13 @@ export const useUserStore = defineStore('user',()=>{
         axios({
             url: REST_FOLLOW_API,
             method: 'POST',
+            headers:{
+                "Content-Type": "application/json"
+            },
             data: f
         })
             .then(()=>{
-                router.push({name:'/'})
+                alert("해당 유저를 팔로우했습니다. 결과를 확인하려면 새로고침해주세요.");
             })
             .catch((err)=>{
                 console.log(err)
@@ -134,10 +136,9 @@ export const useUserStore = defineStore('user',()=>{
     const myReviewList = ref(null)
     //내 리뷰 리스트 조회
     const getMyReviewList = function(usernum) {
-        axios.get(`http://localhost:8080/api/review`, {
+        axios.get(`${REST_USER_API}/${usernum}/review`, {
             params : {
-                key: "review_writer",
-                word: usernum
+                userNum : usernum
         }})
         .then((response)=>{
         myReviewList.value = response.data
