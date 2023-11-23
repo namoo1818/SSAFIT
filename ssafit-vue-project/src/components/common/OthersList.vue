@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h2>유저 관리 페이지</h2>
+        <h2>유저 탐색</h2>
         <section>
             <table class="table table-hover text-center">
                 <thead>
@@ -8,7 +8,6 @@
                         <th>번호</th>
                         <th>아이디</th>
                         <th>닉네임</th>
-                        <th>이름</th>
                         <th>이메일</th>
                         <th>가입일시</th>
                         <th>경험치</th>
@@ -21,12 +20,15 @@
                         <td>{{ user.userNum }}</td>
                         <td>{{ user.userId }}</td>
                         <td>{{ user.userNickname }}</td>
-                        <td>{{ user.userName }}</td>
                         <td>{{ user.userEmail }}</td>
                         <td>{{ user.userRegdate }}</td>
                         <td>{{ user.userExp }}</td>
-                        <td>{{ user.userGrade }}</td>
-                        <td><RouterLink :to="`/admin/user/${user.userNum}`"><button>상세조회</button></RouterLink>&nbsp;
+                        <td>
+                            {{ user.userGrade == 'Platinum' ? '🏆' :
+                                (user.userGrade == 'Gold' ? '🥇' :
+                                (user.userGrade == 'Silver' ? '🥈' : '🥉')) }} 
+                            {{ user.userGrade }}</td>
+                        <td><RouterLink :to="`/others/${user.userNum}`"><button>상세조회</button></RouterLink>&nbsp;
                             <button @click="deleteUser(user.userNum)">삭제</button></td>
                     </tr>
                 </tbody>

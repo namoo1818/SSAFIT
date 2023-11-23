@@ -1,4 +1,59 @@
 <template>
+  <div class="d-flex align-items-center py-4">
+<main class="form-signin w-100 m-auto">
+    <h2>회원가입</h2>
+    <div class="form-floating">
+      <input type="text" class="form-control" v-model="id" id="id" placeholder="아이디">
+      <label for="id">아이디</label>
+    </div>
+    <div v-show="valid.id" :class="{'input-error':idHasError}">
+    아이디에는 4~16자의 영문 소문자, 숫자와 특수기호(_),(-)만 사용 가능합니다.
+  </div>
+    <div class="form-floating">
+      <input type="password" class="form-control" v-model="pw1" id="pw1" placeholder="비밀번호">
+      <label for="pw1">비밀번호</label>
+    </div>
+    <div v-show="valid.pw" :class="{'input-error':pwHasError}">
+      비밀번호는 영문과 숫자를 모두 포함하여 4~16자로 작성해야 합니다.
+    </div>
+    <div class="form-floating">
+      <input type="password" class="form-control" v-model="pw2" id="pw2" placeholder="비밀번호 확인">
+      <label for="pw2">비밀번호 확인</label>
+    </div>
+    <div v-show="valid.pw2" :class="{'input-error':pw2HasError}">
+      비밀번호 확인이 일치하지 않습니다.
+    </div>
+    <div class="form-floating">
+      <input type="text" class="form-control" v-model="name" id="name" placeholder="이름">
+      <label for="name">이름</label>
+    </div>
+    <div v-show="valid.name" :class="{'input-error':nameHasError}">
+      이름은 2~16자의 한글로만 작성 가능합니다.
+    </div>
+    <div class="form-floating">
+      <input type="text" class="form-control" v-model="nickname" id="nickname" placeholder="닉네임">
+      <label for="nickname">닉네임</label>
+    </div>
+    <div v-show="valid.nickname" :class="{'input-error':nicknameHasError}">
+      닉네임은 2~16자의 한글, 영문, 숫자와 특수기호(_),(-)로만 작성 가능합니다.
+    </div>
+    <div class="form-floating">
+      <input type="text" class="form-control" v-model="email" id="email" placeholder="이메일">
+      <label for="email">이메일</label>
+    </div>
+    <div v-show="valid.email" :class="{'input-error':emailHasError}">
+      이메일이 형식에 맞지 않습니다.
+    </div>
+    <div class="d-flex btn-group" role="group">
+        <button type="button" class="btn btn-outline-primary" @click="signup">가입</button>
+        <button type="button" class="btn btn-outline-secondary">취소</button>
+    </div>
+</main>
+</div>
+</template>
+
+
+<!-- <template>
     <div id="container" class="row justify-content-center">
         <h2>회원가입</h2>
         <div class="col-4">
@@ -60,7 +115,7 @@
     </form>
     </div>
     </div>
-</template>
+</template> -->
 
 <script setup>
 import { useRouter, RouterLink } from 'vue-router'
@@ -200,14 +255,23 @@ const signup = () => {
 
 <style scoped>
 
-table tr td input {
-    border:none;
-}
-
 .input-error {
   font-size:0.8rem;
   color:mediumorchid;
   border-top: 1px solid mediumorchid;
+  margin-bottom:10px;
 }
+
+.form-signin {
+  max-width: 380px;
+  padding: 1rem;
+}
+
+.form-signin .form-floating:focus-within {
+  z-index: 2;
+}
+
+
+
 
 </style>

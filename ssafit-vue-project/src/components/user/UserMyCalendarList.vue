@@ -107,22 +107,7 @@ const handleWeekendsToggle = () => {
 
 </script>
 
-<style lang='css' scoped>
-
-/* h2 {
-  margin: 0;
-  font-size: 16px;
-}
-
-ul {
-  margin: 0;
-  padding: 0 0 0 1.5em;
-}
-
-li {
-  margin: 1.5em 0;
-  padding: 0;
-} */
+<style scoped>
 
 b { /* used for event dates/times */
   margin-right: 3px;
@@ -131,7 +116,6 @@ b { /* used for event dates/times */
 .demo-app {
   display: flex;
   min-height: 100%;
-  font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
   font-size: 14px;
 }
 

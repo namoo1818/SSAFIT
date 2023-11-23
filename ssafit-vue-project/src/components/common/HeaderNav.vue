@@ -9,20 +9,26 @@
                 <span>
                 <RouterLink to="/"><img alt="SSAFIT logo" class="p-5" src="@/assets/logo.png" /></RouterLink>
                 </span>
-                <!-- <span style="font-size:14px;">{{loginUser.userNickname}} 님, 환영합니다</span> -->
-                <RouterLink to="/weather"><i class="bi bi-cloud-sun"></i></RouterLink>
+                
+                <Weather />
                 <RouterLink to="/map"><i class="bi bi-map"></i></RouterLink>
                 <div class="dropdown d-inline-flex">
                     <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-person"></i></button>
                     <ul class="dropdown-menu">
+                        <li><RouterLink class="dropdown-item" to="test">
+                            <i class="bi bi-gear"></i>테스트</RouterLink>
+                        </li>
                         <li v-show="!getUser"><RouterLink class="dropdown-item" to="/login">
                             <i class="bi bi-box-arrow-in-right"></i>로그인</RouterLink>
                         </li>
                         <li v-show="!getUser"><RouterLink class="dropdown-item" to="/regist">
                             <i class="bi bi-person-plus"></i>회원가입</RouterLink>
                         </li>
-                        <li v-show="getUser"><RouterLink class="dropdown-item" to="/user/mypage">
+                        <li v-show="getUser"><RouterLink class="dropdown-item" to="/user">
                             <i class="bi bi-person-circle"></i>마이페이지</RouterLink>
+                        </li>
+                        <li v-show="getUser"><RouterLink class="dropdown-item" to="/others">
+                            <i class="bi bi-people-fill"></i>유저탐색</RouterLink>
                         </li>
                         <li v-show="getUser" @click="logout"><a class="dropdown-item" href="#">
                             <i class="bi bi-box-arrow-in-right"></i>로그아웃</a>
@@ -38,7 +44,7 @@
 </template>
 
 <script setup>
-
+import Weather from '@/components/common/Weather.vue'
 import {ref, computed} from 'vue';
 import {useVideoStore} from '@/stores/video'
 import {useRouter} from "vue-router";

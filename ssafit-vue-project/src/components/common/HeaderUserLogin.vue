@@ -1,25 +1,21 @@
 <template>
-    <div id="container" class="row justify-content-center">
-            <h2>로그인</h2>
-            <div class="col-4">
-        <form>
-        <table>
-            <tr>
-                <td>아이디</td>
-                <td><input type="text" class="form-control" placeholder="아이디" v-model.trim="id" id="id"></td>
-            </tr>
-            <tr>
-                <td>비밀번호</td>
-                <td><input type="password" class="form-control" placeholder="비밀번호" v-model.trim="pw" id="pw"></td>
-            </tr>
-        </table>
+  <div class="d-flex align-items-center py-4">
+<main class="form-signin w-100 m-auto">
+    <h2>로그인</h2>
+    <div class="form-floating">
+      <input type="text" class="form-control" v-model.trim="id" id="id" placeholder="아이디">
+      <label for="id">아이디</label>
+    </div>
+    <div class="form-floating">
+      <input type="password" class="form-control" v-model.trim="pw" id="pw" placeholder="비밀번호">
+      <label for="pw">비밀번호</label>
+    </div>
         <div class="d-flex btn-group" role="group">
             <button type="button" class="btn btn-outline-primary" @click="login">로그인</button>
             <button type="button" class="btn btn-outline-secondary">뒤로가기</button>
         </div>
-    </form>
+</main>
 </div>
-    </div>
 </template>
 
 <script setup>
@@ -76,8 +72,32 @@
 
 <style scoped>
 
-table tr td input {
-    border:none;
+
+html,
+body {
+  height: 100%;
 }
+
+.form-signin {
+  max-width: 330px;
+  padding: 1rem;
+}
+
+.form-signin .form-floating:focus-within {
+  z-index: 2;
+}
+
+.form-signin input[type="text"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.form-signin input[type="password"] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
 
 </style>

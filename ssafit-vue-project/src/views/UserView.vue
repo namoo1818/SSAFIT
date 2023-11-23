@@ -9,11 +9,8 @@
 import HeaderUserNav from '../components/common/HeaderUserNav.vue';
 
 import { ref, onMounted } from 'vue'
-// import { useUserStore } from '@/stores/user';
 
-// const store = useUserStore()
-
-const loginUser = ref({})
+const loginUser = ref(null)
   const loginOffDisplay = ref('block')
   const loginOnDisplay = ref('none')
   
@@ -26,7 +23,7 @@ const loginUser = ref({})
     }
   }
   
-onMounted(fetchLoginUser)
+onMounted( fetchLoginUser )
 
 </script>
 

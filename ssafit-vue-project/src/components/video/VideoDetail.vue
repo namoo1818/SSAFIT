@@ -1,7 +1,7 @@
 <template>
   <div id="container" class="row justify-content-center">
 
-    <!-- 영상 정보 영역 -->
+    <!-- 영상 영역 -->
     <div class="text-center col-7 m-2">
       <iframe
         width="560"
@@ -11,11 +11,19 @@
         frameborder="0"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
         allowfullscreen></iframe>
-        <h2>{{ store.video.title }}</h2>
-      <div>By {{ store.video.channel }}&nbsp;&nbsp;|&nbsp;&nbsp;조회수 {{ store.video.viewcnt }}</div>
 
-      <!-- 찜 버튼 -->
-      <!-- 찜 버튼도 로그인해야 보이게 하고 싶은데... -->
+        <!-- 영상 정보 영역 -->
+        <h2>{{ store.video.title }}</h2>
+      <div>By {{ store.video.channel }}
+        &nbsp;&nbsp;|&nbsp;&nbsp;
+        👀 {{ store.video.viewcnt }}
+        &nbsp;&nbsp;|&nbsp;&nbsp;
+        <!-- <RouterLink :to="`/review/${route.params.id}`">리뷰쓰기</RouterLink> -->
+        <VideoDetailReviewCreate />
+      </div>
+      <!-- 영상 정보 영역 끝 -->
+
+      <!-- 찜 버튼 (로그인해야 보일 수 있게 하고 싶은데 어려우려나) -->
       <div class="p-4">
         <button :class="['heart-btn', { liked }]" @click="heartit">
             <svg class="heart heart-icon" viewBox="0 0 32 29.6">
@@ -26,34 +34,15 @@
             </svg>
         </button>
       </div>
-    </div>
+      <!-- 찜 버튼 영역 끝 -->
 
-    <!-- 해당 영상에 대한 리뷰 영역 -->
-    <div class="col-4 m-2">
-      <div v-if="rStore.videoReview==''">등록된 리뷰가 없습니다.</div>
-      <table v-else class="review-table">
-        <tr v-for="review in rStore.videoReview" :key="review.num">
-          <!-- <td>{{ review.num }}</td> -->
-          <td>{{ review.userNickname }}</td>
-          <td>&nbsp;&nbsp;|&nbsp;&nbsp;</td>
-          <td><b>{{ review.title }}</b></td>
-          <td>&nbsp;&nbsp;|&nbsp;&nbsp;</td>
-          <td>{{ review.content }}</td>
-          <td>&nbsp;&nbsp;|&nbsp;&nbsp;</td>
-          <td>{{ review.regdate }}</td>
-          <!-- <button @click="deleteReview(review.num)">
-            삭제
-          </button> -->
-        </tr>
-
-        <!--로그인해야 리뷰쓰기 버튼 보이게 하고 싶은데 어렵다 -->
-        <tr v-show="true"><td colspan="6"></td>
-          <td><RouterLink :to="`/review/${route.params.id}`">
-        <button class="btn btn-outline-info mx-2">리뷰쓰기</button>
-      </RouterLink>
-        </td></tr>
-      </table>
     </div>
+    <!-- 영상 영역 끝 -->
+
+        <!-- 해당 영상에 대한 리뷰 영역 -->
+    <div class="col-4 m-2 text-center" v-if="rStore.videoReview==''">등록된 리뷰가 없습니다.</div>
+    <VideoDetailReviewList v-else />
+    <!-- 해당 영상에 대한 리뷰 영역 끝 -->
   </div>
   </template>
   
@@ -61,11 +50,14 @@
 import { useRoute } from 'vue-router';
 import { useVideoStore } from '@/stores/video';
 import { useReviewStore } from '@/stores/review';
-import {ref, onMounted} from 'vue';
+import {ref, computed,onMounted} from 'vue';
+import VideoDetailReviewList from './VideoDetailReviewList.vue';
+import VideoDetailReviewCreate from './VideoDetailReviewCreate.vue';
 
 const store = useVideoStore();
 const rStore = useReviewStore();
 const route = useRoute();
+
 
 const liked = ref(false);
 

@@ -3,6 +3,7 @@ import {defineStore} from 'pinia'
 import axios from 'axios'
 import router from '@/router'
 
+const REST_VIDEO_API = `http://localhost:8080/video`
 const REST_REVIEW_API = `http://localhost:8080/review`
 
 export const useReviewStore = defineStore('review', ()=>{
@@ -38,7 +39,8 @@ export const useReviewStore = defineStore('review', ()=>{
             data:review
         })
         .then(()=>{
-            router.push({name: 'reviewlist'})
+            router.go(0); //현재 라우터 페이지 새로고침 
+            // router.push(`/video/${review.videoNum}`)
         })
         .catch((err)=>{
             console.log(err)

@@ -1,29 +1,38 @@
 <template>
-    <div>
-        <h4>리뷰 작성</h4>
-        <div>
-            <label for="title">제목 : </label>
-            <input type="text" id="title" v-model="review.title">
-        </div>
-        <div>
-            <label for="content">내용 : </label>
-            <textarea id="content" cols="30" rows="10" v-model="review.content"></textarea>
-        </div>
-        <div>
-            <button @click="createReview">등록</button>
-        </div>
+
+  <span data-bs-toggle="collapse" data-bs-target="#modalSheet" aria-expanded="false" aria-controls="modalSheet">
+    📝 리뷰쓰기
+  </span>
+<div class="collapse" id="modalSheet">
+<div class="modal modal-sheet position-static d-block p-4 py-md-5" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content rounded-4 shadow">
+      <div class="modal-header border-bottom-0">
+            <input type="text" id="title" v-model.trim="review.title"
+            class="form-control rounded-3 modal-title" placeholder="리뷰 제목">
+      </div>
+      <div class="modal-body py-0">
+        <textarea id="content" cols="30" rows="4" v-model.trim="review.content"
+        class="form-control rounded-3" placeholder="리뷰 내용"></textarea>    
     </div>
+      <div class="modal-footer flex-column align-items-stretch w-100 gap-2 pb-3 border-top-0">
+        <button type="button" class="btn btn-secondary" @click="createReview">등록</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+</div>
 </template>
 
 <script setup>
-//전체복붙
-import {ref, onMounted} from 'vue';
+import { ref } from 'vue';
 import { useReviewStore } from '@/stores/review';
 import { useRoute } from 'vue-router';
 
 const store = useReviewStore()
 const route = useRoute();
-const currentUserNum = ref('')
 
 const review = ref({
     videoNum:route.params.id,
@@ -33,8 +42,10 @@ const review = ref({
 })
 
 const createReview = function(){
-    console.log(review.value)
-    // store.createReview(review.value)
+    if (review.value.title!='' && review.value.content!='') {
+        store.createReview(review.value)
+    }
+
 }
 
 </script>

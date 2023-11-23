@@ -13,7 +13,6 @@
                         <th>운동강도</th>
                         <th>조회수</th>
                         <th>찜 횟수</th>
-                        <th>완료 횟수</th>
                         <th>리뷰 수</th>
                         <th>관리</th>
                     </tr>
@@ -27,7 +26,6 @@
                             <td>{{ video.keyword }}</td>
                             <td>{{ video.intensity }}</td>
                             <td>{{ video.viewcnt }}</td>
-                            <td>0</td>
                             <td>0</td>
                             <td>0</td>
                             <td>

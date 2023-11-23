@@ -23,10 +23,11 @@ import HeaderUserRegist from '@/components/common/HeaderUserRegist.vue'
 import AdminVideoCreate from '@/components/admin/AdminVideoCreate.vue'
 import AdminVideoList from '@/components/admin/AdminVideoList.vue'
 import AdminReviewList from '@/components/admin/AdminReviewList.vue'
-import AdminUserList from '@/components/admin/AdminUserList.vue'
-import AdminUserDetail from '@/components/admin/AdminUserDetail.vue'
 import ErrorPage from '@/components/common/ErrorPage.vue'
 
+import TestPage from '@/components/common/TestPage.vue'
+import OthersList from'@/components/common/OthersList.vue'
+import OthersDetail from'@/components/common/OthersDetail.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -36,6 +37,22 @@ const router = createRouter({
       name: 'searchResult',
       component: VideoSearchResult,
       props: true
+    },
+    {
+      path: '/test',
+      name: 'test',
+      component: TestPage,
+    },
+    {
+      path: '/others',
+      name: 'others',
+      component: OthersList,
+      meta: { requiresAuth: true },
+    },
+    {
+      path: "/others/:userNum",
+      name: 'othersdetail',
+      component: OthersDetail
     },
     {
       path: '/',
@@ -55,7 +72,8 @@ const router = createRouter({
         {
           path: '/review/:id',
           name: 'reviewcreate',
-          component: ReviewCreate
+          component: ReviewCreate,
+          meta: { requiresAuth: true },
         }
       ]
     },
@@ -67,12 +85,14 @@ const router = createRouter({
     {
       path: '/map',
       name: 'map',
-      component: KakaoMap
+      component: KakaoMap,
+      meta: { requiresAuth: true }, // 이 라우트는 인증이 필요합니다.
     },
     {
       path: '/user',
       name: 'user',
       component: UserView, 
+      meta: { requiresAuth: true },
       children: [
         {
           path: ":userNum",
@@ -115,6 +135,7 @@ const router = createRouter({
       path: '/admin',
       name: 'admin',
       component: AdminView,
+      meta: { requiresAuth: true },
       children: [
         {
           path: 'videocreate',
@@ -132,16 +153,6 @@ const router = createRouter({
           component: AdminReviewList
         },
         {
-          path: 'userlist',
-          name: 'userlist',
-          component: AdminUserList
-        },
-        {
-          path: 'user/:userNum',
-          name: 'userdetail',
-          component: AdminUserDetail
-        },
-        {
           path: 'error',
           name: 'error',
           component: ErrorPage
@@ -150,5 +161,20 @@ const router = createRouter({
     },
   ]
 })
+
+router.beforeEach((to, from, next) => {
+  const loginUser = JSON.parse(localStorage.getItem('loginUser'));
+
+  // to.matched 배열은 현재 라우트의 계층 구조에 있는 모든 라우트를 포함합니다.
+  const requiresAuth = to.matched.some(record => record.meta.requiresAuth);
+
+  // 로그인된 사용자가 없고, 인증이 필요한 페이지로 이동하려고 하는 경우 로그인 페이지로 리다이렉트
+  if (requiresAuth && !loginUser) {
+    next('/login');
+  } else {
+    next();
+  }
+});
+
 
 export default router

@@ -2,7 +2,9 @@
     <div>
         <nav>
         ✨추천 키워드✨
-        <button v-for="keyword in keywordList" class="btn btn-outline-info mx-2" @click="selectKeyword(keyword)">{{ keyword }}</button>
+        <button v-for="keyword in keywordList" class="btn btn-outline-info mx-2" @click="selectKeyword(keyword)">
+            {{ keyword }}
+        </button>
         </nav>
     </div>
 </template>

@@ -25,10 +25,10 @@
             </tr>
         </table>
         <div class="d-flex btn-group" role="group">
-                        <button type="button" class="btn btn-outline-primary" 
-                          @click="updateUser">업데이트</button>
-                        <button type="button" class="btn btn-outline-secondary" 
-                          @click="logout">로그아웃</button>   
+            <button type="button" class="btn btn-outline-primary" 
+                @click="updateUser">업데이트</button>
+            <button type="button" class="btn btn-outline-secondary" 
+                @click="logout">로그아웃</button>   
         </div>
     </div>
     </div>

@@ -33,7 +33,7 @@ const loginUser = (loginUser) => {
         localStorage.setItem("loginUser", JSON.stringify(matchedUser));
 
         alert("로그인에 성공하였습니다.");
-        router.push("/user"); // 로그인 성공 시 메인으로
+        router.push("/"); // 로그인 성공 시 메인으로
       } else {
         alert("아이디 또는 비밀번호가 맞지 않습니다.");
       }

@@ -1,15 +1,15 @@
 <template>
     <div>
-        <h4>검색 결과</h4>
-        <ul>
-            <VideoListItem
+        <h2>검색 결과</h2>
+        <div class="d-inline-flex">
+            <VideoListItem 
                 v-if="store.videoList.length!=0"
                 v-for="video in store.videoList"
                 :key="video.num"
                 :video="video"
             />
-            <div v-else>검색 결과가 없습니다.</div>
-        </ul>
+        </div>
+        <div class="text-center" v-if="store.videoList.length==0">해당 키워드를 포함하는 운동 영상은 아직 없습니다.</div>
     </div>
 </template>
 
