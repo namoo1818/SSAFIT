@@ -2,6 +2,8 @@
     <div>
         <h2>내가 북마크한 영상</h2>
         <section>
+            <div v-if="store.wishList==''">찜한 영상이 없습니다.</div>
+            <div v-else>
             <table class="table table-hover text-center">
                 <thead>
                     <tr>
@@ -14,16 +16,17 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>3</td>
-                        <td>안쌤</td>
-                        <td><a href="#">앉아서 하는 스트레칭</a></td>
-                        <td>-</td>
-                        <td>상</td>
-                        <td><button>북마크해제</button></td>
+                    <tr v-for="video in store.wishList">
+                        <td>{{ video.num }}</td>
+                        <td style="text-align:left;">{{ video.channel }}</td>
+                        <td style="text-align:left;"><RouterLink :to="`/video/${video.num}`">{{ video.title }}</RouterLink></td>
+                        <td>{{ video.keyword }}</td>
+                        <td>{{ video.intensity }}</td>
+                        <td><button @click="unwish(video.num)">북마크 해체</button></td>
                     </tr>
                 </tbody>
             </table>
+            </div>
             <nav>
         <span class="d-inline-flex my-4">
                     <input class="form-control" type="text" placeholder="영상 검색">
@@ -36,7 +39,19 @@
 </template>
 
 <script setup>
+import { onMounted } from 'vue';
+import { useUserStore } from '@/stores/user'
 
+const store = useUserStore()
+
+const unwish = function(id){
+    store.deleteWish(id);
+}
+
+onMounted(()=>{
+    const currentUserNum = JSON.parse(localStorage.getItem('loginUser')).userNum
+    store.getWishList(currentUserNum);
+})
 
 </script>
 

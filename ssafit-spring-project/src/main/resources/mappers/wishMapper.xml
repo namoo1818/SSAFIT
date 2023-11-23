@@ -6,7 +6,7 @@
 
 	<insert id="insertWish" parameterType="Wish" keyProperty="num" useGeneratedKeys="true">
 		INSERT INTO wish (video_num, user_num) 
-		VALUES (#{videoNum}, #{userNum})
+		VALUES (#{videonum}, #{userNum})
 	</insert>
 
 	<delete id="deleteWish" parameterType="int">

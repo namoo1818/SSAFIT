@@ -50,45 +50,46 @@
 import { useRoute } from 'vue-router';
 import { useVideoStore } from '@/stores/video';
 import { useReviewStore } from '@/stores/review';
+import { useUserStore } from '@/stores/user'
 import {ref, computed,onMounted} from 'vue';
 import VideoDetailReviewList from './VideoDetailReviewList.vue';
 import VideoDetailReviewCreate from './VideoDetailReviewCreate.vue';
 
 const store = useVideoStore();
 const rStore = useReviewStore();
+const uStore = useUserStore();
 const route = useRoute();
+const currentUserNum = JSON.parse(localStorage.getItem('loginUser')).userNum
 
 
 const liked = ref(false);
 
-const wish = ref({
-    videonum : '',
-    userNum : ''
+const wishInfo = ref({
+    videonum : Number(route.params.id),
+    userNum : currentUserNum
 })
 
 const heartit = (e) => {
-    wish.value.userNum = '';
-    wish.value.videonum = route.params.id;
-    console.log(wish);
-    // 위시함수 추가해야함
+  console.log(wishInfo)
+  uStore.createWish(wishInfo.value);
 
-    const hearts = document.createElement('div');
-    hearts.innerHTML = ''
-        e.target.appendChild(hearts);
-        liked.value = !liked.value;
-        setTimeout(() => {
-            e.target.removeChild(hearts);
-        }, 3000);
-    };
+const hearts = document.createElement('div');
+hearts.innerHTML = ''
+    e.target.appendChild(hearts);
+    liked.value = !liked.value;
+    setTimeout(() => {
+        e.target.removeChild(hearts);
+    }, 3000);
+};
 
-  const deleteReview = (id) => {
-    rStore.deleteReview(id);
-  };
-  
-  onMounted(() => {
-    store.getVideo(route.params.id);
-    rStore.getVideoReview(route.params.id);
-  });
+const deleteReview = (id) => {
+  rStore.deleteReview(id);
+};
+
+onMounted(() => {
+  store.getVideo(route.params.id);
+  rStore.getVideoReview(route.params.id);
+});
   </script>
   
   <style lang="scss" scoped>
