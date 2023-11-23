@@ -39,7 +39,7 @@
       </div>
     </div>
   </div>
-  <UserMyCalendarChart/>
+  <!-- <UserMyCalendarChart/> -->
 </template>
 
 <script setup>
@@ -50,6 +50,10 @@ import timeGridPlugin from '@fullcalendar/timegrid'
 import interactionPlugin from '@fullcalendar/interaction'
 import { INITIAL_EVENTS, createEventId } from '@/assets/event-utils'
 import { ref, onMounted } from 'vue';
+import { useCalendarStore } from '@/stores/calendar'
+
+const store = useCalendarStore()
+const currentUserNum = JSON.parse(localStorage.getItem('loginUser')).userNum;
 
 const handleDateSelect = (selectInfo) => {
   const title = prompt('내용을 입력해주세요')
@@ -65,7 +69,27 @@ const handleDateSelect = (selectInfo) => {
       end: selectInfo.endStr,
       allDay: selectInfo.allDay,
     })
+
+    const Info = ref({
+      // num: Number(createEventId()),
+      title : title,
+      content : '',
+      start: dateFormat(new Date(selectInfo.startStr)),
+      end: dateFormat(new Date(selectInfo.endStr)),
+      userNum : currentUserNum
+      // allDay: selectInfo.allDay,
+    });
+
+    console.log(Info)
+    store.createCal(Info.value)
   }
+}
+
+const dateFormat = function(date){
+  let dateFormat2 = date.getFullYear() +
+		'-' + ( (date.getMonth()+1) < 9 ? "0" + (date.getMonth()+1) : (date.getMonth()+1) )+
+		'-' + ( (date.getDate()) < 9 ? "0" + (date.getDate()) : (date.getDate()) );
+	return dateFormat2;
 }
 
 const handleEventClick = (clickInfo) => {
@@ -86,7 +110,8 @@ const calendarOptions = {
     right: 'dayGridMonth,timeGridWeek,timeGridDay',
   },
   initialView: 'dayGridMonth',
-  initialEvents: INITIAL_EVENTS,
+  // initialEvents: INITIAL_EVENTS,
+  initialEvents: store.calList,
   editable: true,
   selectable: true,
   selectMirror: true,
@@ -104,6 +129,12 @@ const currentEvents = ref([])
 const handleWeekendsToggle = () => {
   calendarOptions.weekends.value = !calendarOptions.weekends.value
 }
+
+
+onMounted(()=>{
+  const currentUserNum = JSON.parse(localStorage.getItem('loginUser')).userNum;
+  store.getCalList(currentUserNum);
+})
 
 </script>
 

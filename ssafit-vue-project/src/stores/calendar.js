@@ -37,7 +37,6 @@ export const useCalendarStore = defineStore('calendar', ()=>{
             data:cal
         })
         .then(()=>{
-            router.push({name: 'calendar'})
         })
         .catch((err)=>{
             console.log(err)
