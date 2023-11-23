@@ -12,12 +12,17 @@
                 <p class="mx-auto fs-5">{{ store.user.userEmail }}</p>
                 <div class="d-inline-flex gap-2 m-3 mb-5">
                     <!-- <button type="button" @click="updateUser">업데이트</button> -->
-                <button type="button" @click="createFollow" 
-                    class="d-inline-flex align-items-center btn btn-primary px-4 rounded-pill">
-                    팔로우</button>
-                <button type="button" 
-                    class="btn btn-outline-secondary px-4 rounded-pill">
-                    언팔로우</button>
+                    <div>
+                        <button type="button" @click="unFollow()" 
+                        class="btn btn-outline-secondary px-4 rounded-pill">
+                        언팔로우</button>
+                    </div>
+                
+                    <div>
+                        <button type="button" @click="Follow()" 
+                        class="d-inline-flex align-items-center btn btn-primary px-4 rounded-pill">
+                        팔로우</button>
+                    </div>
                 </div>
                 <!--기본 회원정보 영역 끝-->
             <!-- <hr class="col-1 mx-auto"> -->
@@ -62,24 +67,30 @@ const rStore = useReviewStore()
 
 const route = useRoute();
 const router = useRouter();
+const currentUserNum = JSON.parse(localStorage.getItem('loginUser')).userNum
 
-const follow = ref({
-    followernum: '',
-    followeenum: ''
+const followInfo = ref({
+    followernum: currentUserNum,
+    followeenum: route.params.userNum
   })
 
-const createFollow = function() {
-    store.follow(follow)
+const Follow = function() {
+    store.follow(followInfo.value)
+}
+
+const unFollow = function() {
+    alert("업데이트 예정")
 }
 
 onMounted(() => {
     store.getUser(route.params.userNum)
 
     const currentUserNum = JSON.parse(localStorage.getItem('loginUser')).userNum
-    follow.value.followernum = currentUserNum
-    follow.value.followeenum = Number(route.params.userNum)
+    // follow.value.followernum = currentUserNum
+    // follow.value.followeenum = Number(route.params.userNum)
 
     store.getMyReviewList(route.params.userNum);
+    store.getFollowingList(currentUserNum)
 
 })
 // const deleteBoard = function () {

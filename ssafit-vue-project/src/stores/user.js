@@ -66,10 +66,7 @@ export const useUserStore = defineStore('user',()=>{
 
     //사용자 찜 목록
     const getWishList = function(usernum) {
-        axios.get(REST_WISH_API, {
-            params : {
-                writer : usernum
-            }})
+        axios.get(`${REST_USER_API}/${usernum}/wish`)
         .then((response)=>{
             wishList.value = response.data
         })
@@ -145,10 +142,34 @@ export const useUserStore = defineStore('user',()=>{
     })
       }
 
-      // 찜하기
-      const updateWish = function() {
-        
+      //찜하기
+      const createWish = function(wish) {
+        axios({
+            url:REST_WISH_API,
+            method:'POST',
+            headers:{
+                "Content-Type": "application/json"
+            },
+            data:wish
+        })
+        .then(()=>{
+        })
+        .catch((err)=>{
+            console.log(err)
+        })
       }
+
+      //찜취소
+      const deleteWish = function(id){
+        axios.delete(REST_WISH_API, {
+            params : {
+                num : id
+            }
+        })
+        .then(()=>{
+            alert('북마크가 해제되었습니다.')
+        })
+        }
 
       // 사용자 검색
       const searchUser = function(searchCondition){
@@ -162,7 +183,7 @@ export const useUserStore = defineStore('user',()=>{
 
       return {userList, getUserList, user, getUser, createUser, updateUser, deleteUser,
         getWishList, getFollowerList, getFollowingList, follow, unFollow, deleteFollower,
-        wishList, followerList, followingList, getMyReviewList, myReviewList, updateWish, searchUser}
+        wishList, followerList, followingList, getMyReviewList, myReviewList, createWish, deleteWish, searchUser}
     
 
 })
