@@ -69,7 +69,7 @@ const follow = ref({
   })
 
 const createFollow = function() {
-    store.follow(follow)
+    store.follow(follow.value)
 }
 
 onMounted(() => {

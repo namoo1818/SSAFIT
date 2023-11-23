@@ -9,14 +9,9 @@ export const useVideoStore = defineStore('video', ()=>{
     const videoList = ref([])
     const selectedVideo = ref(null)
 
-    // 영상 전체
+    // 영상 전체 조회(등록일 오름차순)
     const getVideoList = function(){
-        axios.get(REST_VIDEO_API, {
-            params : {
-                orderBy : "video_viewcnt",
-                orderByDir : "desc"
-            }
-        })
+        axios.get(REST_VIDEO_API)
         .then((response)=>{
             videoList.value = response.data
         })
@@ -46,8 +41,9 @@ export const useVideoStore = defineStore('video', ()=>{
     }
 
     // 인기동영상
+    const popularVideoList = ref({})
     const popularVideos = computed (() => {
-        return videoList.value.sort((a,b)=>b.viewcnt - a.viewcnt).slice(0,3);
+        return videoList.value.sort((a,b)=>b.viewcnt - a.viewcnt).slice(0,4);
     })
 
 
@@ -67,5 +63,5 @@ export const useVideoStore = defineStore('video', ()=>{
     }
 
     return { videoList, video, getVideo, selectedVideo, getVideoList, createVideo,
-        videoSearch, clickVideo, popularVideos }
+        videoSearch, clickVideo, popularVideos, popularVideoList }
 })

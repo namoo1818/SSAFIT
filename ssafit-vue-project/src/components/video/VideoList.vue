@@ -1,7 +1,7 @@
 <template>
     <div class="d-inline-flex">
         <VideoListItem
-            v-for="video in store.videoList.slice(0, 4)"
+            v-for="video in store.popularVideos.slice(0, 4)"
             :key="video.title"
             :video="video"
         />

@@ -101,18 +101,17 @@ export const useUserStore = defineStore('user',()=>{
     //팔로우 추가
     const follow = function(f) {
         console.log(f)
-        //왜 안되지 
-        // axios({
-        //     url: REST_FOLLOW_API,
-        //     method: 'POST',
-        //     data: f
-        // })
-        //     .then(()=>{
-        //         router.push({name:'/'})
-        //     })
-        //     .catch((err)=>{
-        //         console.log(err)
-        //     })
+        axios({
+            url: REST_FOLLOW_API,
+            method: 'POST',
+            data: f
+        })
+            .then(()=>{
+                router.push({name:'/'})
+            })
+            .catch((err)=>{
+                console.log(err)
+            })
     }
 
     //내가 팔로우한 유저 1명 삭제 
