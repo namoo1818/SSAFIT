@@ -8,10 +8,10 @@
               :video="video"
           />
       </div>
-        <h3 class="m-4">💪 새로 등록된 따끈따끈한 운동 영상을 만나 보세요! </h3>
+        <h3 class="m-4">🙏 심신을 단련하자! 마음이 진정되는 명상 시리즈 </h3>
         <div class="d-inline-flex flex-wrap">
           <VideoListItem
-              v-for="video in store.videoList.slice(0, 4)"
+              v-for="video in store.mainVideo1.slice(0, 4)"
               :key="video.title"
               :video="video"
           />
@@ -19,7 +19,7 @@
         <h3 class="m-4">🎄 같이 캐럴 들으면서 운동할 사람? 저요! </h3>
         <div class="d-inline-flex flex-wrap">
           <VideoListItem
-              v-for="video in store.videoList.slice(0, 4)"
+              v-for="video in store.mainVideo2.slice(0, 4)"
               :key="video.title"
               :video="video"
           />
@@ -36,6 +36,8 @@
 
   onMounted(()=>{
       store.getVideoList()
+      store.videoSearch1()
+      store.videoSearch2()
   })
 
   </script>

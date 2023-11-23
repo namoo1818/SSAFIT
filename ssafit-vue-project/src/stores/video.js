@@ -35,6 +35,31 @@ export const useVideoStore = defineStore('video', ()=>{
         })
     }
 
+    const mainVideo1 = ref([])
+    const mainVideo2 = ref([])
+    const videoSearch1 = function(){
+        axios.get(REST_VIDEO_API, {
+            params: {
+                key: 'video.video_keyword',
+                word: '명상'
+              }
+        })
+        .then((res)=>{
+            mainVideo1.value = res.data
+        })
+    }
+    const videoSearch2 = function(){
+        axios.get(REST_VIDEO_API, {
+            params: {
+                key: 'video.video_keyword',
+                word: '시즌'
+              }
+        })
+        .then((res)=>{
+            mainVideo2.value = res.data
+        })
+    }
+
     // 영상 클릭
     const clickVideo = function(video){
         selectedVideo.value = video
@@ -63,5 +88,5 @@ export const useVideoStore = defineStore('video', ()=>{
     }
 
     return { videoList, video, getVideo, selectedVideo, getVideoList, createVideo,
-        videoSearch, clickVideo, popularVideos, popularVideoList }
+        videoSearch, clickVideo, popularVideos, popularVideoList, mainVideo1, mainVideo2, videoSearch1, videoSearch2 }
 })
