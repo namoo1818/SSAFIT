@@ -18,34 +18,22 @@
             <div id="pagination"></div>
         </div>
     </div>
-      <!-- <button @click="displayMarker(myMarkerPosition)">즐겨찾기 마커 표시</button>
-      <button @click="displayMarker([])">즐겨찾기 마커 해제</button> -->
     </div>
     <div class="col-5">
       <div v-if="store.mapList==''">장소를 저장해보세요.</div>
       <div v-else>
         <div style="color: gray;">※제목을 누르면 해당 장소로 이동합니다.</div>
         <table>
-        <tr>
-          <!-- <th>장소</th>
-          <td>&nbsp;&nbsp;</td><th>제목</th>
-          <td>&nbsp;&nbsp;</td><th>메모</th> -->
-        </tr>
         <tr v-for="map in store.mapList" :key="map.mapId">
-          <!-- <td>{{ map.mapId }}</td> -->
-          <!-- <td>{{ map.mapLatitud }}</td> -->
-          <!-- <td>{{ map.mapLongitud }}</td> -->
-          <!-- <td style="color:deepskyblue" @click="displayMarker(myMarkerPosition)">바로가기</td> -->
-          <td>&nbsp;&nbsp;</td><td style="color:deepskyblue" @click="displayMarker(myMarkerPosition)">{{ map.mapTitle }}</td>
+          <td>&nbsp;&nbsp;</td><td style="color:deepskyblue" @click="displayMarker(map.mapLatitud, map.mapLongitud, map.mapTitle)">{{ map.mapTitle }}</td>
           <td>&nbsp;&nbsp;</td><td>{{ map.mapContent }}</td>
-          <td>&nbsp;&nbsp;</td><button @click="deleteReview(review.num)">삭제</button>
+          <td>&nbsp;&nbsp;</td><button @click="deleteMemo(map.mapId)">삭제</button>
         </tr>
       </table>
       </div>
       <div class="form-group">
-        <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="제목">
-        <textarea class="form-control" id="exampleFormControlTextarea1" placeholder="내용" rows="3"></textarea>
-        <button class="btn btn-outline-info mx-2">등록</button>
+        <textarea class="form-control" id="exampleFormControlTextarea1" v-model="createInfo.mapContent" placeholder="메모" rows="3"></textarea>
+        <button class="btn btn-outline-info mx-2" @click="createMemo">등록</button>
       </div>
     </div>
   </div>
@@ -56,10 +44,6 @@ import { onMounted, ref, toRaw } from 'vue';
 import {useMapStore} from '@/stores/map'
 
 const store = useMapStore();
-const searchInfo = ref({
-    key: '',
-    word: ''
-})
 const currentUserNum = JSON.parse(localStorage.getItem('loginUser')).userNum;
 const createInfo = ref({
   mapLatitud: null,
@@ -68,6 +52,16 @@ const createInfo = ref({
   mapContent: '',
   userNum: currentUserNum
 })
+
+const createMemo = function(){
+  if (createInfo.value.mapTitle!='' && createInfo.value.mapContent!='') {
+    store.createMap(createInfo.value);
+  }
+}
+
+const deleteMemo = function(id){
+  store.deleteMap(id);
+}
 
 let map = null;
 
@@ -131,29 +125,23 @@ const myMarkerPosition = ref([
 
 var markers = [];
 
-const displayMarker = function (markerPositions) {
+const displayMarker = function (mapLatitud, mapLongitud, mapTitle) {
+  console.log(mapLatitud, mapLongitud)
   //마커지우기
   removeMarker();
 
-  const positions = markerPositions.map(
-    (position) => new kakao.maps.LatLng(...position)
-  );
-  if (positions.length > 0) {
-    markers.value = positions.map(
-      (position) =>
-        new kakao.maps.Marker({
-          map: toRaw(map),
-          position,
-        })
-    );
+  const positions = new kakao.maps.LatLng(mapLatitud, mapLongitud);
+  map.setCenter(positions); // 지도 이동
+  var marker = new kakao.maps.Marker({
+    position: positions
+  });
+  // 마커가 지도 위에 표시되도록 설정합니다
+  marker.setMap(map);
+  var infowindow = new kakao.maps.InfoWindow({zIndex:1});
+  var content = '<div style="padding:5px;z-index:1;">' + mapTitle + '</div>';
+  infowindow.setContent(content);
+  infowindow.open(map, marker);
 
-    const bounds = positions.reduce(
-      (bounds, latlng) => bounds.extend(latlng),
-      new kakao.maps.LatLngBounds()
-    );
-
-    toRaw(map).setBounds(bounds);
-  }
 };
 
 
@@ -236,23 +224,7 @@ for ( var i=0; i<places.length; i++ ) {
     // 마커와 검색결과 항목에 mouseover 했을때
     // 해당 장소에 인포윈도우에 장소명을 표시합니다
     // mouseout 했을 때는 인포윈도우를 닫습니다
-    (function(marker, title) {
-        kakao.maps.event.addListener(marker, 'mouseover', function() {
-            displayInfowindow(marker, title);
-        });
-
-        kakao.maps.event.addListener(marker, 'mouseout', function() {
-            infowindow.close();
-        });
-
-        itemEl.onmouseover =  function () {
-            displayInfowindow(marker, title);
-        };
-
-        itemEl.onmouseout =  function () {
-            infowindow.close();
-        };
-    })(marker, places[i].place_name);
+    mouseInfowindow(marker, places[i], itemEl);
 
     fragment.appendChild(itemEl);
 }
@@ -351,15 +323,37 @@ const displayPagination = function(pagination) {
 
 // 검색결과 목록 또는 마커를 클릭했을 때 호출되는 함수입니다
 // 인포윈도우에 장소명을 표시합니다
-const displayInfowindow = function(marker, title) {
-    var content = '<div style="padding:5px;z-index:1;">' + title + '</div>';
+const mouseInfowindow = function(marker, place, itemEl) {
+  var title = place.place_name;
+  var x = place.x;
+  var y = place.y;
+  var infowindow = new kakao.maps.InfoWindow({zIndex:1});
+        kakao.maps.event.addListener(marker, 'click', function() {
+              // 마커 위에 인포윈도우를 표시합니다
+              if (infowindow.getMap()) {
+                infowindow.close();
+                } else {
+                var content = '<div style="padding:5px;z-index:1;">' + title + '</div>';
+                infowindow.setContent(content);
+                infowindow.open(map, marker);
+              }  
+              createInfo.value.mapTitle = title;
+              createInfo.value.mapLongitud = x;
+              createInfo.value.mapLatitud = y;
+              console.log(createInfo);
+        });
 
-    //임시
-    var infowindow = new kakao.maps.InfoWindow({zIndex:1});
+        itemEl.onmouseover =  function () {
+          var content = '<div style="padding:5px;z-index:1;">' + title + '</div>';
+          infowindow.setContent(content);
+          infowindow.open(map, marker);
+        };
 
-    infowindow.setContent(content);
-    infowindow.open(map, marker);
-}
+        itemEl.onmouseout =  function () {
+            infowindow.close();
+        };
+    }
+
 
  // 검색결과 목록의 자식 Element를 제거하는 함수입니다
 const removeAllChildNods = function(el) {   

@@ -36,10 +36,10 @@ export const useMapStore = defineStore('map', ()=>{
             headers:{
                 "Content-Type": "application/json"
             },
-            data:review
+            data:map
         })
         .then(()=>{
-            router.push({name: 'map'})
+            router.go(0);
         })
         .catch((err)=>{
             console.log(err)
@@ -58,7 +58,7 @@ export const useMapStore = defineStore('map', ()=>{
     const deleteMap = function(id){
         axios.delete(`${REST_MAP_API}/${id}`)
         .then(()=>{
-            router.push({name:'map'})
+            router.go(0);
         })
     }
 
