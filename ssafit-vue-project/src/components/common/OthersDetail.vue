@@ -34,7 +34,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="review in rStore.reviewList">
+                    <tr v-for="review in store.myReviewList">
                         <td>{{ review.num }}</td>
                         <td>{{ review.title }}</td>
                         <td>{{ review.content }}</td>
@@ -79,13 +79,7 @@ onMounted(() => {
     follow.value.followernum = currentUserNum
     follow.value.followeenum = Number(route.params.userNum)
 
-    //리뷰 리스트가 이상하게 불러와지는데(1을 검색하면 10 11도 같이 나오는 듯) 어떻게 수정하지?! 
-    rStore.searchReviewList({
-    key : 'user_num',
-    word : route.params.userNum
-
-
-});
+    store.getMyReviewList(route.params.userNum);
 
 })
 // const deleteBoard = function () {
