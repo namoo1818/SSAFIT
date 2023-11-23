@@ -8,7 +8,8 @@
             v-for="review in rStore.videoReview" :key="review.num">
             <div class="d-flex w-100 align-items-center justify-content-between">
               <strong class="mb-1">{{ review.title }}</strong>
-              <small class="text-body-secondary">{{ review.userNickname }}</small>
+              <small class="text-body-secondary">
+                <RouterLink :to="`/others/${review.writer}`">{{ review.userNickname }}</RouterLink></small>
             </div>
             <div class="col-10 mb-1 small">{{ review.content }}<br><small class="text-body-secondary">{{ review.regdate }}</small></div>
         </div>

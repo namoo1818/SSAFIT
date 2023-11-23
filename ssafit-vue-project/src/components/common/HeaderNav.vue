@@ -15,9 +15,6 @@
                 <div class="dropdown d-inline-flex">
                     <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-person"></i></button>
                     <ul class="dropdown-menu">
-                        <li><RouterLink class="dropdown-item" to="test">
-                            <i class="bi bi-gear"></i>테스트</RouterLink>
-                        </li>
                         <li v-show="!getUser"><RouterLink class="dropdown-item" to="/login">
                             <i class="bi bi-box-arrow-in-right"></i>로그인</RouterLink>
                         </li>

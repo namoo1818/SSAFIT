@@ -20,12 +20,10 @@ import UserMyMapMarkerList from '@/components/user/UserMyMapMarkerList.vue'
 import HeaderUserLogin from '@/components/common/HeaderUserLogin.vue'
 import HeaderUserRegist from '@/components/common/HeaderUserRegist.vue'
 
-import AdminVideoCreate from '@/components/admin/AdminVideoCreate.vue'
 import AdminVideoList from '@/components/admin/AdminVideoList.vue'
 import AdminReviewList from '@/components/admin/AdminReviewList.vue'
-import ErrorPage from '@/components/common/ErrorPage.vue'
 
-import TestPage from '@/components/common/TestPage.vue'
+import ErrorPage from '@/components/common/ErrorPage.vue'
 import OthersList from'@/components/common/OthersList.vue'
 import OthersDetail from'@/components/common/OthersDetail.vue'
 
@@ -39,9 +37,9 @@ const router = createRouter({
       props: true
     },
     {
-      path: '/test',
-      name: 'test',
-      component: TestPage,
+      path: '/error',
+      name: 'error',
+      component: ErrorPage,
     },
     {
       path: '/others',
@@ -67,7 +65,8 @@ const router = createRouter({
         {
           path: '/video/:id',
           name: 'videodetail',
-          component: VideoDetail
+          component: VideoDetail,
+          meta: { requiresAuth: true },
         },
         {
           path: '/review/:id',
@@ -138,11 +137,6 @@ const router = createRouter({
       meta: { requiresAuth: true },
       children: [
         {
-          path: 'videocreate',
-          name: 'videocreate',
-          component: AdminVideoCreate
-        },
-        {
           path: 'videolist',
           name: 'videolist',
           component: AdminVideoList
@@ -151,11 +145,6 @@ const router = createRouter({
           path: 'reviewlist',
           name: 'reviewlist',
           component: AdminReviewList
-        },
-        {
-          path: 'error',
-          name: 'error',
-          component: ErrorPage
         },
       ]
     },

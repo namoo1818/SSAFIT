@@ -1,8 +1,27 @@
 <template>
+  <!-- 리뷰쓰기를 클릭하면 작성창이 모달로 뜨게 -->
+  <span data-bs-toggle="modal" data-bs-target="#reviewWriteModal">📝 리뷰쓰기</span>
+  <div class="modal fade" id="reviewWriteModal" tabindex="-1" aria-labelledby="reviewWriteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header border-bottom-0">
+            <input type="text" id="title" v-model.trim="review.title"
+            class="form-control rounded-3 modal-title" placeholder="리뷰 제목">
+      </div>
+      <div class="modal-body py-0">
+        <textarea id="content" cols="30" rows="4" v-model.trim="review.content"
+        class="form-control rounded-3" placeholder="리뷰 내용"></textarea>    
+      </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" @click="createReview">등록</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- 리뷰쓰기를 클릭하면 작성창이 모달로 뜨게 하는 코드 종료 -->
 
-  <span data-bs-toggle="collapse" data-bs-target="#modalSheet" aria-expanded="false" aria-controls="modalSheet">
-    📝 리뷰쓰기
-  </span>
+  <!-- 리뷰쓰기를 클릭하면 작성창이 영상 하단에 뜨게 -->
+  <!-- <span data-bs-toggle="collapse" data-bs-target="#modalSheet" aria-expanded="false" aria-controls="modalSheet">📝 리뷰쓰기</span>
 <div class="collapse" id="modalSheet">
 <div class="modal modal-sheet position-static d-block p-4 py-md-5" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
@@ -21,9 +40,8 @@
     </div>
   </div>
 </div>
-
-
-</div>
+</div> -->
+  <!-- 리뷰쓰기를 클릭하면 작성창이 영상 하단에 뜨게 하는 코드 종료 -->
 </template>
 
 <script setup>

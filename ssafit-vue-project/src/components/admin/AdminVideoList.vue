@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h2>영상 관리 페이지</h2>
+        <h2>영상 관리 페이지</h2> <AdminVideoCreate/>
         <section>
             <table class="table table-hover text-center">
                 <thead>
@@ -57,6 +57,7 @@
 <script setup>
 import {ref, onMounted} from 'vue';
 import {useVideoStore} from '@/stores/video'
+import AdminVideoCreate from './AdminVideoCreate.vue';
 
 const store = useVideoStore()
 const searchInfo = ref({

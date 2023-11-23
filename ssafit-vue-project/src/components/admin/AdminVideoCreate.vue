@@ -1,37 +1,33 @@
 <template>
-    <div id="container" class="row justify-content-center">
-        <h2>새 비디오 등록</h2>
-        <div class="col-4">
-        <form>
-        <table>
-            <tr>
-                <td>제목</td>
-                <td><input type="text" class="form-control" id="title" v-model="video.title"></td>
-            </tr>
-            <tr>
-                <td>채널명</td>
-                <td><input type="text" class="form-control" id="channel" v-model="video.channel"></td>
-            </tr>
-            <tr>
-                <td>URL</td>
-                <td><input type="text" class="form-control" id="url" v-model="video.url"></td>
-            </tr>
-            <tr>
-                <td>부가키워드(옵션)</td>
-                <td><input type="text" class="form-control" id="keyword" v-model="video.keyword"></td>
-            </tr>
-            <tr>
-                <td>운동강도</td>
-                <td><input type="text" class="form-control" id="intensity" v-model="video.intensity"></td>
-            </tr>
-        </table>
-        <div class="d-flex btn-group" role="group">
-                        <button type="button" @click="createVideo" class="btn btn-outline-primary">등록</button>
-                        <button type="button" class="btn btn-outline-secondary">취소</button>
+<div id="container">
+<!-- 영상 등록 버튼 -->
+<div class="text-center">
+<span data-bs-toggle="collapse" data-bs-target="#modalSheet" aria-expanded="false" aria-controls="modalSheet">
+      <button>영상 등록</button>
+    </span>
+</div>
+<!-- 영상 등록 버튼 종료 -->
+<!-- 영상 등록 폼 -->
+  <div class="collapse" id="modalSheet">
+  <div class="modal modal-sheet position-static d-block p-4 py-md-5" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content rounded-4 shadow">
+        <div class="modal-body m-2">
+            영상 제목<input type="text" id="title" v-model.trim="video.title" class="form-control rounded-3">
+            채널명 <input type="text" class="form-control" id="channel" v-model="video.channel">
+            URL <input type="text" class="form-control" id="url" v-model="video.url">
+            부가 키워드 (옵션) <input type="text" class="form-control" id="keyword" v-model="video.keyword" >
+            운동 강도 (0~3) <input type="text" class="form-control" id="intensity" v-model="video.intensity" >
+      </div>
+        <div class="modal-footer flex-column align-items-stretch w-100 gap-2 pb-3 border-top-0">
+          <button type="button" class="btn btn-secondary" @click="createVideo">등록</button>
         </div>
-    </form>
+      </div>
     </div>
-    </div>
+  </div>
+</div>
+<!-- 영상 등록 폼 종료 -->
+</div>
 </template>
 
 <script setup>
@@ -60,3 +56,4 @@ table tr td input {
 }
 
 </style>
+
