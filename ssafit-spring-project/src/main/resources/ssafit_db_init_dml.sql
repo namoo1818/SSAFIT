@@ -130,7 +130,15 @@ INSERT INTO review (review_writer, review_title, review_content, video_num) VALU
 
 -- 4. (calendar) 캘린더 
 SELECT * FROM calendar;
-	-- 생략 (작성하게 되면 여기에 추가)
+INSERT INTO calendar (calendar_title, calendar_content, calendar_start, calendar_end, user_num) VALUES
+	("유산소", "", "2023-11-01", "2023-11-02", 1),
+    ("상체", "", "2023-11-03", "2023-11-04", 1),
+    ("하체", "", "2023-11-15", "2023-11-16", 1),
+    ("유산소", "", "2023-11-05", "2023-11-06", 11),
+    ("러닝", "", "2023-11-12", "2023-11-13", 11),
+    ("요가", "", "2023-11-19", "2023-11-20", 11),
+    ("르세라핌 이프케 연습", "", "2023-11-15", "2023-11-16", 12),
+    ("뉴진스 디토 연습", "", "2023-11-23", "2023-11-24", 12);
 
 -- 5. (daily) 운동 체크
 SELECT * FROM daily;
