@@ -81,6 +81,7 @@ const initMap = function () {
   //     map.setCenter(myCenter);
   //   });
   // }
+ 
   const container = document.getElementById('map');
   const options = {
     center: myCenter,
@@ -89,6 +90,13 @@ const initMap = function () {
   
   // 지도 객체를 등록합니다.
   map = new kakao.maps.Map(container, options);
+
+  var marker = new kakao.maps.Marker({
+    position: myCenter
+  });
+
+   // 마커가 지도 위에 표시되도록 설정합니다
+   marker.setMap(map);
 
   // 일반 지도와 스카이뷰로 지도 타입을 전환할 수 있는 지도타입 컨트롤을 생성합니다
   const mapTypeControl = new kakao.maps.MapTypeControl();
