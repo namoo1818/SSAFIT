@@ -22,6 +22,8 @@ public class CalendarServiceImpl implements CalendarService {
 	
 	@Override
 	public void writeCal(Calendar cal) {
+		int userNum = cal.getUserNum();
+		userDao.plusExp(userNum);
 		calendarDao.insertCal(cal);
 	}
 
@@ -44,6 +46,9 @@ public class CalendarServiceImpl implements CalendarService {
 	@Transactional
 	@Override
 	public boolean removeCal(int id) {
+		Calendar cal = calendarDao.selectOne(id);
+		int userNum = cal.getUserNum();
+		userDao.minusExp(userNum);
 		return calendarDao.deleteCal(id) == 1;
 	}
 
