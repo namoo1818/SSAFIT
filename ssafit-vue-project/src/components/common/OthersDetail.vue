@@ -1,51 +1,92 @@
 <template>
     <div id="container" class="row justify-content-center">
-        <h2>내 회원 정보</h2>
-        <div class="col-4">
-        <table>
-            <tr>
-                <td>아이디</td>
-                <td><input type="text" class="form-control" 
-                  v-model="store.user.userId" id="id" readonly></td>
-            </tr>
-            <tr>
-                <td>이름</td>
-                <td><input type="text" class="form-control" 
-                  v-model="store.user.userName" id="name"></td>
-            </tr>
-            <tr>
-                <td>닉네임</td>
-                <td><input type="text" class="form-control" 
-                  v-model="store.user.userNickname" id="nickname"></td>
-            </tr>
-            <tr>
-                <td>이메일</td>
-                <td><input type="text" class="form-control" 
-                  v-model="store.user.userEmail" id="email"></td>
-            </tr>
-        </table>
-        <div class="d-flex btn-group" role="group">
-            <button type="button" class="btn btn-outline-primary" 
-                @click="updateUser">업데이트</button>
-            <button type="button" class="btn btn-outline-secondary" 
-                @click="logout">로그아웃</button>   
+        <div class="col-8">
+            <div class="m-4 p-4 text-center border rounded-3">
+                <!-- 기본 회원정보 영역 -->
+                <h2>
+                    {{ store.user.userGrade == 'Platinum' ? '🏆' :
+                        (store.user.userGrade == 'Gold' ? '🥇' :
+                        (store.user.userGrade == 'Silver' ? '🥈' : '🥉')) }} 
+                    {{store.user.userNickname}} 님의 회원정보</h2>
+                <!-- 아이디 <input type="text" class="form-control" v-model="store.user.userId" id="id" readonly> -->
+                <p class="mx-auto fs-5">{{ store.user.userEmail }}</p>
+                <div class="d-inline-flex gap-2 m-3 mb-5">
+                    <!-- <button type="button" @click="updateUser">업데이트</button> -->
+                <button type="button" @click="createFollow" 
+                    class="d-inline-flex align-items-center btn btn-primary px-4 rounded-pill">
+                    팔로우</button>
+                <button type="button" 
+                    class="btn btn-outline-secondary px-4 rounded-pill">
+                    언팔로우</button>
+                </div>
+                <!--기본 회원정보 영역 끝-->
+            <!-- <hr class="col-1 mx-auto"> -->
+                <!--리뷰영역-->
+                <h2>{{store.user.userNickname}} 님의 운동리뷰</h2>
+            <table class="table table-hover text-center">
+                <thead>
+                    <tr>
+                        <th>번호</th>
+                        <th>제목</th>
+                        <th>내용</th>
+                        <!-- <th>작성일시</th> -->
+                        <th>영상</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="review in rStore.reviewList">
+                        <td>{{ review.num }}</td>
+                        <td>{{ review.title }}</td>
+                        <td>{{ review.content }}</td>
+                        <!-- <td>{{ review.regdate }}</td> -->
+                        <td><RouterLink :to="`/video/${review.videoNum}`">📺</RouterLink></td>
+                    </tr>
+                </tbody>
+            </table>
+                <!--리뷰영역 끝-->
+
+            </div>
         </div>
-    </div>
     </div>
 </template>
 
 <script setup>
-import { useRoute, useRouter } from 'vue-router'
+import { ref, onMounted } from "vue";
 import { useUserStore } from "@/stores/user";
-import { onMounted } from "vue";
+import { useReviewStore } from '@/stores/review'
+import { useRoute, useRouter } from 'vue-router'
 import axios from 'axios'
 
 const store = useUserStore()
+const rStore = useReviewStore()
 
 const route = useRoute();
 const router = useRouter();
+
+const follow = ref({
+    followernum: '',
+    followeenum: ''
+  })
+
+const createFollow = function() {
+    store.follow(follow)
+}
+
 onMounted(() => {
     store.getUser(route.params.userNum)
+
+    const currentUserNum = JSON.parse(localStorage.getItem('loginUser')).userNum
+    follow.value.followernum = currentUserNum
+    follow.value.followeenum = Number(route.params.userNum)
+
+    //리뷰 리스트가 이상하게 불러와지는데(1을 검색하면 10 11도 같이 나오는 듯) 어떻게 수정하지?! 
+    rStore.searchReviewList({
+    key : 'user_num',
+    word : route.params.userNum
+
+
+});
+
 })
 // const deleteBoard = function () {
 //     axios.delete(`http://localhost:8080/api/board/${route.params.id}`)
@@ -56,6 +97,10 @@ onMounted(() => {
 
 // const updateBoard = function () {
 //     router.push({ name: 'boardUpdate' })
+// }
+
+// const deleteFollower = function (num) {
+//     store.deleteFollower(num)
 // }
 
 

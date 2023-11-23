@@ -12,25 +12,22 @@
                         <th>가입일시</th>
                         <th>경험치</th>
                         <th>회원등급</th>
-                        <th>관리</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr v-for="user in store.userList">
                         <td>{{ user.userNum }}</td>
                         <td>{{ user.userId }}</td>
-                        <td>{{ user.userNickname }}</td>
+                        <td><RouterLink :to="`/others/${user.userNum}`">{{ user.userNickname }}</RouterLink></td>
                         <td>{{ user.userEmail }}</td>
                         <td>{{ user.userRegdate }}</td>
                         <td>{{ user.userExp }}</td>
-                        <td>
-                            {{ user.userGrade == 'Platinum' ? '🏆' :
+                        <td>{{ user.userGrade == 'Platinum' ? '🏆' :
                                 (user.userGrade == 'Gold' ? '🥇' :
                                 (user.userGrade == 'Silver' ? '🥈' : '🥉')) }} 
                             {{ user.userGrade }}</td>
-                        <td><RouterLink :to="`/others/${user.userNum}`"><button>상세조회</button></RouterLink>&nbsp;
-                            <button @click="deleteUser(user.userNum)">삭제</button></td>
-                    </tr>
+                            <!-- <button @click="deleteUser(user.userNum)">삭제</button>-->
+                        </tr>
                 </tbody>
             </table>
             <nav>

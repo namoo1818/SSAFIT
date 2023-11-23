@@ -35,11 +35,11 @@ export const useUserStore = defineStore('user',()=>{
             data: user
             })
             .then(()=>{
-                    router.push({name:'/'})
-                })
-                .catch((err)=>{
-                    console.log(err)
-                })
+                router.push({name:'/'})
+            })
+            .catch((err)=>{
+                console.log(err)
+            })
     }
 
     // 사용자 수정
@@ -98,9 +98,25 @@ export const useUserStore = defineStore('user',()=>{
         })
     }
 
+    //팔로우 추가
+    const follow = function(f) {
+        console.log(f)
+        //왜 안되지 
+        // axios({
+        //     url: REST_FOLLOW_API,
+        //     method: 'POST',
+        //     data: f
+        // })
+        //     .then(()=>{
+        //         router.push({name:'/'})
+        //     })
+        //     .catch((err)=>{
+        //         console.log(err)
+        //     })
+    }
+
     //내가 팔로우한 유저 1명 삭제 
     const unFollow = function(num) {
-        console.log(num)
         axios.delete(REST_FOLLOW_API, {params: {num:num}})
         .then(() => {
             alert("해당 유저를 언팔로우했습니다. 결과를 확인하려면 새로고침해주세요.");
@@ -145,7 +161,7 @@ export const useUserStore = defineStore('user',()=>{
       }
 
       return {userList, getUserList, user, getUser, createUser, updateUser, deleteUser,
-        getWishList, getFollowerList, getFollowingList, unFollow, deleteFollower,
+        getWishList, getFollowerList, getFollowingList, follow, unFollow, deleteFollower,
         wishList, followerList, followingList, getMyReviewList, myReviewList, updateWish, searchUser}
     
 

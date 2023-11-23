@@ -3,7 +3,7 @@
 <!-- 영상 등록 버튼 -->
 <div class="text-center">
 <span data-bs-toggle="collapse" data-bs-target="#modalSheet" aria-expanded="false" aria-controls="modalSheet">
-      <button>영상 등록</button>
+      <button class="btn btn-outline-secondary">영상 등록</button>
     </span>
 </div>
 <!-- 영상 등록 버튼 종료 -->
@@ -13,11 +13,16 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content rounded-4 shadow">
         <div class="modal-body m-2">
-            영상 제목<input type="text" id="title" v-model.trim="video.title" class="form-control rounded-3">
-            채널명 <input type="text" class="form-control" id="channel" v-model="video.channel">
-            URL <input type="text" class="form-control" id="url" v-model="video.url">
-            부가 키워드 (옵션) <input type="text" class="form-control" id="keyword" v-model="video.keyword" >
-            운동 강도 (0~3) <input type="text" class="form-control" id="intensity" v-model="video.intensity" >
+            영상 제목 <input type="text" class="form-control rounded-3" 
+              id="title" v-model.trim="video.title">
+            채널명 <input type="text" class="form-control" 
+              id="channel" v-model="video.channel">
+            URL <input type="text" class="form-control" 
+              id="url" v-model="video.url">
+            부가 키워드 (옵션) <input type="text" class="form-control" 
+              id="keyword" v-model="video.keyword" >
+            운동 강도 (0~3) <input type="text" class="form-control" 
+              id="intensity" v-model="video.intensity" >
       </div>
         <div class="modal-footer flex-column align-items-stretch w-100 gap-2 pb-3 border-top-0">
           <button type="button" class="btn btn-secondary" @click="createVideo">등록</button>

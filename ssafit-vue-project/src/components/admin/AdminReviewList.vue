@@ -10,7 +10,7 @@
                     <th>작성자</th>
                     <th>작성일시</th>
                     <th>영상</th>
-                    <th>관리</th>
+                    <th>삭제</th>
                 </tr>
             </thead>
             <tbody>
@@ -20,14 +20,14 @@
                     <td>{{ review.content }}</td>
                     <td>{{ review.writer }}</td>
                     <td>{{ review.regdate }}</td>
-                    <td><a href="#">바로가기</a></td>
-                    <td><button>삭제</button></td>
+                    <td><RouterLink :to="`/video/${review.videoNum}`">📺</RouterLink></td>
+                    <td>❌</td>
                 </tr>
             </tbody>
         </table>
         <nav>
             <span class="d-inline-flex my-4">
-                <select v-model="searchInfo.key">
+                <select class="rounded-3" v-model="searchInfo.key">
                     <option value="user_nickname">작성자</option>
                     <option value="review.review_title">리뷰제목</option>
                     <option value="review.review_content">리뷰내용</option>

@@ -1,6 +1,6 @@
 <template>
   <!-- 리뷰쓰기를 클릭하면 작성창이 모달로 뜨게 -->
-  <span data-bs-toggle="modal" data-bs-target="#reviewWriteModal">📝 리뷰쓰기</span>
+  <span data-bs-toggle="modal" data-bs-target="#reviewWriteModal">📝 리뷰 남기기</span>
   <div class="modal fade" id="reviewWriteModal" tabindex="-1" aria-labelledby="reviewWriteModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
