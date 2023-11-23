@@ -165,7 +165,7 @@ SELECT video_num, user_nickname FROM wish LEFT JOIN user ON wish.user_num = user
 INSERT INTO wish (video_num, user_num) VALUES
 	(2,1),(3,1),(4,1),
 	(1,10),(3,10),(5,10),(7,10),(9,10),
-    (11,12),(13,12),(38,12);
+    (11,12),(6,12),(40,12);
 
 -- 8. (playlist) 운동용 플레이리스트 
 SELECT * FROM playlist;
