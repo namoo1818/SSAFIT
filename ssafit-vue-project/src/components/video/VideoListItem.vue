@@ -1,6 +1,6 @@
 <template>
-    <div class="container album">
-      <div class="row g-3">
+    <div class="container album" style="width:300px;">
+      <div class="row g-3 mb-4">
         <div class="col">
           <div class="card shadow-sm"><RouterLink :to="`/video/${video.num}`">
             <img :src="`https://img.youtube.com/vi/${video.url}/0.jpg`" class="card-img-top" style="width:100%;"></RouterLink>

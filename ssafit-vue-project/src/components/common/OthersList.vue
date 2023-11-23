@@ -32,7 +32,7 @@
             </table>
             <nav>
                 <span class="d-inline-flex my-4">
-                    <select v-model="searchInfo.key">
+                    <select class="rounded-3" v-model="searchInfo.key">
                         <option value="user_id">아이디</option>
                         <option value="user_name">이름</option>
                         <option value="user_nickname">닉네임</option>

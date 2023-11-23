@@ -1,7 +1,7 @@
 <template>
-    <div>
+    <div id="container">
         <h2>검색 결과</h2>
-        <div class="d-inline-flex">
+        <div class="d-inline-flex flex-wrap">
             <VideoListItem 
                 v-if="store.videoList.length!=0"
                 v-for="video in store.videoList"
@@ -34,5 +34,6 @@ onMounted(() => {
 </script>
 
 <style scoped>
+
 
 </style>

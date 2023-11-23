@@ -5,7 +5,7 @@
             <table class="table table-hover text-center">
                 <thead>
                     <tr>
-                        <th>번호</th>
+                        <th>등록번호</th>
                         <th>제목</th>
                         <th>채널</th>
                         <th>부가키워드</th>
@@ -20,7 +20,7 @@
                 <tbody>
                     <tr v-for="video in store.videoList">
                         <td>{{ video.num }}</td>
-                        <td><RouterLink :to="`/video/${video.num}`">{{video.title}}</RouterLink></td>
+                        <td width="120px"><RouterLink :to="`/video/${video.num}`">{{video.title}}</RouterLink></td>
                         <td>{{ video.channel }}</td>
                         <td>{{ video.keyword }}</td>
                         <td>{{ video.intensity }}</td>

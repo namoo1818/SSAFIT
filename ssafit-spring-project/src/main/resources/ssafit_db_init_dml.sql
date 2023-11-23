@@ -49,7 +49,27 @@ INSERT INTO video (video_keyword, video_title, video_url, video_channel, video_i
 	('해외','Miley Cyrus Workout: Sexy Legs','MG69sFM1UIw','마일리사일러스',3),
 	('해외','Drive By Inner Thighs Challenge Workout','kJyZhOJ2Tag','캐시',3),
 	('해외','10 min Booty Shaking Waist Workout- Lose inches off your waist | TiffanyRotheWorkouts','r_J8btnIEKQ','티파니',3),
-	('해외','줌바댄스 1000칼로리 소비 /Zumba dance','dZbPtAgofwI','다이어트의모든것',3);
+	('해외','줌바댄스 1000칼로리 소비 /Zumba dance','dZbPtAgofwI','다이어트의모든것',3),
+    ('108배','간단하지만 땀나는 108배 절운동 확언 명상','B2xUVl_XnTE','섬마을 요가원',2),
+	('108배','발리 일출을 담은 108배 절요가. 함께 몸마음수련해요','V-e1rgzaRfI','미라요가명상TV',2),
+	('108배','배우 문소리의 모닝 루틴 대공개~! 108배부터 고난도 스트레칭까지?!, MBC 210123 방송','zmgPhumEy1E','MBCentertainment',2),
+	('108배','[1분 투자체조]13강.고소영 108배 체조','6zBO7LaGY44','한국경제TV주식창',2),
+	('명상','10분 명상⏳️몸이 이완되고 마음이 편안해지는 호흡명상 가이드 ㅣ 불안 스트레스 해소','6soiPqRSfU4','명상하는그녀_내안의별',0),
+	('명상','마음이 평온해지는 10분 명상 | 스트레스 해소, 호흡 명상 가이드','_MTd1opMBk0','에일린 mind yoga',0),
+	('명상','5분 호흡명상 - 뇌를 위한 최고의 휴식법 (스트레스 해소, 뇌 피로회복)','dZewQEbQQM0','에일린 mind yoga',0),
+	('명상','불안과 근심걱정을 잠재우는 10분 명상가이드🧘 내안의 안식처 키우기','5queBOE-zzE','명상하는그녀_내안의별',0),
+	('명상','몸과 마음의 완전한 휴식을 위한 이완명상 (ASMR · 바디스캔 · 자기암시) | 20분 요가니드라 | 요가소년 044','CNYYWuH_Fcc','요가소년',0),
+	('명상','호흡 명상 - 김정호 교수님','E1Sfv6xeTpY','마보TV',0),
+	('시즌','살 빠지는 캐롤 다이어트 댄스 4탄! 쉽게 따라할 수 있고 너무 신나고 땀도 쫙! carol diet dance','WeAhQYuNH3E','삐약스핏',2),
+	('시즌','[삐약스핏 다이어트 댄스] 살빠지는 캐롤 다이어트댄스!! 너무 신나도 책임 못집니다!! 쉽게 따라할 수 있는 다이어트댄스! [carol diet dance]','aFRil1vyX2Q','삐약스핏',2),
+	('시즌','🔥몸에 쌓인 지방을 3분만에 녹여버리는🔥체중감량 끝판왕 크리스마스 다이어트 댄스','ZG5_dwCmWvo','비타민신지니',2),
+	('시즌','15 MIN CHRISTMAS DANCE PARTY WORKOUT - burn calories to the classics!','sJhJZBjBWGk','MadFit',2),
+	('시즌','10 MIN CHRISTMAS DANCE WORKOUT - 10/10 for happiness / Sweaty Version I Pamela Reif','pzj78YA1zws','Pamela Reif',2),
+	('시즌','14 MIN CHRISTMAS DANCE PARTY - Beginner Friendly Fun Sweat','BCMtrC9Xb0k','growwithjo',2),
+	('시즌','The Ultra Christmas Cardio Challenge','QqAn8BJhv2w','Cardio Party Mashup Fitness',2),
+	('시즌','할로윈 파티 대신 우리는 홈트 한다 👻 10분 논스톱 근력 유산소','vRTymm71tPo','빅씨스',2);
+    
+    
 INSERT INTO video (video_title, video_url, video_channel, video_intensity) VALUES 
 	('앉아서 하는 스트레칭 루틴!ㅣ의자 스트레칭','2DRvc74GgYM','관절사용설명서',1),
 	('가만히 서 있었는데 뱃살이 쫙 빠지고 하체가 단단해지는 운동 루틴! [하루 10분 홈트]','GUhTT21IHI0','관절사용설명서',2),
@@ -80,7 +100,19 @@ INSERT INTO video (video_title, video_url, video_channel, video_intensity) VALUE
 	('한번만 따라 해도 시원함에 중독되는 폼롤러 마사지!! (근막이완 마사지, 폼롤러운동)ㅣ다노티비','NlMjP_uaIW8','다노',1),
 	('매일매일 꼭 하고 자는 10분 스트레칭! (워밍업, 쿨 다운, 아침, 저녁용 스트레칭영상) total body stretch | 다노티비','SAsE6JUbSWQ','다노',1),
 	('[EN/CH]눈뜨스:아침에 눈뜨자마자 따라하는 스트레칭 (First Thing in the Morning Stretching, Morning Stretching)ㅣ다노티비','6_LYz_XxD-g','다노',1),
-	('종아리 가늘어지는 5분 셀프 마사지 (5min calf massage)','prkgLZUX2Dk','다노',1);
+	('종아리 가늘어지는 5분 셀프 마사지 (5min calf massage)','prkgLZUX2Dk','다노',1),
+	('NO 층간소음 올인원 운동 - 40분 유산소운동 홈트 - 관절에 무리없이 체지방 태우기','myNjmnvI6x0','빅씨스',3),
+	('몸 무거운 월요일 - 가볍게 부담없이 28분 층간소음 없는 관절무리없는 유산소 운동 - 초보 홈트','0IWibGOf1jU','빅씨스',2),
+	('NO 층간소음 - 고민없이 하나로 끝내는 전신운동 근력 유산소 - 운동 못한 날 죄책감 씻어줄 30분 홈트','4kZHHPH6heY','빅씨스',3),
+	('떡국 타파👊 칼로리 폭파👊 근력 유산소 - NO 층간소음, NO 반복 홈트','tE5WqR-IDiM','빅씨스',3),
+	('땀폭발 타바타 홈트 신나고 경쾌한 10분 다이어트 운동','fbYu5yzo4lc','빅씨스',3),
+	('8분 루틴 꼭 해주세요! 운동 후 전신 스트레칭 - 8분 쿨다운 스트레칭','zDcOqeLGymE','빅씨스',1),
+	('무.조.건! 뱃살 빠지는 운동 베스트5','','땅크부부',3),
+	('','iOSYLKBk894','땅크부부',3),
+	('집에서 하는 유산소운동 다이어트 [칼소폭]','VNQpP6C1fJg','땅크부부',3),
+	('허벅지 안쪽살 빨리 빼는 운동 3가지','Q70jQVPkMnc','땅크부부',3),
+	('아랫뱃살 똥배 폭파 운동','2Uv1B3kjCOI','땅크부부',3),
+	('집에서 칼로리 불태우는 최고의 유산소운동 [칼소폭 매운맛]','lKwZ2DU4P-A','땅크부부',3);
 
 
 -- 3. (review) 리뷰 
