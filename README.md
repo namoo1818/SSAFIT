@@ -22,5 +22,10 @@
 
 
 # 주요 기능
-
-
+[!메인페이지]<img src="image/메인페이지.jpg"><br>
+[!날씨페이지]<img src="image/날씨페이지.jpg"><br>
+[!회원가입_로그인페이지]<img src="image/회원가입_로그인페이지.jpg><br>
+[!영상조회페이지]<img src="image/영상조회페이지.jpg"><br>
+[!마이페이지]<img src="image/마이페이지.jpg"><br>
+[!팔로우_유저목록페이지]<img src="image/팔로우_유저목록페이지.jpg"><br>
+[!관리자페이지]<img src="image/관리자페이지.jpg"><br>
