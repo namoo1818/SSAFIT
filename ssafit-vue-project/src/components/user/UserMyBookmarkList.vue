@@ -16,8 +16,8 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="video in store.wishList">
-                        <td>{{ video.num }}</td>
+                    <tr v-for="(video, index) in store.wishList">
+                        <td>{{ index+1 }}</td>
                         <td style="text-align:left;">{{ video.channel }}</td>
                         <td style="text-align:left;"><RouterLink :to="`/video/${video.num}`">{{ video.title }}</RouterLink></td>
                         <td>{{ video.keyword }}</td>

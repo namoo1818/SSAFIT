@@ -16,8 +16,8 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="review in store.myReviewList">
-                        <td>{{ review.num }}</td>
+                    <tr v-for="(review, index) in store.myReviewList">
+                        <td>{{ index+1 }}</td>
                         <td>{{ review.title }}</td>
                         <td>{{ review.content }}</td>
                         <td>{{ review.regdate }}</td>
