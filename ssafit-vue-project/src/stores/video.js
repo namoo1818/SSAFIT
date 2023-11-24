@@ -85,13 +85,22 @@ export const useVideoStore = defineStore('video', ()=>{
         data: video
         })
         .then(() => {
-            router.push({ name: 'videolist'})
+            alert('등록되었습니다')
+            router.go(0);
         })
         .catch((err) => {
         console.log(err)
         })
     }
 
+    //비디오 삭제
+    const deleteVideo = function(id){
+        axios.delete(`${REST_VIDEO_API}/${id}`)
+        .then(()=>{
+            router.go(0);
+        })
+    }
+
     return { videoList, video, getVideo, selectedVideo, getVideoList, createVideo,
-        videoSearch, clickVideo, popularVideos, popularVideoList, mainVideo1, mainVideo2, videoSearch1, videoSearch2 }
+        videoSearch, clickVideo, popularVideos, popularVideoList, mainVideo1, mainVideo2, videoSearch1, videoSearch2, deleteVideo }
 })
