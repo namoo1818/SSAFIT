@@ -28,7 +28,7 @@
                         <td>0</td>
                         <td>0</td>
                         <td><a :href="`https://www.youtube.com/watch?v=${video.url}`">📺</a></td>
-                        <td><span @click="deleteReview(review.num)">❌</span></td>
+                        <td><span @click="deleteVideo(video.num)">❌</span></td>
                         </tr>
                 </tbody>
             </table>
@@ -65,6 +65,10 @@ const searchInfo = ref({
 
 const search = function() {
     store.videoSearch(searchInfo.value)
+}
+
+const deleteVideo = function(id){
+    store.deleteVideo(id);
 }
 
 onMounted(() => {

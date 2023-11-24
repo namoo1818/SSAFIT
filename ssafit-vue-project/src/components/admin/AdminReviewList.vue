@@ -21,7 +21,7 @@
                     <td>{{ review.writer }}</td>
                     <td>{{ review.regdate }}</td>
                     <td><RouterLink :to="`/video/${review.videoNum}`">📺</RouterLink></td>
-                    <td>❌</td>
+                    <td><span @click="deleteReview(review.num)">❌</span></td>
                 </tr>
             </tbody>
         </table>
@@ -53,6 +53,10 @@ const searchInfo = ref({
 
 const search = function() {
     store.searchReviewList(searchInfo.value);
+}
+
+const deleteReview = function(id){
+    store.deleteReview(id);
 }
 
 onMounted(() => {
