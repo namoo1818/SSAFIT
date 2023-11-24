@@ -106,7 +106,7 @@ export const useUserStore = defineStore('user',()=>{
             data: f
         })
             .then(()=>{
-                alert("해당 유저를 팔로우했습니다. 결과를 확인하려면 새로고침해주세요.");
+                alert("해당 유저를 팔로우했습니다.");
             })
             .catch((err)=>{
                 console.log(err)
@@ -117,7 +117,7 @@ export const useUserStore = defineStore('user',()=>{
     const unFollow = function(num) {
         axios.delete(REST_FOLLOW_API, {params: {num:num}})
         .then(() => {
-            alert("해당 유저를 언팔로우했습니다. 결과를 확인하려면 새로고침해주세요.");
+            alert("해당 유저를 언팔로우했습니다.");
         })
     }
 
@@ -126,7 +126,7 @@ export const useUserStore = defineStore('user',()=>{
         console.log(num)
         axios.delete(REST_FOLLOW_API, {params: {num:num}})
         .then(() => {
-            alert("해당 팔로워의 팔로우를 해제하였습니다. 결과를 확인하려면 새로고침해주세요.");
+            alert("해당 팔로워의 팔로우를 해제하였습니다.");
         })
     }
 

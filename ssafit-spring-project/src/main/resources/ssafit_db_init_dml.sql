@@ -121,6 +121,7 @@ INSERT INTO video (video_title, video_url, video_channel, video_intensity) VALUE
 -- 3. (review) 리뷰 
 SELECT * FROM review;
 INSERT INTO review (review_writer, review_title, review_content, video_num, review_regdate) VALUES 
+(1, '재밌어요', '오늘 10번 따라했어요', 23,"2023-10-19 16:33:23"),
 (11, '오늘부터 시작', 'day 1 완료', 1,"2023-10-19 16:33:23"),
 (11, '이틀차', 'day 2 완료', 1,"2023-10-20 20:59:59"),
 (11, '포기...', '죽을 것 같음ㅠㅠ카즈하 당신은 대체..', 1,"2023-10-23 18:13:23");
@@ -219,7 +220,7 @@ INSERT INTO follow (follower_num, followee_num) VALUES
 	(5,4),(5,6),
 	(7,3),(7,4),(7,9),
 	(9,8),
-	(12,1),(12,2),(12,3),(12,4),(12,5),(12,6),(12,7),(12,8),(12,9),(12,10),(12,11),
+	(12,2),(12,3),(12,4),(12,5),(12,6),(12,7),(12,8),(12,9),
 	(11,10),(11,12);
 
 -- 12. (grade) 회원 등급
