@@ -4,10 +4,6 @@
 # 프로젝트 기간
 2023.11.16 ~ 23.11.24(9일)
 
-# Tech Stack
-<img src="https://img.shields.io/badge/vue-4FC08D?style=for-the-badge&logo=vuedotjs&logoColor=white"> 
-<img src="https://img.shields.io/badge/spring-6DB33F?style=for-the-badge&logo=spring&logoColor=white"> 
-
 # 팀원 소개
 <table>
  <tr>
@@ -20,6 +16,15 @@
   </tr>
 </table>
 
+# Tech Stack
+<img src="https://img.shields.io/badge/vue-4FC08D?style=for-the-badge&logo=vuedotjs&logoColor=white"> 
+<img src="https://img.shields.io/badge/spring-6DB33F?style=for-the-badge&logo=spring&logoColor=white"> <br>
+
+## 사용한 API   
+공공데이터포털, 카카오맵, 풀캘린더
+
+# 기획 배경
+<img src="image/기획배경.jpg"><br>
 
 # 주요 기능
 <img src="image/메인페이지.jpg"><br>
