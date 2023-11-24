@@ -15,8 +15,8 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="user in store.userList">
-                        <td>{{ user.userNum }}</td>
+                    <tr v-for="(user, index) in store.userList">
+                        <td>{{ index+1 }}</td>
                         <td>{{ user.userId }}</td>
                         <td><RouterLink :to="`/others/${user.userNum}`">{{ user.userNickname }}</RouterLink></td>
                         <td>{{ user.userEmail }}</td>
