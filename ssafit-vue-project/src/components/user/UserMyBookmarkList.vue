@@ -22,7 +22,7 @@
                         <td style="text-align:left;"><RouterLink :to="`/video/${video.num}`">{{ video.title }}</RouterLink></td>
                         <td>{{ video.keyword }}</td>
                         <td>{{ video.intensity }}</td>
-                        <td><button @click="unwish(video.num)">북마크 해체</button></td>
+                        <td><button class="btn" @click="unwish(video.num)">북마크 해제</button></td>
                     </tr>
                 </tbody>
             </table>

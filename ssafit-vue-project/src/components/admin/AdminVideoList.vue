@@ -11,8 +11,6 @@
                         <th>부가키워드</th>
                         <th>운동강도</th>
                         <th>조회수</th>
-                        <th>찜 횟수</th>
-                        <th>리뷰 수</th>
                         <th>출처</th>
                         <th>삭제</th>
                     </tr>
@@ -20,13 +18,11 @@
                 <tbody>
                     <tr v-for="video in store.videoList">
                         <td>{{ video.num }}</td>
-                        <td width="120px"><RouterLink :to="`/video/${video.num}`">{{video.title}}</RouterLink></td>
+                        <td><RouterLink :to="`/video/${video.num}`">{{video.title}}</RouterLink></td>
                         <td>{{ video.channel }}</td>
                         <td>{{ video.keyword }}</td>
                         <td>{{ video.intensity }}</td>
                         <td>{{ video.viewcnt }}</td>
-                        <td>0</td>
-                        <td>0</td>
                         <td><a :href="`https://www.youtube.com/watch?v=${video.url}`">📺</a></td>
                         <td><span @click="deleteVideo(video.num)">❌</span></td>
                         </tr>

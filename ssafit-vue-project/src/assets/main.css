@@ -47,6 +47,16 @@ nav a {
 
 }
 
+table tr td a {
+  text-decoration:none;
+  color:#4EA8DE;
+}
+
+small a {
+  text-decoration:none;
+  color:#56CFE1;
+}
+
 /* 
 nav a:hover {
     background: linear-gradient(to top, #54ddff 40%, transparent 20%);
